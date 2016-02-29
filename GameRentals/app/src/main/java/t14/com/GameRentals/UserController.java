@@ -4,15 +4,15 @@ package t14.com.GameRentals;
  * Created by cjresler on 2016-02-28.
  */
 public class UserController {
-    private User user;
-    private GameList gameList;
+    private static User currentUser;
+    private static GameList gameList;
 
-    public User getUser() {
-        return user;
+    public static User getCurrentUser() {
+        return currentUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public static void setUser(User current) {
+        currentUser = current;
     }
 
     public GameList getGameList() {

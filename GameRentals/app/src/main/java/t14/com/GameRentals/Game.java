@@ -10,9 +10,19 @@ public class Game {
     private String gameID;
     private String description;
     private int status;
-    private ArrayList<Bid> bidList;
+    private BidList bidList;
     private User owner;
     private User borrower;
+
+    public Game(String gameName, String description, User owner) {
+        this.gameName = gameName;
+        this.description = description;
+        this.gameID = "";
+        this.status = 0;
+        this.bidList = new BidList();
+        this.owner = owner;
+        this.borrower = null;
+    }
 
     public User getBorrower() {
         return borrower;
@@ -38,11 +48,11 @@ public class Game {
         this.status = status;
     }
 
-    public ArrayList<Bid> getBidList() {
+    public BidList getBidList() {
         return bidList;
     }
 
-    public void setBidList(ArrayList<Bid> bidList) {
+    public void setBidList(BidList bidList) {
         this.bidList = bidList;
     }
 

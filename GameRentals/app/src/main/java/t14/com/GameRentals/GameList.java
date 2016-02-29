@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class GameList {
     private ArrayList<Game> list;
 
+    public GameList() {
+        list = new ArrayList<Game>();
+    }
+
     public ArrayList<Game> getList() {
         return list;
     }
