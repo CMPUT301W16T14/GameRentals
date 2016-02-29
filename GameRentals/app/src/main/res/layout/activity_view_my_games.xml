@@ -5,13 +5,13 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/oldTweetsTitle"
+        android:id="@+id/myGamesLabel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="My Games" />
 
     <ListView
-        android:id="@+id/oldTweetsList"
+        android:id="@+id/myGames"
         android:layout_width="fill_parent"
         android:layout_height="263dp"
         android:layout_weight="1"
@@ -32,9 +32,10 @@
         android:scrollbars="horizontal" />
 
     <Button
-        android:id="@+id/clear"
+        android:id="@+id/addGame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Add Game"/>
 
 
 </LinearLayout>

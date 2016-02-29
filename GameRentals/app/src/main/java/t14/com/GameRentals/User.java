@@ -11,6 +11,15 @@ public class User {
     private GameList biddedItems;
     private GameList borrowedItems;
 
+    public User(String userName, String email, String phoneNumber) {
+        this.userName = userName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        myGames = new GameList();
+        biddedItems = new GameList();
+        borrowedItems = new GameList();
+    }
+
     public String getUserName() {
         return userName;
     }

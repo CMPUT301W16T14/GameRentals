@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class BidList {
     private ArrayList<Bid> list;
 
+    public BidList() {
+    }
+
     public ArrayList<Bid> getList() {
         return list;
     }
