@@ -1,4 +1,4 @@
-package t14.com.gamerentals;
+package t14.com.GameRentals;
 
 import org.junit.Test;
 
