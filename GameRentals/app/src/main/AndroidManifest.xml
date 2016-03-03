@@ -16,9 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name="t14.com.GameRentals.ViewMyGamesActivity"></activity>
-        <activity android:name="t14.com.GameRentals.AddGameActivity"
-        android:theme="@android:style/Theme.Dialog">
-        </activity>
+        <activity android:name="t14.com.GameRentals.AddGameActivity"></activity>
     </application>
 
 </manifest>
