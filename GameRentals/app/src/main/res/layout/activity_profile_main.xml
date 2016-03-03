@@ -38,7 +38,7 @@
         android:ems="10"
         android:id="@+id/PhoneNumberText"
         android:text="Edit Phone Number"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="13dp"
         android:layout_below="@+id/PhoneNumberView"
         android:layout_alignLeft="@+id/EmailText"
         android:layout_alignStart="@+id/EmailText" />
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My E-mail"
-        android:id="@+id/EmailView1"
+        android:id="@+id/EmailView"
         android:layout_above="@+id/EmailText"
         android:layout_alignLeft="@+id/NameView1"
         android:layout_alignStart="@+id/NameView1" />
@@ -81,9 +81,9 @@
         android:layout_height="wrap_content"
         android:text="My Phone Number"
         android:id="@+id/PhoneNumberView"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/EmailText"
-        android:layout_alignLeft="@+id/EmailView1"
-        android:layout_alignStart="@+id/EmailView1" />
+        android:layout_alignLeft="@+id/EmailView"
+        android:layout_alignStart="@+id/EmailView" />
 
 </RelativeLayout>
