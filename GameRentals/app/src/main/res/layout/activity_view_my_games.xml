@@ -19,12 +19,6 @@
 
     </ListView>
 
-    <TextView
-        android:id="@+id/hello"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="hi" />
-
     <EditText
         android:id="@+id/body"
         android:layout_width="fill_parent"
