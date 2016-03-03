@@ -26,11 +26,10 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/EmailText"
-        android:layout_below="@+id/NameText"
+        android:text="Edit E-mail"
+        android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/NameText"
-        android:layout_alignStart="@+id/NameText"
-        android:layout_marginTop="43dp"
-        android:text="Edit E-mail" />
+        android:layout_alignStart="@+id/NameText" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -38,11 +37,11 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/PhoneNumberText"
-        android:layout_below="@+id/EmailText"
+        android:text="Edit Phone Number"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/PhoneNumberView"
         android:layout_alignLeft="@+id/EmailText"
-        android:layout_alignStart="@+id/EmailText"
-        android:layout_marginTop="43dp"
-        android:text="Edit Phone Number" />
+        android:layout_alignStart="@+id/EmailText" />
 
     <Button
         android:layout_width="wrap_content"
@@ -55,5 +54,36 @@
         android:layout_alignEnd="@+id/PhoneNumberText"
         android:layout_alignLeft="@+id/PhoneNumberText"
         android:layout_alignStart="@+id/PhoneNumberText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Name"
+        android:id="@+id/NameView1"
+        android:layout_alignBottom="@+id/NameText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My E-mail"
+        android:id="@+id/EmailView1"
+        android:layout_above="@+id/EmailText"
+        android:layout_alignLeft="@+id/NameView1"
+        android:layout_alignStart="@+id/NameView1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Phone Number"
+        android:id="@+id/PhoneNumberView"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/EmailText"
+        android:layout_alignLeft="@+id/EmailView1"
+        android:layout_alignStart="@+id/EmailView1" />
 
 </RelativeLayout>
