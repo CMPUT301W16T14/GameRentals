@@ -15,6 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+        <activity android:name="t14.com.GameRentals.ViewMyGamesActivity"></activity>
+        <activity android:name="t14.com.GameRentals.AddGameActivity"></activity>
+=======
         <activity android:name=".ViewMyGamesActivity" />
         <activity
             android:name=".AddGameActivity"
@@ -35,6 +39,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="t14.com.GameRentals.MainActivity" />
         </activity>
+>>>>>>> 8237de355f73c8568bbd00e1422df3e4ff260eb1
     </application>
 
 </manifest>
