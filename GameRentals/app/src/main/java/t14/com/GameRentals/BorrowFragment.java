@@ -11,8 +11,6 @@ import android.view.ViewGroup;
  */
 public class BorrowFragment extends Fragment {
 
-    public static final String ARG_OBJECT = "object";
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

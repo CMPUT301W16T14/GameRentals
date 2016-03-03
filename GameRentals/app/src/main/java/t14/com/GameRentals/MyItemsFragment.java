@@ -11,8 +11,6 @@ import android.view.ViewGroup;
  */
 public class MyItemsFragment extends Fragment {
 
-    public static final String ARG_OBJECT = "object";
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -20,4 +18,5 @@ public class MyItemsFragment extends Fragment {
         // properly.
         return inflater.inflate(R.layout.my_items, container,false);
     }
+    
 }

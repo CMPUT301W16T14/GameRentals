@@ -11,7 +11,6 @@ import android.view.ViewGroup;
  */
 public class BidsFragment  extends Fragment {
 
-    public static final String ARG_OBJECT = "object";
 
     @Override
     public View onCreateView(LayoutInflater inflater,

@@ -24,7 +24,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return new BidsFragment();
         }
-
         return null;
     }
 
