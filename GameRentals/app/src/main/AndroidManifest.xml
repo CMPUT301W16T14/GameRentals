@@ -35,6 +35,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="t14.com.GameRentals.MainActivity" />
         </activity>
+        <activity
+            android:name=".SearchGameActivity"
+            android:label="@string/title_activity_search_game"></activity>
     </application>
 
 </manifest>
