@@ -22,6 +22,7 @@
 <<<<<<< HEAD
         <activity android:name="t14.com.GameRentals.ViewMyGamesActivity"></activity>
         <activity android:name="t14.com.GameRentals.AddGameActivity"></activity>
+<<<<<<< HEAD
 =======
         <activity android:name=".ViewMyGamesActivity" />
         <activity
@@ -47,6 +48,8 @@
             android:name=".SearchGameActivity"
             android:label="@string/title_activity_search_game"></activity>
 >>>>>>> origin/Austin
+=======
+>>>>>>> origin/stable
     </application>
 
 </manifest>
