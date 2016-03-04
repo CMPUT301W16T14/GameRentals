@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Test</string>
-<<<<<<< HEAD
-=======
+
     <string name="title_activity_view_profile">ViewProfileActivity</string>
     <string name="title_activity_profile_main">MyProfile</string>
     <string name="title_activity_search_game">SearchGameActivity</string>
->>>>>>> origin/Austin
 </resources>

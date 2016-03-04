@@ -16,15 +16,8 @@
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="364dp"
-<<<<<<< HEAD
-<<<<<<< HEAD
             android:id="@+id/myItems"
-=======
-            android:id="@+id/listView3"
->>>>>>> origin/Austin
-=======
-            android:id="@+id/myItems"
->>>>>>> origin/stable
+
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_weight="1.01" />
