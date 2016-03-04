@@ -65,9 +65,5 @@ public class MyItemsFragment extends Fragment {
         return v;
     }
 
-    @Override
-    public void onStart(){
-
-    }
     
 }
