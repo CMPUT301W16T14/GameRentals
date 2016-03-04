@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/myGamesLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="My Games" />
+
+    <ListView
+        android:id="@+id/myGames"
+        android:layout_width="fill_parent"
+        android:layout_height="263dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" >
+
+    </ListView>
+
+    <EditText
+        android:id="@+id/body"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal" />
+
+    <Button
+        android:id="@+id/addGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Game"/>
+
+
+</LinearLayout>
