@@ -1,13 +1,17 @@
 package t14.com.GameRentals;
 
+<<<<<<< HEAD
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+=======
+>>>>>>> origin/Austin
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -17,11 +21,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+=======
+>>>>>>> origin/Austin
 
 /**
  * Created by yourui on 3/2/16.
  */
 public class MyItemsFragment extends Fragment {
+<<<<<<< HEAD
     private GameList gameList;
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -65,5 +72,15 @@ public class MyItemsFragment extends Fragment {
         return v;
     }
 
+=======
+
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        // The last two arguments ensure LayoutParams are inflated
+        // properly.
+        return inflater.inflate(R.layout.my_items, container,false);
+    }
+>>>>>>> origin/Austin
     
 }
