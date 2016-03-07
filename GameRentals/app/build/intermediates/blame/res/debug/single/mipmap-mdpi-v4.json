@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\cjresler\\Documents\\CMPUT301\\GameRentals\\GameRentals\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\cjresler\\Documents\\CMPUT301\\GameRentals\\GameRentals\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\cshome\\yourui\\cmput301\\GameRentals\\GameRentals\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\cshome\\yourui\\cmput301\\GameRentals\\GameRentals\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    }
+]
