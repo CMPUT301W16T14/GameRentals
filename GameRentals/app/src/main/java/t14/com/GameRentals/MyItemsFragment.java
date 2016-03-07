@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
@@ -20,13 +21,22 @@ import android.widget.Toast;
  */
 public class MyItemsFragment extends Fragment {
     private GameList gameList;
+    private ListView myItems;
+    private ArrayAdapter<Game> adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        //For testing
+        User test = new User("Bill", "hi@hi.com", "9");
+        UserController.setUser(test);
+        //
+
         gameList = new GameList();
         View v = inflater.inflate(R.layout.my_items, container,false);
         Button addButton = (Button)v.findViewById(R.id.AddButton);
-        ListView myItems = (ListView)v.findViewById(R.id.myItems);
+        myItems = (ListView)v.findViewById(R.id.myItems);
         CheckBox checkBox = (CheckBox)v.findViewById(R.id.withBidCheckBox);
         addButton.setOnClickListener(new View.OnClickListener(){
 
@@ -36,11 +46,26 @@ public class MyItemsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        //Set up adapter
+        gameList = UserController.getCurrentUser().getBorrowedItems();
+        adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),
+                R.layout.game_list, gameList.getList());
+        myItems.setAdapter(adapter);
+
+        //For testing
+        User user = UserController.getCurrentUser();
+        Game zelda = new Game("Zelda", "Action RPG", user);
+        gameList.addGame(zelda);
+        adapter.notifyDataSetChanged();
+        //
+
+        //Handle items on list being clicked
         myItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-                if (!((CheckBox)view).isChecked()) {
+                if (!((CheckBox) view).isChecked()) {
                     adb.setMessage("Do you want to edit it?");
                     adb.setCancelable(true);
 
@@ -59,8 +84,7 @@ public class MyItemsFragment extends Fragment {
                         }
                     });
                     adb.show();
-                }
-                else{
+                } else {
                     adb.setMessage("Do you want to view the bids?");
                     adb.setCancelable(true);
 
@@ -96,6 +120,4 @@ public class MyItemsFragment extends Fragment {
 
         return v;
     }
-
-    
 }
