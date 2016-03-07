@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/color/abc_search_url_text_holo.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/color/abc_search_url_text_holo.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/color/abc_search_url_text_holo.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/color/abc_search_url_text_holo.xml"
+    }
+]
