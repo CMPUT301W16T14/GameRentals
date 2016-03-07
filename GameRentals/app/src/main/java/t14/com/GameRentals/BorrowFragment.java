@@ -15,6 +15,7 @@ import android.widget.ListView;
  * Created by yourui on 3/2/16.
  */
 public class BorrowFragment extends Fragment {
+
     private View v;
     private Button searchButton;
     private EditText searchText;
@@ -31,7 +32,6 @@ public class BorrowFragment extends Fragment {
         borrowedGameList = (ListView)v.findViewById(R.id.BorrowedItems);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 String cSearchText = searchText.getText().toString();
@@ -41,17 +41,18 @@ public class BorrowFragment extends Fragment {
             }
         });
 
+
         return v;
     }
-/*
-    @Override
+
+    /*@Override
     public void onStart() {
         super.onStart();
         borrowedGames = UserController.getCurrentUser().getBorrowedItems();
         adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),
                 R.layout.game_list, borrowedGames.getList());
         borrowedGameList.setAdapter(adapter);
-    }
+    }*/
 
-*/
+
 }

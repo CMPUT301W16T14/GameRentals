@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout-v14/abc_activity_chooser_view.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout-v14/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout-v14/abc_activity_chooser_view.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout-v14/abc_activity_chooser_view.xml"
+    }
+]

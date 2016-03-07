@@ -1,0 +1,338 @@
+[
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/log_in.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/log_in.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/view_bids_list.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/view_bids_list.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/borrow_search.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/borrow_search.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/bid_on_game.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/bid_on_game.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/my_items.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/my_items.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_mode_close_item.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/cancel_bid.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/cancel_bid.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_mode_close_item.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_tabbar.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_tabbar.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/edit_my_item.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/edit_my_item.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/borrow_search.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/borrow_search.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/search_result_for_bid.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/search_result_for_bid.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_decor.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_decor.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_profile_main.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_profile_main.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/edit_my_item.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/edit_my_item.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_view_my_games.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_view_my_games.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_include.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_activity_chooser_view_include.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_tab.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_tab.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/bid_on_game.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/bid_on_game.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/borrow.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/borrow.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_tab.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_tab.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/view_bid.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/view_bid.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_add_game.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_add_game.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/cancel_bid.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/cancel_bid.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_add_game.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_add_game.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/bids.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/bids.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_profile_main.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_profile_main.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/view_bid.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/view_bid.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/game_list.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/game_list.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_decor_overlay.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_decor_overlay.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/view_bids_list.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/view_bids_list.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/borrow.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/borrow.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/game_list.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/game_list.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_home.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_home.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_decor_overlay.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_decor_overlay.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_view_my_games.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_view_my_games.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_screen.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_screen.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/log_in.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/log_in.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/bids.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/bids.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_tabbar.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_tabbar.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_include.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_activity_chooser_view_include.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_search_game.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_search_game.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_decor.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_decor.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/search_result_for_bid.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/layout/search_result_for_bid.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_screen.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_screen.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_decor_include.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_decor_include.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/activity_search_game.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/activity_search_game.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_home.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_home.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/my_items.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/layout/my_items.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_decor_include.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_decor_include.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    }
+]
