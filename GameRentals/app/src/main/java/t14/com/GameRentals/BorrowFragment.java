@@ -28,15 +28,15 @@ public class BorrowFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.borrow, container, false);
         searchButton = (Button) v.findViewById(R.id.SearchButton);
-        searchText = (EditText)v.findViewById(R.id.SearchText);
+        searchText = (EditText) v.findViewById(R.id.SearchText);
         borrowedGameList = (ListView)v.findViewById(R.id.BorrowedItems);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String cSearchText = searchText.getText().toString();
+                String sSearchText = searchText.getText().toString();
                 Intent intent = new Intent(getActivity(), SearchGameActivity.class);
-                intent.putExtra("SEARCH_TERM", cSearchText);
+                intent.putExtra("SEARCH_TERM", sSearchText);
                 startActivity(intent);
             }
         });
