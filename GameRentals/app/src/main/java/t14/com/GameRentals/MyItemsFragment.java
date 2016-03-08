@@ -13,16 +13,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 /**
  * Created by yourui on 3/2/16.
  * user case 01.01.01 ~ 01.05.01 & 05.04.01
  */
-public class MyItemsFragment extends Fragment {
+public class MyItemsFragment extends Fragment implements View.OnClickListener {
     private GameList gameList;
     private ListView myItems;
     private ArrayAdapter<Game> adapter;
+    private User currentUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -32,16 +34,21 @@ public class MyItemsFragment extends Fragment {
         User test = new User("Bill", "hi@hi.com", "9");
         UserController.setUser(test);
         //
+        currentUser = UserController.getCurrentUser();
 
         gameList = new GameList();
         View v = inflater.inflate(R.layout.my_items, container,false);
         Button addButton = (Button)v.findViewById(R.id.AddButton);
         myItems = (ListView)v.findViewById(R.id.myItems);
-        CheckBox bidCheckBox = (CheckBox)v.findViewById(R.id.withBidCheckBox);
-        CheckBox allCheckBox = (CheckBox)v.findViewById(R.id.withAllCheckBox);
-        CheckBox borrowedCheckBox = (CheckBox)v.findViewById(R.id.withLentCheckBox);
-        CheckBox availableCheckBox = (CheckBox)v.findViewById(R.id.withAvailableCheckBox);
-        addButton.setOnClickListener(new View.OnClickListener(){
+        RadioButton bidCheckBox = (RadioButton)v.findViewById(R.id.withBidCheckBox);
+        RadioButton allCheckBox = (RadioButton)v.findViewById(R.id.withAllCheckBox);
+        RadioButton borrowedCheckBox = (RadioButton)v.findViewById(R.id.withLentCheckBox);
+        RadioButton availableCheckBox = (RadioButton)v.findViewById(R.id.withAvailableCheckBox);
+
+
+        //allCheckBox.setChecked(true);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -51,17 +58,22 @@ public class MyItemsFragment extends Fragment {
         });
 
         //Set up adapter
-        gameList = UserController.getCurrentUser().getBorrowedItems();
         adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),
                 R.layout.game_list, gameList.getList());
         myItems.setAdapter(adapter);
 
         //For testing
-        User user = UserController.getCurrentUser();
-        Game zelda = new Game("Zelda", "Action RPG", user);
-        gameList.addGame(zelda);
-        adapter.notifyDataSetChanged();
-        //
+        Game zelda = new Game("Zelda", "Action RPG", currentUser);
+        zelda.setStatus(GameController.STATUS_BIDDED);
+        currentUser.getMyGames().addGame(zelda);
+
+        Game chrono = new Game("Chrono Trigger", "RPG", currentUser);
+        chrono.setStatus(GameController.STATUS_AVAILABLE);
+        currentUser.getMyGames().addGame(chrono);
+
+        Game ff = new Game("FF10", "RPG", currentUser);
+        ff.setStatus(GameController.STATUS_BORROWED);
+        currentUser.getMyGames().addGame(ff);
 
         //Handle items on list being clicked
         myItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,57 +120,50 @@ public class MyItemsFragment extends Fragment {
                 }
             }
         });
-        bidCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (((CheckBox) view).isChecked()) {
-                    //TODO(Margaret will do it): Show my_items with bids(sort out games whose status is bidded)
-                    Toast.makeText(getActivity(), "show My Games With Bids", Toast.LENGTH_SHORT).show();
 
-                } else {
-                    Toast.makeText(getActivity(), "Show all my Games", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        //Show all games
-        allCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (((CheckBox) view).isChecked()) {
-                    //TODO(Margaret will do it): Show my_items with bids(sort out games whose status is bidded)
-                    Toast.makeText(getActivity(), "show My Games With Bids", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(getActivity(), "Show all my Games", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        //Show games that are being borrowed
-        borrowedCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (((CheckBox) view).isChecked()) {
-                    //TODO(Margaret will do it): Show my_items with bids(sort out games whose status is bidded)
-                    Toast.makeText(getActivity(), "show My Games With Bids", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(getActivity(), "Show all my Games", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        //Show available games
-        availableCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (((CheckBox) view).isChecked()) {
-                    //TODO(Margaret will do it): Show my_items with bids(sort out games whose status is bidded)
-                    Toast.makeText(getActivity(), "show My Games With Bids", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(getActivity(), "Show all my Games", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        bidCheckBox.setOnClickListener(this);
+        allCheckBox.setOnClickListener(this);
+        availableCheckBox.setOnClickListener(this);
+        borrowedCheckBox.setOnClickListener(this);
         return v;
+    }
+
+    //This handles clicking of the radio buttons
+    @Override
+    public void onClick(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.withAllCheckBox:
+                if (checked) {
+                    //Toast.makeText(getActivity(), "Show All Games", Toast.LENGTH_SHORT).show();
+                    gameList.copyList(currentUser.getMyGames());
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+            case R.id.withAvailableCheckBox:
+                if (checked){
+                    //Toast.makeText(getActivity(), "Show Available Games", Toast.LENGTH_SHORT).show();
+                    gameList.copyList(UserController.getAvailable(currentUser.getMyGames()));
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+            case R.id.withBidCheckBox:
+                if(checked){
+                    //Toast.makeText(getActivity(), "Show Games With Bids", Toast.LENGTH_SHORT).show();
+                    gameList.copyList(UserController.getBidded(currentUser.getMyGames()));
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+            case R.id.withLentCheckBox:
+                if(checked){
+                    //Toast.makeText(getActivity(), "Show Games Being Lent Out", Toast.LENGTH_SHORT).show();
+                    gameList.copyList(UserController.getBorrowed(currentUser.getMyGames()));
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+        }
     }
 }
