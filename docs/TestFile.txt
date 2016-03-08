@@ -1,6 +1,10 @@
 This is a test file.
 Connor: made this
 Janice: I edited it.
+<<<<<<< HEAD
+Qi：666666
+=======
 Austin: Whatever.
 Yourui: hahaha
 qliang: 666666
+>>>>>>> origin/Austin
