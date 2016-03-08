@@ -37,7 +37,10 @@ public class MyItemsFragment extends Fragment {
         View v = inflater.inflate(R.layout.my_items, container,false);
         Button addButton = (Button)v.findViewById(R.id.AddButton);
         myItems = (ListView)v.findViewById(R.id.myItems);
-        CheckBox checkBox = (CheckBox)v.findViewById(R.id.withBidCheckBox);
+        CheckBox bidCheckBox = (CheckBox)v.findViewById(R.id.withBidCheckBox);
+        CheckBox allCheckBox = (CheckBox)v.findViewById(R.id.withAllCheckBox);
+        CheckBox borrowedCheckBox = (CheckBox)v.findViewById(R.id.withLentCheckBox);
+        CheckBox availableCheckBox = (CheckBox)v.findViewById(R.id.withAvailableCheckBox);
         addButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -105,7 +108,7 @@ public class MyItemsFragment extends Fragment {
                 }
             }
         });
-        checkBox.setOnClickListener(new View.OnClickListener() {
+        bidCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (((CheckBox) view).isChecked()) {
@@ -117,7 +120,45 @@ public class MyItemsFragment extends Fragment {
                 }
             }
         });
+        //Show all games
+        allCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (((CheckBox) view).isChecked()) {
+                    //TODO(Margaret will do it): Show my_items with bids(sort out games whose status is bidded)
+                    Toast.makeText(getActivity(), "show My Games With Bids", Toast.LENGTH_SHORT).show();
 
+                } else {
+                    Toast.makeText(getActivity(), "Show all my Games", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        //Show games that are being borrowed
+        borrowedCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (((CheckBox) view).isChecked()) {
+                    //TODO(Margaret will do it): Show my_items with bids(sort out games whose status is bidded)
+                    Toast.makeText(getActivity(), "show My Games With Bids", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(getActivity(), "Show all my Games", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        //Show available games
+        availableCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (((CheckBox) view).isChecked()) {
+                    //TODO(Margaret will do it): Show my_items with bids(sort out games whose status is bidded)
+                    Toast.makeText(getActivity(), "show My Games With Bids", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(getActivity(), "Show all my Games", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return v;
     }
 }
