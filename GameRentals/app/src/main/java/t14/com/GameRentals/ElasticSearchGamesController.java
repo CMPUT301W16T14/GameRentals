@@ -93,6 +93,49 @@ public class ElasticSearchGamesController {
         }
     }
 
+    public static class SearchGamesTask extends AsyncTask<String,Void,GameList> {
+
+        @Override
+        protected GameList doInBackground(String... params) {
+            verifyConfig();
+
+            /*
+            {
+                "query": {
+                    "bool": {
+                        "must": [
+                            { "match": { "status": 0} },//not borrowed
+                            { "match": { "description": "mill" } },
+                            { "match": { "description": "lane" } }
+                        ]
+                    }
+                }
+            }
+             */
+
+            // Hold (eventually) the games that we get back from Elasticsearch
+            GameList games = new GameList();
+
+            // The following gets the top 10000 tweets matching the string passed in
+            String search_string = "{\"query\":{\"bool\":{must\":[" + params[0] + "]}}}";
+
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("game").build();
+            try {
+                SearchResult execute = client.execute(search);
+                if(execute.isSucceeded()) {
+                    List<Game> foundGames = execute.getSourceAsObjectList(Game.class);
+                    games.getList().addAll(foundGames);
+                } else {
+                    Log.i("TODO", "Search was unsuccessful, do something!");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return games;
+        }
+    }
+
     // If no client, add one
     public static void verifyConfig() {
         if(client == null) {
