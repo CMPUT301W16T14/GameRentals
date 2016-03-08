@@ -70,7 +70,7 @@ public class MyItemsFragment extends Fragment {
 
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
                             startActivity(intent);
-                            Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "view the bids", Toast.LENGTH_SHORT).show();
                         }
                     });
                     adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {

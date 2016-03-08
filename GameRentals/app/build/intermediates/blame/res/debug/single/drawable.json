@@ -1,87 +1,111 @@
 [
     {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_holo_light.xml"
-    },
-    {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_holo_dark.xml"
-    },
-    {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_background_transition_holo_light.xml"
-    },
-    {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear_holo_light.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_ic_clear_holo_light.xml"
-    },
-    {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_ab_holo.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_tab_indicator_ab_holo.xml"
-    },
-    {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_holo_dark.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_holo_dark.xml"
-    },
-    {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_holo_dark.xml"
-    },
-    {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_right_holo_dark.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_right_holo_dark.xml"
-    },
-    {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_holo_dark.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_holo_dark.xml"
-    },
-    {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_ab_holo.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_tab_indicator_ab_holo.xml"
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_ic_clear.xml"
     },
     {
         "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear_holo_light.xml",
         "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_ic_clear_holo_light.xml"
     },
     {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_search_dropdown_dark.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_search_dropdown_dark.xml"
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_holo_dark.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_holo_dark.xml"
     },
     {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_search_dropdown_dark.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_search_dropdown_dark.xml"
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_right_holo_light.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_right_holo_light.xml"
     },
     {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_dark.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_dark.xml"
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_light.xml"
     },
     {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_light.xml"
-    },
-    {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_right_holo_light.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_right_holo_light.xml"
-    },
-    {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_dark.xml"
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_light.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_light.xml"
     },
     {
         "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
         "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_holo_light.xml"
     },
     {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_ic_clear.xml"
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_ab_holo.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_tab_indicator_ab_holo.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_right_holo_dark.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_right_holo_dark.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_right_holo_light.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_right_holo_light.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_dark.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_dark.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear_holo_light.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_ic_clear_holo_light.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_light.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_light.xml"
     },
     {
         "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_search_dropdown_light.xml",
         "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_search_dropdown_light.xml"
     },
     {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_light.xml"
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_search_dropdown_light.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_search_dropdown_light.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_ic_clear.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_dark.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_holo_light.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_holo_light.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_holo_dark.xml"
     },
     {
         "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_dark.xml",
@@ -92,47 +116,91 @@
         "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
     },
     {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_dark.xml"
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_light.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_light.xml"
     },
     {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_holo_light.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_holo_light.xml"
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_holo_light.xml"
     },
     {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_ab_holo.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_tab_indicator_ab_holo.xml"
     },
     {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_right_holo_light.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_right_holo_light.xml"
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear_holo_light.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_ic_clear_holo_light.xml"
     },
     {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_light.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_light.xml"
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_holo_dark.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_holo_dark.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_search_dropdown_dark.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_search_dropdown_dark.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_search_dropdown_dark.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_search_dropdown_dark.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_holo_dark.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_holo_dark.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_search_dropdown_light.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_search_dropdown_light.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_right_holo_light.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_right_holo_light.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_dark.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_dark.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_holo_light.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_holo_light.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_search_dropdown_dark.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_search_dropdown_dark.xml"
+    },
+    {
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_item_background_holo_dark.xml"
     },
     {
         "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_holo_light.xml",
         "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_holo_light.xml"
     },
     {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_light.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_light.xml"
-    },
-    {
-        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear.xml",
-        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_ic_clear.xml"
-    },
-    {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_search_dropdown_light.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_search_dropdown_light.xml"
-    },
-    {
-        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_spinner_ab_holo_dark.xml",
-        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_spinner_ab_holo_dark.xml"
+        "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_right_holo_dark.xml",
+        "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_right_holo_dark.xml"
     },
     {
         "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_textfield_searchview_right_holo_dark.xml",
         "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_textfield_searchview_right_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_ic_clear.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_dark.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_ab_holo.xml",
+        "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/drawable/abc_tab_indicator_ab_holo.xml"
     }
 ]

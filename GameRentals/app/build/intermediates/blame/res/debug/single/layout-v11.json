@@ -6,5 +6,9 @@
     {
         "merged": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout-v11/abc_action_bar_decor.xml",
         "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout-v11/abc_action_bar_decor.xml"
+    },
+    {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/layout-v11/abc_action_bar_decor.xml",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/layout-v11/abc_action_bar_decor.xml"
     }
 ]

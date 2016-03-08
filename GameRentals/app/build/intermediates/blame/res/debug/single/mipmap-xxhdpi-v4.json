@@ -4,6 +4,10 @@
         "source": "/cshome/yourui/cmput301/GameRentals/GameRentals/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },
     {
+        "merged": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher.png",
+        "source": "/afs/ualberta.ca/home/y/o/yourui/Projects/GameRentals/GameRentals/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
         "merged": "/Users/margaret/cmput301/GameRentals/GameRentals/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher.png",
         "source": "/Users/margaret/cmput301/GameRentals/GameRentals/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     }
