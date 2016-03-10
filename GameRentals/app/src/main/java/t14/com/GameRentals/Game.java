@@ -1,11 +1,12 @@
 package t14.com.GameRentals;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class Game {
+public class Game implements Serializable{
     private String gameName;
     private String gameID;
     private String description;

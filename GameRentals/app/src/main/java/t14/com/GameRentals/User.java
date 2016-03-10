@@ -71,4 +71,5 @@ public class User {
     public void addMyGame(Game game) {
         UserController.addMyGame(game);
     }
+
 }
