@@ -1,6 +1,7 @@
 package t14.com.GameRentals;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by cjresler on 2016-02-28.
@@ -24,6 +25,14 @@ public class GameList {
         list.add(game);
     }
 
+    public void copyList(GameList copy){
+        list.clear();
+        for(int i = 0; i < copy.list.size(); i++){
+            list.add(copy.list.get(i));
+        }
+
+    }
+
     public boolean hasGame(Game game){
         return list.contains(game);
     }
@@ -36,5 +45,13 @@ public class GameList {
         if(list.contains(game)){
             list.remove(game);
         }
+    }
+    //Delete all games from list
+    public void clearList(){
+        list.clear();
+    }
+
+    public int getSize(){
+        return list.size();
     }
 }
