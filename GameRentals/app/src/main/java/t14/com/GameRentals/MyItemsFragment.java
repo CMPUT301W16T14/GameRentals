@@ -80,6 +80,28 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //TODO: Make this work
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                //Handle if game clicked has available status
+                if(gameList.getList().get(position).getStatus() == GameController.STATUS_AVAILABLE){
+                    adb.setMessage("Do you want to edit it?");
+                    adb.setCancelable(true);
+
+                    adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    adb.show();
+                }
+                /*
                 if (!((CheckBox) view).isChecked()) {
                     adb.setMessage("Do you want to edit it?");
                     adb.setCancelable(true);
@@ -117,7 +139,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });
-                }
+                }*/
             }
         });
 
