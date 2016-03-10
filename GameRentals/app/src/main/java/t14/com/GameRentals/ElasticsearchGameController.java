@@ -20,7 +20,7 @@ import io.searchbox.core.SearchResult;
  * Created by aredmond on 3/7/16.
  * From esports branch of LonelyTwitter
  */
-public class ElasticSearchGamesController {
+public class ElasticsearchGameController {
     private static JestDroidClient client;
 
     //TODO: A function that gets tweets
@@ -99,25 +99,32 @@ public class ElasticSearchGamesController {
         protected GameList doInBackground(String... params) {
             verifyConfig();
 
+            // Hold (eventually) the games that we get back from Elasticsearch
+            GameList games = new GameList();
+
             /*
             {
                 "query": {
                     "bool": {
                         "must": [
-                            { "match": { "status": 0} },//not borrowed
-                            { "match": { "description": "mill" } },
-                            { "match": { "description": "lane" } }
+                            { "match": { "name": "call" } },
+                            { "match": { "description": "first" } },
+                            { "match": { "description": "shooter" } }
                         ]
                     }
                 }
             }
+
              */
 
-            // Hold (eventually) the games that we get back from Elasticsearch
-            GameList games = new GameList();
+            String insertTerms = "{\"match\": {\"status\": 0}}";
 
-            // The following gets the top 10000 tweets matching the string passed in
-            String search_string = "{\"query\":{\"bool\":{must\":[" + params[0] + "]}}}";
+            for (String searchTerm: params) {
+                insertTerms += ", {\"match\": {\"description\": \"" + searchTerm + "\"}}";
+            }
+
+            // The following gets the games with all the search terms
+            String search_string = "{\"query\":{\"bool\":{\"must\":[ " + insertTerms + " ]}}}";
 
             Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("game").build();
             try {
