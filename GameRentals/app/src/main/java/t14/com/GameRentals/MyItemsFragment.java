@@ -29,11 +29,9 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        //TODO: Keep track of which radio button is pressed so appropriate items are displayed
+        //when switching screens
 
-        //For testing
-        User test = new User("Bill", "hi@hi.com", "9");
-        UserController.setUser(test);
-        //
         currentUser = UserController.getCurrentUser();
 
         gameList = new GameList();
@@ -54,6 +52,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddGameActivity.class);
                 startActivity(intent);
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -79,6 +78,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         myItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //TODO: Make this work
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
                 if (!((CheckBox) view).isChecked()) {
                     adb.setMessage("Do you want to edit it?");

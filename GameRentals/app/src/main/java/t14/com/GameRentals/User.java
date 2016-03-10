@@ -67,4 +67,8 @@ public class User {
     public void setBorrowedItems(GameList borrowedItems) {
         this.borrowedItems = borrowedItems;
     }
+
+    public void addMyGame(Game game) {
+        UserController.addMyGame(game);
+    }
 }

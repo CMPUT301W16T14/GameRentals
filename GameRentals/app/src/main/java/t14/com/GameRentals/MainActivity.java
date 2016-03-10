@@ -54,4 +54,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
     }
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        //For testing
+        User test = new User("Bill", "hi@hi.com", "9");
+        UserController.setUser(test);
+        //
+    }
 }
