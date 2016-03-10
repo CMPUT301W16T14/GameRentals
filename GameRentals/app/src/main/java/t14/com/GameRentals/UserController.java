@@ -5,7 +5,6 @@ package t14.com.GameRentals;
  */
 public class UserController {
     private static User currentUser;
-    private static GameList gameList;
 
     public static User getCurrentUser() {
         return currentUser;
@@ -15,12 +14,45 @@ public class UserController {
         currentUser = current;
     }
 
-    public GameList getGameList() {
+    //Given a GameList, return all games with available status
+    public static GameList getAvailable(GameList games){
+        GameList gameList = new GameList();
+        for(int i = 0; i < games.getSize(); i++){
+            if(games.getGame(i).getStatus() == GameController.STATUS_AVAILABLE){
+                gameList.addGame(games.getGame(i));
+            }
+        }
         return gameList;
     }
 
-    public void addMyGame(){
-        //TODO
+    //Given a GameList, return all games with borrowed status
+    public static GameList getBorrowed(GameList games){
+        GameList gameList = new GameList();
+        for(int i = 0; i < games.getSize(); i++){
+            if(games.getGame(i).getStatus() == GameController.STATUS_BORROWED){
+                gameList.addGame(games.getGame(i));
+            }
+        }
+        return gameList;
+    }
+
+    //Given a GameList, return all games with bidded status
+    public static GameList getBidded(GameList games){
+        GameList gameList = new GameList();
+        for(int i = 0; i < games.getSize(); i++){
+            if(games.getGame(i).getStatus() == GameController.STATUS_BIDDED){
+                gameList.addGame(games.getGame(i));
+            }
+        }
+        return gameList;
+    }
+
+    public GameList getGameList() {
+        return currentUser.getMyGames();
+    }
+
+    public static void addMyGame(Game game){
+        currentUser.getMyGames().addGame(game);
     }
 
     public void deleteGame(){
