@@ -15,8 +15,7 @@ public class BidsFragment  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        // The last two arguments ensure LayoutParams are inflated
-        // properly.
+        //TODO
         return inflater.inflate(R.layout.bids, container,false);
     }
 }

@@ -12,12 +12,15 @@ import android.widget.Button;
  * user case 05.01.01
  */
 public class BidOnGameActivity extends Activity {
+    private Game game;
+    private User user;
 
     @Override
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
         Button okButton = (Button)findViewById(R.id.OKButton);
         setContentView(R.layout.bid_on_game);
+        game = new Game(" "," ",user);
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,13 +32,12 @@ public class BidOnGameActivity extends Activity {
                 adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        game.setStatus(1);//////////////don't know which is set status to bid
                     }
                 });
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 });
                 adb.show();

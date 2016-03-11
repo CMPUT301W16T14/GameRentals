@@ -11,6 +11,8 @@ import android.widget.Button;
  */
 public class BidOnActivity extends Activity {
 
+    private Game game;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
