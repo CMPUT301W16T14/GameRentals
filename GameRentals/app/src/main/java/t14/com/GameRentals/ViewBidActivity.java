@@ -12,8 +12,8 @@ import android.widget.Button;
  */
 public class ViewBidActivity extends Activity {
     private Bid bid;
-    private int position;
     private BidList bidList;
+    private User currentUser;
 
     private Button cancelButton;
     private Button acceptButton;
@@ -22,14 +22,17 @@ public class ViewBidActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_bid);
+
+        currentUser = UserController.getCurrentUser();
+        int gamePosition = getIntent().getExtras().getInt("gamePosition");
+        int bidPosition = getIntent().getExtras().getInt("bidPosition");
         /////////////////////////
-        bidList = new BidList();
-        /////////////////////////
+        bidList = currentUser.getMyGames().getGame(gamePosition).getBidList();
+        bid = bidList.getItem(bidPosition);
+
         cancelButton = (Button)findViewById(R.id.CancelBidButton);
         acceptButton = (Button)findViewById(R.id.acceptBidButton);
 
-        position = getIntent().getExtras().getInt("position");
-        bid = bidList.getItem(position);
         final int length = bidList.getSize();
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +63,7 @@ public class ViewBidActivity extends Activity {
     @Override
     protected void onStart(){
         super.onStart();
-        //TODO: SET THE BIDLIST
+
         //TODO: SET THE CURRENT BID
     }
 

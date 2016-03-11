@@ -13,14 +13,15 @@ import android.widget.Button;
  */
 public class BidOnGameActivity extends Activity {
     private Game game;
-    private User user;
+    private User currentuser;
 
     @Override
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
         Button okButton = (Button)findViewById(R.id.OKButton);
         setContentView(R.layout.bid_on_game);
-        game = new Game(" "," ",user);
+        currentuser = UserController.getCurrentUser();
+
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override

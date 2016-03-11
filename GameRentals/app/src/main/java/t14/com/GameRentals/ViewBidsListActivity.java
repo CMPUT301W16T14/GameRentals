@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
@@ -13,8 +14,11 @@ import android.widget.ListView;
  */
 public class ViewBidsListActivity extends Activity {
 
-    private BidList bidList =  new BidList();
+    private BidList bidList;
     private ListView bidListView;
+    private User currentUser;
+    private int gamePosition;
+    private ArrayAdapter<Bid> adapter;
 
 
     @Override
@@ -22,7 +26,10 @@ public class ViewBidsListActivity extends Activity {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.view_bids_list);
 
+        gamePosition = getIntent().getExtras().getInt("gamePosition");
         bidListView = (ListView)findViewById(R.id.bidListView);
+        currentUser = UserController.getCurrentUser();
+        bidList = currentUser.getMyGames().getGame(gamePosition).getBidList();
 
         bidListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -30,7 +37,8 @@ public class ViewBidsListActivity extends Activity {
                 final int position = i;
 
                 Intent intent = new Intent(ViewBidsListActivity.this, ViewBidActivity.class);
-                intent.putExtra("position",position);
+                intent.putExtra("gamePosition",gamePosition);
+                intent.putExtra("bidPosition",position);
                 startActivity(intent);
             }
         });
@@ -40,6 +48,8 @@ public class ViewBidsListActivity extends Activity {
     public void onStart(){
         super.onStart();
         //TODO: SET THE BIDLIST TO THE ONE IN SERVER
+        adapter = new ArrayAdapter<Bid>(ViewBidsListActivity.this,R.layout.view_bids_list,bidList.getList());
+        bidListView.setAdapter(adapter);
     }
 
 }

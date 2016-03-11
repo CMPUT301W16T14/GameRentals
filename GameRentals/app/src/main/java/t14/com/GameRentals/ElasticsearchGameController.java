@@ -8,7 +8,6 @@ import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import io.searchbox.core.DocumentResult;
@@ -20,7 +19,7 @@ import io.searchbox.core.SearchResult;
  * Created by aredmond on 3/7/16.
  * From esports branch of LonelyTwitter
  */
-public class ElasticSearchGamesController {
+public class ElasticsearchGameController {
     private static JestDroidClient client;
 
     //TODO: A function that gets tweets
