@@ -39,6 +39,8 @@ public class ViewBidActivity extends Activity {
             @Override
             public void onClick(View view) {
                 bid.setAccepted(false);
+                ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                ese.execute(currentUser);
             }
         });
 
@@ -54,7 +56,11 @@ public class ViewBidActivity extends Activity {
                         break;
                     }
                 }
-                if (length == i) bid.setAccepted(true);
+                if (length == i) {
+                    bid.setAccepted(true);
+                    ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                    ese.execute(currentUser);
+                }
             }
         });
 

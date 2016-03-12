@@ -25,6 +25,7 @@ public class BidOnGameActivity extends Activity {
     private Game game;
     private ArrayList<Game> returnedGames;
     private double rate;
+    private User currentUser;
     private final String FILENAME = "searchedResults.sav";
     @Override
     public void onCreate(Bundle SavedInstanceState){
@@ -34,6 +35,7 @@ public class BidOnGameActivity extends Activity {
 
         int gamePosition = getIntent().getExtras().getInt("gamePosition");
         game = returnedGames.get(gamePosition);
+        final User currentUser = UserController.getCurrentUser();
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,8 +48,10 @@ public class BidOnGameActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //////////TODO:GET RATE VALUE
-                        game.getBidList().AddBid(UserController.getCurrentUser(),rate);
-                        UserController.addBiddedGame(game);
+                        game.getBidList().AddBid(currentUser,rate);
+                        currentUser.getBiddedItems().addGame(game);
+                        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                        ese.execute(currentUser);
                     }
                 });
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {

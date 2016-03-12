@@ -5,20 +5,17 @@ package t14.com.GameRentals;
  */
 public class UserController {
     private static User currentUser;
-    public UserController() {
-        currentUser = null;
-    }
 
+    public UserController(User user) {
+        setUser(user);
+    }
 
     public static User getCurrentUser() {
-        User user = new User("Margaret","1234569","donkeyoyo@gmail.com");
-        ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
-        esa.doInBackground(user);
-        return user;
+        return currentUser;
     }
 
-    public static void setUser(User current) {
-        currentUser = current;
+    public static void setUser(User user) {
+        currentUser = user;
     }
 
     //Given a GameList, return all games with available status
@@ -58,11 +55,11 @@ public class UserController {
         return currentUser.getMyGames();
     }
 
-    public static void addMyGame(Game game){
+    /*public static void addMyGame(Game game){
         currentUser.getMyGames().addGame(game);
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.doInBackground(currentUser);
-    }
+        ese.execute(currentUser);
+    }*/
 
     public void deleteGame(){
         //TODO
@@ -72,10 +69,10 @@ public class UserController {
         //TODO
     }
 
-    public static void addBiddedGame(Game game){
+    /*public static void addBiddedGame(Game game){
         currentUser.getBiddedItems().addGame(game);
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.doInBackground(currentUser);
+        ese.execute(currentUser);
     }
 
     public Game getGame(GameList list, int index){
@@ -85,7 +82,7 @@ public class UserController {
     public static void deleteBiddedGame(Game game){
         currentUser.getBiddedItems().removeGame(game);
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.doInBackground(currentUser);
-    }
+        ese.execute(currentUser);
+    }*/
 
 }

@@ -33,6 +33,8 @@ public class CancelBidActivity extends Activity {
             public void onClick(View view) {
                 game.getBidList().RemoveBid(game);
                 currentUser.getBiddedItems().removeGame(game);
+                ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                ese.execute(currentUser);
                 Toast.makeText(CancelBidActivity.this,"cancel this bid",Toast.LENGTH_SHORT);
             }
         });

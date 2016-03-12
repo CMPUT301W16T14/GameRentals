@@ -85,7 +85,6 @@ public class ElasticSearchUsersController {
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()) {
                     user = result.getSourceAsObject(User.class);
-
                 } else {
                     Log.i("TODO", "Search was unsuccessful, do something!");
                 }
@@ -106,7 +105,7 @@ public class ElasticSearchUsersController {
 
             for(User user : params) {
                 String json = gson.toJson(user);
-                Index index = new Index.Builder(user).index("cmput301w16t14").type("user").build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("user").build();
 
                 try {
                     DocumentResult result = client.execute(index);
@@ -115,7 +114,7 @@ public class ElasticSearchUsersController {
                     } else {
                         Log.e("TODO", "Our insert of user failed, oh no!");
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
