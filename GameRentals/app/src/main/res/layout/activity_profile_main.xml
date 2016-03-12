@@ -1,89 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="t14.com.GameRentals.ProfileMain">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Edit Name"
-        android:ems="10"
-        android:id="@+id/NameText"
-        android:layout_marginTop="156dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/EmailText"
-        android:text="Edit E-mail"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/NameText"
-        android:layout_alignStart="@+id/NameText" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="t14.com.GameRentals.ProfileMain">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/PhoneNumberText"
-        android:text="Edit Phone Number"
-        android:layout_marginTop="28dp"
-        android:layout_below="@+id/PhoneNumberView"
-        android:layout_alignLeft="@+id/EmailText"
-        android:layout_alignStart="@+id/EmailText" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/button"
-        android:layout_marginTop="38dp"
-        android:layout_below="@+id/PhoneNumberText"
-        android:layout_alignRight="@+id/PhoneNumberText"
-        android:layout_alignEnd="@+id/PhoneNumberText"
-        android:layout_alignLeft="@+id/PhoneNumberText"
-        android:layout_alignStart="@+id/PhoneNumberText" />
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:id="@+id/card_image">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Name"
-        android:id="@+id/NameView1"
-        android:layout_alignBottom="@+id/NameText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="40dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My E-mail"
-        android:id="@+id/EmailView1"
-        android:layout_above="@+id/EmailText"
-        android:layout_alignLeft="@+id/NameView1"
-        android:layout_alignStart="@+id/NameView1" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/profile_image"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:cropToPadding="false"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Phone Number"
-        android:id="@+id/PhoneNumberView"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/EmailText"
-        android:layout_alignLeft="@+id/EmailView1"
-        android:layout_alignStart="@+id/EmailView1" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/greyRectMask"
+                android:layout_gravity="left|center_vertical" />
 
-</RelativeLayout>
+
+        </FrameLayout>
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnProfileImage"
+            android:layout_alignTop="@+id/imgLine"
+            android:layout_marginRight="10dp"
+            android:layout_alignBottom="@+id/imgLine"
+            android:layout_alignRight="@+id/card_image"
+            android:background="#00000000"
+            android:layout_alignLeft="@+id/imgLine" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgLine"
+            android:layout_alignBottom="@+id/card_image"
+            android:layout_alignRight="@+id/card_image"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/nameText"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Name:"
+            android:id="@+id/lblName"
+            android:layout_gravity="left|center_vertical"
+            android:paddingLeft="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_marginBottom="-35dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/nameText"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="31dp"
+            android:paddingRight="50dp"
+            android:layout_below="@+id/imgLine"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/btnProfileImage"
+            android:layout_alignEnd="@+id/btnProfileImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Email:"
+            android:id="@+id/txtEmail"
+            android:layout_gravity="left|center_vertical"
+            android:paddingLeft="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@+id/EmailText"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="-25dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/EmailText"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/nameText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/nameText"
+            android:layout_alignEnd="@+id/nameText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Phone Number:"
+            android:id="@+id/txtPhone"
+            android:layout_gravity="left|center_vertical"
+            android:paddingLeft="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@+id/PhoneText"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="-25dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/PhoneText"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:inputType="textWebEmailAddress"
+            android:paddingLeft="10dp"
+            android:paddingRight="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/EmailText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/EmailText"
+            android:layout_alignEnd="@+id/EmailText" />
+
+        <Button
+            android:layout_width="94dp"
+            android:layout_height="34dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Save"
+            android:id="@+id/SaveButton"
+            android:layout_gravity="end|bottom"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginBottom="17dp"
+            android:layout_below="@+id/PhoneText"
+            android:layout_marginRight="0dp" />
+
+    </RelativeLayout>
+</ScrollView>
