@@ -88,6 +88,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             startActivity(intent);
             return true;
         }
+        int id2 = item.getItemId();
+        if (id2 == R.id.action_profile){
+            Intent intent = new Intent(this,ProfileMain.class);
+            startActivity(intent);
+            return true;
+        }
         switch(item.getItemId())
         {
             case R.id.settings_id:
