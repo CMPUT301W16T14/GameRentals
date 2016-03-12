@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -37,10 +38,10 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.my_items, container,false);
         Button addButton = (Button)v.findViewById(R.id.AddButton);
         myItems = (ListView)v.findViewById(R.id.myItems);
-        final RadioButton bidCheckBox = (RadioButton)v.findViewById(R.id.withBidCheckBox);
+        RadioButton bidCheckBox = (RadioButton)v.findViewById(R.id.withBidCheckBox);
         RadioButton allCheckBox = (RadioButton)v.findViewById(R.id.withAllCheckBox);
-        final RadioButton borrowedCheckBox = (RadioButton)v.findViewById(R.id.withLentCheckBox);
-        final RadioButton availableCheckBox = (RadioButton)v.findViewById(R.id.withAvailableCheckBox);
+        RadioButton borrowedCheckBox = (RadioButton)v.findViewById(R.id.withLentCheckBox);
+        RadioButton availableCheckBox = (RadioButton)v.findViewById(R.id.withAvailableCheckBox);
 
 
         //allCheckBox.setChecked(true);
@@ -79,7 +80,70 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //TODO: Make this work
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-                if (availableCheckBox.isChecked()) {
+                final Game selectedGame = gameList.getList().get(position);
+                //Handle if game clicked has available status
+                if(selectedGame.getStatus() == GameController.STATUS_AVAILABLE){
+                    adb.setMessage("Do you want to edit it?");
+                    adb.setCancelable(true);
+                    adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            //intent.putExtra("Game", temp);
+                            startActivity(intent);
+                            Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    adb.show();
+                }
+                else if(selectedGame.getStatus() == GameController.STATUS_BIDDED){
+                    adb.setMessage("Do you want to edit or view bids?");
+                    adb.setCancelable(true);
+                    adb.setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            intent.putExtra("Game", selectedGame);
+                            startActivity(intent);
+                            Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    adb.setNegativeButton("VIEW BIDS", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //TODO:Go to view bids activity
+                            Intent intent = new Intent(getActivity(), ViewBidsListActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    adb.show();
+                }
+                else if(selectedGame.getStatus() == GameController.STATUS_BORROWED){
+                    adb.setMessage("Do you want to edit it?");
+                    adb.setCancelable(true);
+                    adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            intent.putExtra("Game", selectedGame);
+                            startActivity(intent);
+                            Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    adb.show();
+                }
+                /*
+                if (!((CheckBox) view).isChecked()) {
                     adb.setMessage("Do you want to edit it?");
                     adb.setCancelable(true);
 
@@ -98,8 +162,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         }
                     });
                     adb.show();
-                }
-                else if(bidCheckBox.isChecked()) {
+                } else {
                     adb.setMessage("Do you want to view the bids?");
                     adb.setCancelable(true);
 
@@ -107,13 +170,9 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            Intent intent = new Intent(getActivity(), ViewBidsListActivity.class);
+                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
                             startActivity(intent);
-                            Toast.makeText(getActivity(), "view the list of the bids", Toast.LENGTH_SHORT).show();
-                            /*
-                            hi Connor~
-                            Can you help me copy from line 102 to 124 and paste them to your version please?
-                             */
+                            Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
                         }
                     });
                     adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -121,10 +180,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });
-                }
-                else if (borrowedCheckBox.isChecked()){
-                    //TODO
-                }
+                }*/
             }
         });
 
