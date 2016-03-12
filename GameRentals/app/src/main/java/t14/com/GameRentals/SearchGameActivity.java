@@ -10,11 +10,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class SearchGameActivity extends Activity {
-
+    private final String FILENAME = "searchedResults.sav";
     private ArrayList<Game> returnedGames;
     private ListView returnedGamesList;
     private ArrayAdapter<Game> adapter;
@@ -40,8 +47,9 @@ public class SearchGameActivity extends Activity {
         }
         adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
         returnedGamesList.setAdapter(adapter);
-
         setResult(RESULT_OK);
+
+        saveInFile();/////////////save the results to local file to do bid.
 
         returnedGamesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,20 +73,24 @@ public class SearchGameActivity extends Activity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                     }
                 });
-
             }
         });
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //if(returnedGames == null) {
-
-        //}
-        //adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
-        //returnedGamesList.setAdapter(adapter);
+    private void saveInFile(){
+        try{
+            FileOutputStream fos = openFileOutput(FILENAME,0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(returnedGames, out);
+            out.flush();
+            fos.close();
+        }catch(FileNotFoundException e){
+            throw new RuntimeException();
+        }catch (IOException e){
+            throw new RuntimeException();
+        }
     }
 
 }

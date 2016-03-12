@@ -26,7 +26,7 @@ public class ViewBidActivity extends Activity {
         currentUser = UserController.getCurrentUser();
         int gamePosition = getIntent().getExtras().getInt("gamePosition");
         int bidPosition = getIntent().getExtras().getInt("bidPosition");
-        /////////////////////////
+
         bidList = currentUser.getMyGames().getGame(gamePosition).getBidList();
         bid = bidList.getItem(bidPosition);
 
@@ -64,7 +64,6 @@ public class ViewBidActivity extends Activity {
     protected void onStart(){
         super.onStart();
 
-        //TODO: SET THE CURRENT BID
     }
 
 }

@@ -24,4 +24,13 @@ public class BidList {
         bid = list.get(position);
         return bid;
     }
+
+    public void AddBid(User user, double rate){
+        Bid bid = new Bid(user,rate);
+        list.add(bid);
+    }
+
+    public void RemoveBid(Game game){
+        list.remove(game);
+    }
 }

@@ -1,15 +1,20 @@
 package t14.com.GameRentals;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
  * Created by yourui on 3/2/16.
+ * uc 05.02.01
  */
 public class BidsFragment  extends Fragment {
     private User currentUser;
@@ -28,7 +33,31 @@ public class BidsFragment  extends Fragment {
 
         biddedItemsView = (ListView)v.findViewById(R.id.biddedItemList);
 
-        //TODO
+        biddedItemsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                adb.setTitle("Bidding");
+                adb.setMessage("Do you want to view the details?");
+                adb.setCancelable(true);
+                final int position = i;
+                adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getActivity(),CancelBidActivity.class);
+                        intent.putExtra("bidPosition",position);
+                        startActivity(intent);
+                    }
+                });
+                adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                adb.show();
+            }
+        });
+
         return v;
     }
 

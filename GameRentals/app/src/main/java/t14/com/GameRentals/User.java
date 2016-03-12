@@ -1,5 +1,7 @@
 package t14.com.GameRentals;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by cjresler on 2016-02-28.
  */
@@ -10,6 +12,16 @@ public class User {
     private GameList myGames;
     private GameList biddedItems;
     private GameList borrowedItems;
+    @JestId
+    private String ItemID;
+
+    public String getItemID() {
+        return ItemID;
+    }
+
+    public void setItemID(String itemID) {
+        ItemID = itemID;
+    }
 
     public User(String userName, String email, String phoneNumber) {
         this.userName = userName;
