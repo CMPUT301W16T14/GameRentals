@@ -10,7 +10,7 @@ public abstract class EditGameActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_my_item_available);
+        setContentView(R.layout.edit_my_item);
     }
 
 }
