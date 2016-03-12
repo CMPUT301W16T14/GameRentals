@@ -39,7 +39,9 @@ public class AddGameActivity extends Activity {
                 //else, proper input
                 else{
                     Game temp = new Game(name, description, currentUser);
-                    currentUser.addMyGame(temp);
+                    currentUser.getMyGames().addGame(temp);
+                    ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                    ese.execute(currentUser);
                     finish();
                 }
             }

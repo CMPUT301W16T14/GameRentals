@@ -6,6 +6,13 @@ package t14.com.GameRentals;
 public class Bid {
     private User bidMaker;
     private double rate;
+
+    public Bid(User bidMaker, double rate) {
+        this.bidMaker = bidMaker;
+        this.rate = rate;
+        this.accepted = false;
+    }
+
     private boolean accepted;
 
     public User getBidMaker() {

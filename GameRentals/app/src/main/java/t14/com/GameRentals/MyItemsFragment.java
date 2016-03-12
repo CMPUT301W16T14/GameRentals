@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -38,10 +37,10 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.my_items, container,false);
         Button addButton = (Button)v.findViewById(R.id.AddButton);
         myItems = (ListView)v.findViewById(R.id.myItems);
-        RadioButton bidCheckBox = (RadioButton)v.findViewById(R.id.withBidCheckBox);
+        final RadioButton bidCheckBox = (RadioButton)v.findViewById(R.id.withBidCheckBox);
         RadioButton allCheckBox = (RadioButton)v.findViewById(R.id.withAllCheckBox);
-        RadioButton borrowedCheckBox = (RadioButton)v.findViewById(R.id.withLentCheckBox);
-        RadioButton availableCheckBox = (RadioButton)v.findViewById(R.id.withAvailableCheckBox);
+        final RadioButton borrowedCheckBox = (RadioButton)v.findViewById(R.id.withLentCheckBox);
+        final RadioButton availableCheckBox = (RadioButton)v.findViewById(R.id.withAvailableCheckBox);
 
 
         //allCheckBox.setChecked(true);
@@ -80,7 +79,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //TODO: Make this work
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-                if (!((CheckBox) view).isChecked()) {
+                if (availableCheckBox.isChecked()) {
                     adb.setMessage("Do you want to edit it?");
                     adb.setCancelable(true);
 
@@ -99,7 +98,8 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         }
                     });
                     adb.show();
-                } else {
+                }
+                else if(bidCheckBox.isChecked()) {
                     adb.setMessage("Do you want to view the bids?");
                     adb.setCancelable(true);
 
@@ -107,9 +107,13 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            Intent intent = new Intent(getActivity(), ViewBidsListActivity.class);
                             startActivity(intent);
-                            Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "view the list of the bids", Toast.LENGTH_SHORT).show();
+                            /*
+                            hi Connor~
+                            Can you help me copy from line 102 to 124 and paste them to your version please?
+                             */
                         }
                     });
                     adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -117,6 +121,9 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });
+                }
+                else if (borrowedCheckBox.isChecked()){
+                    //TODO
                 }
             }
         });
