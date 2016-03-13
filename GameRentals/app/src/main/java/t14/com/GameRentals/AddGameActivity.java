@@ -37,15 +37,15 @@ public class AddGameActivity extends Activity {
                 //else, proper input
                 else{
                     Game temp = new Game(name, description, currentUser);
-                    currentUser.getMyGames().addGame(temp);
+                    Game game2 = new Game(name, description, currentUser);
+                    game2.copyGame(temp);
+                    //User test = new User("Connor", "resler@ualberta.ca", "999");
+
                     //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                     //ese.execute(currentUser);
-                    //ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
-                    //addGameTask.execute(temp);
-                    //setResult(RESULT_OK);
-                    TestGame test = new TestGame("hi", 1);
-                    ElasticsearchGameController.AddTestTask addTestTask = new ElasticsearchGameController.AddTestTask();
-                    addTestTask.execute(test);
+                    ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+                    addGameTask.execute(temp);
+                    currentUser.getMyGames().addGame(game2);
                     finish();
                 }
             }

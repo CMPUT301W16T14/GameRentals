@@ -55,11 +55,13 @@ public class UserController {
         return currentUser.getMyGames();
     }
 
-    /*public static void addMyGame(Game game){
-        currentUser.getMyGames().addGame(game);
-        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.execute(currentUser);
-    }*/
+    public static void addMyGame(Game game){
+        //currentUser.getMyGames().addGame(game);
+        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        //ese.execute(currentUser);
+        ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+        addGameTask.execute(game);
+    }
 
     public void deleteGame(){
         //TODO

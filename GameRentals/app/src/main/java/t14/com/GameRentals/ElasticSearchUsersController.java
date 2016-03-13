@@ -98,23 +98,22 @@ public class ElasticSearchUsersController {
 
     public static class AddUserTask extends AsyncTask<User,Void,Void> {
         Gson gson = new Gson();
-
         @Override
         protected Void doInBackground(User... params) {
             verifyConfig();
 
             for(User user : params) {
                 String json = gson.toJson(user);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("user").build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("users").build();
 
                 try {
-                    DocumentResult result = client.execute(index);
-                    if(result.isSucceeded()) {
-                        user.setUserName(result.getId());
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()) {
+                        user.setID(execute.getId());
                     } else {
-                        Log.e("TODO", "Our insert of user failed, oh no!");
+                        Log.e("TODO", "Our insert of game failed, oh no!");
                     }
-                } catch (Exception e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }

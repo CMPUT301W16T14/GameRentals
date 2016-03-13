@@ -99,8 +99,18 @@ public class Game{
         this.gameName = gameName;
     }
 
-   /* @Override
+    public void copyGame(Game game){
+        this.gameName = game.getGameName();
+        this.description = game.getDescription();
+        this.gameID = game.getGameID();
+        this.status = game.getStatus();
+        this.bidList = game.getBidList();
+        this.owner = game.getOwner();
+        this.borrower = game.getBorrower();
+    }
+
+   @Override
     public String toString(){
         return "ID: [" + gameID +" | " + gameName + "]";
-    }*/
+    }
 }

@@ -78,7 +78,7 @@ public class ElasticsearchGameController {
 
             for(Game game : params) {
                 String json = gson.toJson(game);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("test").build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("game").build();
 
                 try {
                     DocumentResult execute = client.execute(index);
