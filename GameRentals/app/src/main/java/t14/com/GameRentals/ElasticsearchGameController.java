@@ -3,11 +3,14 @@ package t14.com.GameRentals;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import io.searchbox.core.DocumentResult;
@@ -68,18 +71,46 @@ public class ElasticsearchGameController {
     }
 
     public static class AddGameTask extends AsyncTask<Game,Void,Void> {
-
+        Gson gson = new Gson();
         @Override
         protected Void doInBackground(Game... params) {
             verifyConfig();
 
             for(Game game : params) {
-                Index index = new Index.Builder(game).index("cmput301w16t14").type("game").build();
+                String json = gson.toJson(game);
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("test").build();
 
                 try {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
                         game.setGameID(execute.getId());
+                    } else {
+                        Log.e("TODO", "Our insert of game failed, oh no!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+    //TEST
+    public static class AddTestTask extends AsyncTask<TestGame,Void,Void> {
+        Gson gson = new Gson();
+        @Override
+        protected Void doInBackground(TestGame... params) {
+            verifyConfig();
+
+            for(TestGame game : params) {
+                String json = gson.toJson(game);
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("test").build();
+
+                try {
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()) {
+                        game.setTestID(execute.getId());
                     } else {
                         Log.e("TODO", "Our insert of game failed, oh no!");
                     }

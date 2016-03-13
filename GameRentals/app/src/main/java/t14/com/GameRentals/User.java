@@ -1,11 +1,13 @@
 package t14.com.GameRentals;
 
+import java.io.Serializable;
+
 import io.searchbox.annotations.JestId;
 
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class User {
+public class User{
     private String userName;
     private String email;
     private String phoneNumber;

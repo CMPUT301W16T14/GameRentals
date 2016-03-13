@@ -1,13 +1,19 @@
 package t14.com.GameRentals;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import io.searchbox.annotations.JestId;
 
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class Game implements Serializable{
+public class Game{
     private String gameName;
+    @JestId
     private String gameID;
     private String description;
     private int status;
@@ -43,6 +49,18 @@ public class Game implements Serializable{
 
     public int getStatus() {
         return status;
+    }
+
+    public String getStatusString(){
+        switch(this.status){
+            case(GameController.STATUS_AVAILABLE):
+                return "Available";
+            case(GameController.STATUS_BORROWED):
+                return "Borrowed";
+            case(GameController.STATUS_BIDDED):
+                return "Has bids";
+        }
+        return null;
     }
 
     public void setStatus(int status) {
@@ -81,8 +99,8 @@ public class Game implements Serializable{
         this.gameName = gameName;
     }
 
-    @Override
+   /* @Override
     public String toString(){
-        return "ID: " + gameID +" | " + gameName;
-    }
+        return "ID: [" + gameID +" | " + gameName + "]";
+    }*/
 }

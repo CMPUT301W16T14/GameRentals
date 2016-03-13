@@ -1,11 +1,14 @@
 package t14.com.GameRentals;
 
+import java.io.Serializable;
+
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class Bid {
+public class Bid{
     private User bidMaker;
     private double rate;
+    private boolean accepted;
 
     public Bid(User bidMaker, double rate) {
         this.bidMaker = bidMaker;
@@ -13,7 +16,7 @@ public class Bid {
         this.accepted = false;
     }
 
-    private boolean accepted;
+
 
     public User getBidMaker() {
         return bidMaker;

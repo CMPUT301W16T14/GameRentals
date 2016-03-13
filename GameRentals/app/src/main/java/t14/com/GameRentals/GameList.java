@@ -1,12 +1,13 @@
 package t14.com.GameRentals;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class GameList {
+public class GameList{
     private ArrayList<Game> list;
 
     public GameList() {
@@ -27,8 +28,8 @@ public class GameList {
 
     public void copyList(GameList copy){
         list.clear();
-        for(int i = 0; i < copy.list.size(); i++){
-            list.add(copy.list.get(i));
+        for(int i = 0; i < copy.getList().size(); i++){
+            list.add(copy.getList().get(i));
         }
 
     }
