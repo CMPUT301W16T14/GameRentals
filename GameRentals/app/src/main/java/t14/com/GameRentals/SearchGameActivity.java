@@ -111,6 +111,10 @@ public class SearchGameActivity extends Activity {
 
     }
 
+    public ArrayList<Game> getReturnedGames(){
+        return  returnedGames;
+    }
+
     /**
      * This saves the list of returned games to the file "searchedResults.sav"
      */
