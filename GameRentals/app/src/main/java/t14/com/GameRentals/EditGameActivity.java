@@ -11,18 +11,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by yourui on 3/3/16.
+/** This activity allows the user to edit games on their list of games. <br>
+ * User will select a game from their list, and that game will be passed to this <br>
+ * activity to edit.
+ *
  */
+
+
 public class EditGameActivity extends Activity {
     private Game game;
     private User currentUser;
     @Override
+    /**Called when activity is created */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_my_item);
         currentUser = UserController.getCurrentUser();
 
+        //Set up buttons and text boxes
         final EditText gameNameEdit = (EditText) findViewById(R.id.editGameNameEditText);
         final EditText gameDescriptionEdit = (EditText) findViewById(R.id.editGameDescriptionText);
         final Button saveButton = (Button) findViewById((R.id.editGameSaveButton));
@@ -33,14 +39,18 @@ public class EditGameActivity extends Activity {
         final TextView borrowerName = (TextView) findViewById(R.id.borrowerName);
         final TextView borrowerNameLabel = (TextView) findViewById(R.id.borrowerNameLabel);
         final AlertDialog.Builder adb = new AlertDialog.Builder(this);
+
+        //Return button and borrower name will only be shown if game has borrowed status
         returnButton.setVisibility(View.INVISIBLE);
         returnButton.setClickable(false);
         borrowerName.setVisibility(View.INVISIBLE);
         borrowerNameLabel.setVisibility(View.INVISIBLE);
 
-        //TODO:Doesn't always get correct game, need to fix logic
         game = (Game) getIntent().getSerializableExtra("Game");
+        //TODO: Change to Margaret's version of getting game
         statusLabel.setText(game.getStatusString());
+
+        //If game has borrowed status, enable the return button and show borrower name
         if(game.getStatus() == GameController.STATUS_BORROWED){
             returnButton.setVisibility(View.VISIBLE);
             returnButton.setClickable(true);
@@ -49,9 +59,11 @@ public class EditGameActivity extends Activity {
             //borrowerName.setText(game.getBorrower().getUserName());
             borrowerName.setText("Borrow name will go here when not NULL");
         }
+        //Initialize text boxes to have current name and description in them
         gameNameEdit.setText(game.getGameName());
         gameDescriptionEdit.setText(game.getDescription());
 
+        //Handle save button being clicked
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -62,15 +74,18 @@ public class EditGameActivity extends Activity {
                 finish();
             }
         });
+        //Return to previous screen if cancel button is clicked
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        //Allow user to delete a game from list
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Verify that user really wants to delete game
                 adb.setMessage("Are you sure you want to delete this game?");
                 adb.setCancelable(true);
                 adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -101,6 +116,7 @@ public class EditGameActivity extends Activity {
         });
     }
 
+    /** Update user on server to reflect any edits made */
     public void updateServer(){
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         ese.execute(currentUser);

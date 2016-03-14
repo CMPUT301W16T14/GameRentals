@@ -96,33 +96,6 @@ public class ElasticsearchGameController {
         }
     }
 
-    //TEST
-    public static class AddTestTask extends AsyncTask<TestGame,Void,Void> {
-        Gson gson = new Gson();
-        @Override
-        protected Void doInBackground(TestGame... params) {
-            verifyConfig();
-
-            for(TestGame game : params) {
-                String json = gson.toJson(game);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("test").build();
-
-                try {
-                    DocumentResult execute = client.execute(index);
-                    if(execute.isSucceeded()) {
-                        game.setTestID(execute.getId());
-                    } else {
-                        Log.e("TODO", "Our insert of game failed, oh no!");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return null;
-        }
-    }
-
     public static class SearchGamesTask extends AsyncTask<String,Void,GameList> {
 
         @Override

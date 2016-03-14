@@ -11,6 +11,11 @@ import android.support.v4.view.ViewPager;
 
 import java.util.concurrent.ExecutionException;
 
+/** The main activity for an app that allows users to list games<br>
+ * for other's to bid on and borrow. Users may also borrow items from<br>
+ * other users.
+ *
+ */
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener{
@@ -23,28 +28,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //currentUser = new User("Connor", "resler@ualberta.ca", "123");
-
-        /*UserController.setUser(test);
-        Game zelda = new Game("Zelda", "Action RPG", UserController.getCurrentUser());
-        zelda.setStatus(GameController.STATUS_BIDDED);
-        currentUser.getMyGames().addGame(zelda);
-
-        Game chrono = new Game("Chrono Trigger", "RPG", UserController.getCurrentUser());
-        chrono.setStatus(GameController.STATUS_AVAILABLE);
-        currentUser.getMyGames().addGame(chrono);
-
-        Game ff = new Game("FF10", "RPG", UserController.getCurrentUser());
-        ff.setStatus(GameController.STATUS_BORROWED);
-        currentUser.getMyGames().addGame(ff);
-        UserController.setUser(currentUser);
-
-        User serverUser = currentUser;
-        */
-        //ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
-        //esa.execute(serverUser);
-
+        /**Load user from server */
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+        //TODO:Set this to load whatever username is given from login screen
         esg.execute("Connor");
 
         try{
@@ -54,9 +40,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        //Set current user of app to user that logged in
         currentUser = loadedUser;
         UserController.setUser(currentUser);
-        assert(currentUser.getUserName().equalsIgnoreCase("Connor"));
 
 
 
@@ -101,16 +87,5 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-        //For testing
-        //User test = new User("Bill", "hi@hi.com", "9");
-
-        //ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
-        //esa.execute(test);
-
-       // ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
-       // esg.execute("Bill");
-        //UserController.setUser(test);/////////for testing
-
-        //
     }
 }

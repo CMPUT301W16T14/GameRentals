@@ -40,7 +40,7 @@ public class ElasticSearchUsersController {
             for(User user : params) {
                 String json = gson.toJson(user);
                 try {
-                    DocumentResult execute = client.execute(new Update.Builder(json).index("cmput301w16t14").type("try").build());
+                    DocumentResult execute = client.execute(new Index.Builder(json).index("cmput301w16t14").type("try").id(user.getID()).build());
                     if(execute.isSucceeded()) {
                         user.setID(execute.getId());
                     } else {
@@ -111,7 +111,7 @@ public class ElasticSearchUsersController {
                 try {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
-                        user.setUserName(execute.getId());
+                        user.setID(execute.getId());
                     } else {
                         Log.e("TODO", "Our insert of game failed, oh no!");
                     }
