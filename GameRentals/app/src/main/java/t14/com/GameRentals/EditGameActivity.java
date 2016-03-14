@@ -30,15 +30,21 @@ public class EditGameActivity extends Activity {
         final Button cancelButton = (Button) findViewById(R.id.editGameCancelButton);
         final Button returnButton = (Button) findViewById(R.id.editGameReturnButton);
         final TextView statusLabel = (TextView) findViewById(R.id.editGameStatus);
+        final TextView borrowerName = (TextView) findViewById(R.id.borrowerName);
         final AlertDialog.Builder adb = new AlertDialog.Builder(this);
         returnButton.setVisibility(View.INVISIBLE);
         returnButton.setClickable(false);
+        borrowerName.setVisibility(View.INVISIBLE);
+        borrowerName.setClickable(false);
         final int position = getIntent().getExtras().getInt("position");
         game = UserController.getCurrentUser().getMyGames().getGame(position);
         statusLabel.setText(game.getStatusString());
         if(game.getStatus() == GameController.STATUS_BORROWED){
             returnButton.setVisibility(View.VISIBLE);
             returnButton.setClickable(true);
+            borrowerName.setVisibility(View.VISIBLE);
+            borrowerName.setClickable(true);
+            borrowerName.setText(game.getBorrower().getUserName());
         }
         gameNameEdit.setText(game.getGameName());
         gameDescriptionEdit.setText(game.getDescription());
