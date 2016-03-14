@@ -19,21 +19,22 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
- * Created by aredmond on 3/7/16.
- * From esports branch of LonelyTwitter
+ * This class is modeled after the ElasticsearchTweetController introduced in the lab. Its purpose
+ * is to interact with the server.
+ *<p>
+ * @author aredmond
  */
 public class ElasticsearchGameController {
     private static JestDroidClient client;
 
-    //TODO: A function that gets tweets
-    public static GameList getGames() {
-        verifyConfig();
-        // TODO: DO THIS.
-        return null;
-    }
 
     public static class GetGamesTask extends AsyncTask<String,Void,GameList> {
 
+        /**
+         * @param params This is a list of two strings. The first string holds the type of variable
+         *               and the second string holds the value we want the variable to be.
+         * @return the top 10000 games matching the string passed in.
+         */
         @Override
         protected GameList doInBackground(String... params) {
             verifyConfig();
@@ -41,17 +42,7 @@ public class ElasticsearchGameController {
             // Hold (eventually) the tweets that we get back from Elasticsearch
             GameList games = new GameList();
 
-            // NOTE: A HUGE ASSUMPTION IS ABOUT TO BE MADE!
-            // Assume that only one string is passed in.
-
-            // The following gets the top "10000" tweets
-            //String search_string = "{\"from\":0,\"size\":10000}";
-
-            // The following searches for the top 10 tweets matching the string passed in (NOTE: HUGE ASSUMPTION PREVIOUSLY)
-            //String search_string = "{\"query\":{\"match\":{\"message\":\"" + params[0] + "\"}}}";
-
-            // The following gets the top 10000 tweets matching the string passed in
-            String search_string = "{\"from\":0,\"size\":10000,\"query\":{\"match\":{\"message\":\"" + params[0] + "\"}}}";
+            String search_string = "{\"from\":0,\"size\":10000,\"query\":{\"match\":{\"" + params[0] +"\":\"" + params[1] + "\"}}}";
 
             Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("game").build();
             try {
@@ -72,6 +63,12 @@ public class ElasticsearchGameController {
 
     public static class AddGameTask extends AsyncTask<Game,Void,Void> {
         Gson gson = new Gson();
+
+        /**
+         *
+         * @param params These are the games we wish to add.
+         * @return null
+         */
         @Override
         protected Void doInBackground(Game... params) {
             verifyConfig();
@@ -96,58 +93,44 @@ public class ElasticsearchGameController {
         }
     }
 
-    //TEST
-    public static class AddTestTask extends AsyncTask<TestGame,Void,Void> {
-        Gson gson = new Gson();
-        @Override
-        protected Void doInBackground(TestGame... params) {
-            verifyConfig();
-
-            for(TestGame game : params) {
-                String json = gson.toJson(game);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("test").build();
-
-                try {
-                    DocumentResult execute = client.execute(index);
-                    if(execute.isSucceeded()) {
-                        game.setTestID(execute.getId());
-                    } else {
-                        Log.e("TODO", "Our insert of game failed, oh no!");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return null;
-        }
-    }
-
     public static class SearchGamesTask extends AsyncTask<String,Void,GameList> {
-
+        /**
+         *
+         * @param params These are all the key words that are to be searched
+         * @return The top 10000 games that have all the search terms.
+         */
         @Override
         protected GameList doInBackground(String... params) {
             verifyConfig();
+
+            // Hold (eventually) the games that we get back from Elasticsearch
+            GameList games = new GameList();
 
             /*
             {
                 "query": {
                     "bool": {
                         "must": [
-                            { "match": { "status": 0} },//not borrowed
-                            { "match": { "description": "mill" } },
-                            { "match": { "description": "lane" } }
-                        ]
+                            { "match": { "description": "first" } },
+                            { "match": { "description": "shooter" } }
+                        ],
+                        "must_not": { "match": {"status"; 2} }
                     }
                 }
             }
+
              */
 
-            // Hold (eventually) the games that we get back from Elasticsearch
-            GameList games = new GameList();
+            String insertTerms = "";
 
-            // The following gets the top 10000 tweets matching the string passed in
-            String search_string = "{\"query\":{\"bool\":{must\":[" + params[0] + "]}}}";
+            for (String searchTerm: params) {
+                insertTerms += "{\"match\": {\"description\": \"" + searchTerm + "\"}}, ";
+            }
+
+            insertTerms = insertTerms.substring(0, insertTerms.length()-2);
+
+            // The following gets the games with all the search terms
+            String search_string = "{\"from\":0,\"size\":10000,\"query\":{\"bool\":{\"must\":[ " + insertTerms + " ], \"must_not\": {\"match\": {\"status\": 2}}}}}";
 
             Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("game").build();
             try {
@@ -166,7 +149,9 @@ public class ElasticsearchGameController {
         }
     }
 
-    // If no client, add one
+    /**
+     * If no client, add one.
+     */
     public static void verifyConfig() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");

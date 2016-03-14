@@ -5,6 +5,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,25 +26,39 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * This activity is receives the the search terms and uses them to get a list of games that have all
+ * the search terms.
+ * <p>
+ */
 public class SearchGameActivity extends Activity {
     private final String FILENAME = "searchedResults.sav";
+
     private ArrayList<Game> returnedGames;
     private ListView returnedGamesList;
     private ArrayAdapter<Game> adapter;
 
+    /**
+     * On create, the activity gets the search terms and uses the searchGames task to get a list of
+     * games from the server.
+     * <p>
+     *
+     * @param savedInstanceState The saved data that the system uses to restore the previous state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_game);
 
-        returnedGamesList = (ListView)findViewById(R.id.RetuenedGamesView);
+        returnedGames = new ArrayList<Game>();
+        returnedGamesList = (ListView)findViewById(R.id.ReturnedGamesView);
 
         String[] searchTerms = ((String)getIntent().getExtras().getSerializable("SEARCH_TERM")).split(" ");
 
         final ElasticsearchGameController.SearchGamesTask searchGamesTask = new ElasticsearchGameController.SearchGamesTask();
+
         searchGamesTask.execute(searchTerms);
         try {
-            returnedGames = new ArrayList<Game>();
             returnedGames.addAll(searchGamesTask.get().getList());
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -47,6 +67,19 @@ public class SearchGameActivity extends Activity {
         }
         adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
         returnedGamesList.setAdapter(adapter);
+
+        setResult(RESULT_OK);
+    }
+
+    /**
+     * On start, a list of returned games is saved locally so that it may be used by the bidding
+     * activities.
+     * <p>
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         setResult(RESULT_OK);
 
         saveInFile();/////////////save the results to local file to do bid.
@@ -78,6 +111,9 @@ public class SearchGameActivity extends Activity {
 
     }
 
+    /**
+     * This saves the list of returned games to the file "searchedResults.sav"
+     */
     private void saveInFile(){
         try{
             FileOutputStream fos = openFileOutput(FILENAME,0);
