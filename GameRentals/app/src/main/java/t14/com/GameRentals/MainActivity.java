@@ -33,10 +33,29 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*currentUser = new User("evan","123@123","123");
+        //UserController.setUser(test);
+        Game zelda = new Game("Zelda", "Action RPG", UserController.getCurrentUser());
+        zelda.setStatus(GameController.STATUS_BIDDED);
+        currentUser.getMyGames().addGame(zelda);
+        Game chrono = new Game("Chrono Trigger", "RPG", UserController.getCurrentUser());
+        chrono.setStatus(GameController.STATUS_AVAILABLE);
+        currentUser.getMyGames().addGame(chrono);
+        Game ff = new Game("FF10", "RPG", UserController.getCurrentUser());
+        ff.setStatus(GameController.STATUS_BORROWED);
+        currentUser.getMyGames().addGame(ff);
+        UserController.setUser(currentUser);
+        User serverUser = currentUser;
+
+        ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
+        esa.execute(serverUser);
+        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        ese.execute(serverUser);*/
         /**Load user from server */
+
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
-        esg.execute("Connor");
+        esg.execute("evan");
 
         try{
              loadedUser = (esg.get());
