@@ -25,10 +25,10 @@ public class ViewBidsListActivity extends Activity {
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.view_bids_list);
+        currentUser = UserController.getCurrentUser();
 
         gamePosition = getIntent().getExtras().getInt("gamePosition");
         bidListView = (ListView)findViewById(R.id.bidListView);
-        currentUser = UserController.getCurrentUser();
         bidList = currentUser.getMyGames().getGame(gamePosition).getBidList();
 
         bidListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

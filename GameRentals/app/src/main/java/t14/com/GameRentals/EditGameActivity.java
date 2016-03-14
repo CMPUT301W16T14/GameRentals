@@ -3,13 +3,11 @@ package t14.com.GameRentals;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by yourui on 3/3/16.
@@ -49,6 +47,7 @@ public class EditGameActivity extends Activity {
             //borrowerName.setText(game.getBorrower().getUserName());
             borrowerName.setText("Borrow name will go here when not NULL");
         }
+
         gameNameEdit.setText(game.getGameName());
         gameDescriptionEdit.setText(game.getDescription());
 
@@ -56,6 +55,10 @@ public class EditGameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+                for(int i = 0; i < currentUser.getMyGames().getSize(); i++){
+                    if (currentUser.getMyGames().getGame(i).getGameName().equals(game.getGameName()))
+                        game = currentUser.getMyGames().getGame(i);
+                }
                 game.setGameName(gameNameEdit.getText().toString());
                 game.setDescription(gameDescriptionEdit.getText().toString());
                 updateServer();

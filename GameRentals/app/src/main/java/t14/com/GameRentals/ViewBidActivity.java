@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * Created by yourui on 3/3/16.
@@ -24,11 +25,21 @@ public class ViewBidActivity extends Activity {
         setContentView(R.layout.view_bid);
 
         currentUser = UserController.getCurrentUser();
+        final EditText gameNameEdit = (EditText) findViewById(R.id.BidGameName);
+        final EditText gameDescriptionEdit = (EditText) findViewById(R.id.BidGameDescription);
+        final EditText bidUser = (EditText) findViewById(R.id.bidUser);
+        final EditText bidRate = (EditText) findViewById(R.id.bidRate);
         int gamePosition = getIntent().getExtras().getInt("gamePosition");
         int bidPosition = getIntent().getExtras().getInt("bidPosition");
 
+        gameNameEdit.setText(currentUser.getMyGames().getGame(gamePosition).getGameName());
+        gameDescriptionEdit.setText(currentUser.getMyGames().getGame(gamePosition).getDescription());
+
         bidList = currentUser.getMyGames().getGame(gamePosition).getBidList();
         bid = bidList.getItem(bidPosition);
+        final String gameName = currentUser.getMyGames().getGame(gamePosition).getGameName();
+        bidUser.setText(bid.getBidMaker().getUserName());
+        bidRate.setText((CharSequence) bid.getBidMaker().getBiddedItems().getGame(gameName));
 
         cancelButton = (Button)findViewById(R.id.CancelBidButton);
         acceptButton = (Button)findViewById(R.id.acceptBidButton);

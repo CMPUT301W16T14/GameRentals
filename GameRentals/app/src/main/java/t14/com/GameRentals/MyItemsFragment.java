@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -106,6 +105,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO:Go to view bids activity
                             Intent intent = new Intent(getActivity(), ViewBidsListActivity.class);
+                            intent.putExtra("gamePosition",pos);
                             startActivity(intent);
                         }
                     });
