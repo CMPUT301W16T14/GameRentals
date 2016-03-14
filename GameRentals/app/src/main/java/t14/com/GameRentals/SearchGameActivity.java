@@ -26,6 +26,11 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * This activity is receives the the search terms and uses them to get a list of games that have all
+ * the search terms.
+ * <p>
+ */
 public class SearchGameActivity extends Activity {
     private final String FILENAME = "searchedResults.sav";
 
@@ -33,12 +38,19 @@ public class SearchGameActivity extends Activity {
     private ListView returnedGamesList;
     private ArrayAdapter<Game> adapter;
 
+    /**
+     * On create, the activity gets the search terms and uses the searchGames task to get a list of
+     * games from the server.
+     * <p>
+     *
+     * @param savedInstanceState The saved data that the system uses to restore the previous state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_game);
 
-
+        returnedGames = new ArrayList<Game>();
         returnedGamesList = (ListView)findViewById(R.id.ReturnedGamesView);
 
         String[] searchTerms = ((String)getIntent().getExtras().getSerializable("SEARCH_TERM")).split(" ");
@@ -47,7 +59,6 @@ public class SearchGameActivity extends Activity {
 
         searchGamesTask.execute(searchTerms);
         try {
-            returnedGames = new ArrayList<Game>();
             returnedGames.addAll(searchGamesTask.get().getList());
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -60,6 +71,11 @@ public class SearchGameActivity extends Activity {
         setResult(RESULT_OK);
     }
 
+    /**
+     * On start, a list of returned games is saved locally so that it may be used by the bidding
+     * activities.
+     * <p>
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -95,6 +111,9 @@ public class SearchGameActivity extends Activity {
 
     }
 
+    /**
+     * This saves the list of returned games to the file "searchedResults.sav"
+     */
     private void saveInFile(){
         try{
             FileOutputStream fos = openFileOutput(FILENAME,0);
