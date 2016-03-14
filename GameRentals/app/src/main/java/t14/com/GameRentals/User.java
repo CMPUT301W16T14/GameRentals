@@ -1,9 +1,15 @@
 package t14.com.GameRentals;
 
+import java.io.Serializable;
+
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class User {
+public class User implements Serializable{
+    @JestId
+    private String id;
     private String userName;
     private String email;
     private String phoneNumber;
@@ -11,7 +17,16 @@ public class User {
     private GameList biddedItems;
     private GameList borrowedItems;
 
+    public String getID() {
+        return id;
+    }
+
+    public void setID(String ID) {
+        this.id = ID;
+    }
+
     public User(String userName, String email, String phoneNumber) {
+        this.id = "";
         this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;

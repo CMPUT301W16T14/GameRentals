@@ -32,9 +32,9 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         //TODO: Keep track of which radio button is pressed so appropriate items are displayed
         //when switching screens
 
-        currentUser = UserController.getCurrentUser();
+        //currentUser = UserController.getCurrentUser();
 
-        gameList = new GameList();
+        //gameList = new GameList();
         View v = inflater.inflate(R.layout.my_items, container,false);
         Button addButton = (Button)v.findViewById(R.id.AddButton);
         myItems = (ListView)v.findViewById(R.id.myItems);
@@ -50,45 +50,34 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onClick(View v) {
+                Game test = new Game("", "", currentUser);
                 Intent intent = new Intent(getActivity(), AddGameActivity.class);
+                intent.putExtra("test", test);
                 startActivity(intent);
                 adapter.notifyDataSetChanged();
             }
         });
 
-        //Set up adapter
-        adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),
-                R.layout.game_list, gameList.getList());
-        myItems.setAdapter(adapter);
-
-        //For testing
-        Game zelda = new Game("Zelda", "Action RPG", currentUser);
-        zelda.setStatus(GameController.STATUS_BIDDED);
-        currentUser.getMyGames().addGame(zelda);
-
-        Game chrono = new Game("Chrono Trigger", "RPG", currentUser);
-        chrono.setStatus(GameController.STATUS_AVAILABLE);
-        currentUser.getMyGames().addGame(chrono);
-
-        Game ff = new Game("FF10", "RPG", currentUser);
-        ff.setStatus(GameController.STATUS_BORROWED);
-        currentUser.getMyGames().addGame(ff);
-
         //Handle items on list being clicked
         myItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //TODO: Make this work
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-                if (!((CheckBox) view).isChecked()) {
+                final Game selectedGame = gameList.getList().get(position);
+                final int pos = position;
+                //Handle if game clicked has available status
+                if(selectedGame.getStatus() == GameController.STATUS_AVAILABLE){
                     adb.setMessage("Do you want to edit it?");
                     adb.setCancelable(true);
-
                     adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            //Bundle bundle = new Bundle();
+                            //TODO:Need to fix this, doesn't always give the correct item
+                            //bundle.putSerializable("position", pos);
+                            //intent.putExtras(bundle);
+                            intent.putExtra("Game", selectedGame);
                             startActivity(intent);
                             Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
                         }
@@ -99,15 +88,37 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         }
                     });
                     adb.show();
-                } else {
-                    adb.setMessage("Do you want to view the bids?");
+                }
+                else if(selectedGame.getStatus() == GameController.STATUS_BIDDED){
+                    adb.setMessage("Do you want to edit or view bids?");
                     adb.setCancelable(true);
-
+                    adb.setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            intent.putExtra("Game", selectedGame);
+                            startActivity(intent);
+                            Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    adb.setNegativeButton("VIEW BIDS", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //TODO:Go to view bids activity
+                            Intent intent = new Intent(getActivity(), ViewBidsListActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    adb.show();
+                }
+                else if(selectedGame.getStatus() == GameController.STATUS_BORROWED){
+                    adb.setMessage("Do you want to edit it?");
+                    adb.setCancelable(true);
                     adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            intent.putExtra("Game", selectedGame);
                             startActivity(intent);
                             Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
                         }
@@ -117,6 +128,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });
+                    adb.show();
                 }
             }
         });
@@ -126,6 +138,45 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         availableCheckBox.setOnClickListener(this);
         borrowedCheckBox.setOnClickListener(this);
         return v;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        gameList.copyList(currentUser.getMyGames());
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        currentUser = UserController.getCurrentUser();
+        gameList = new GameList();
+        gameList.copyList(currentUser.getMyGames());
+
+
+        /*For testing
+        Game zelda = new Game("Zelda", "Action RPG", UserController.getCurrentUser());
+        zelda.setStatus(GameController.STATUS_BIDDED);
+        UserController.getCurrentUser().getMyGames().addGame(zelda);
+
+        Game chrono = new Game("Chrono Trigger", "RPG", UserController.getCurrentUser());
+        chrono.setStatus(GameController.STATUS_AVAILABLE);
+        UserController.getCurrentUser().getMyGames().addGame(chrono);
+
+        Game ff = new Game("FF10", "RPG", UserController.getCurrentUser());
+        ff.setStatus(GameController.STATUS_BORROWED);
+        UserController.getCurrentUser().getMyGames().addGame(ff);
+        */
+    }
+
+    @Override
+    public void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        //Set up adapter
+        adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),
+                R.layout.game_list, gameList.getList());
+        myItems.setAdapter(adapter);
     }
 
     //This handles clicking of the radio buttons
