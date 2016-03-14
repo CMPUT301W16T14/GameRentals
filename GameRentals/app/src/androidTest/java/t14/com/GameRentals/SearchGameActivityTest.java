@@ -47,9 +47,9 @@ public class SearchGameActivityTest extends ActivityInstrumentationTestCase2 {
 
         Boolean hasGame = false;
 
-        //for(Game game: returnedGames) {
-        //    if(g)
-        //}
+        for(Game game: returnedGames) {
+            if(game.getGameName().equals("EUIV")) {hasGame = true;}
+        }
 
         assertTrue(returnedGames.contains(EUIV));
 
