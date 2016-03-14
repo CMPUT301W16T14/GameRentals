@@ -9,25 +9,56 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
+import java.util.concurrent.ExecutionException;
+
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener{
     ActionBar actionbar;
     ViewPager viewpager;
     PagerAdapter ft;
+    User currentUser;
+    User loadedUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        User test = new User("Connor", "resler@ualberta.ca", "9");
-        UserController.setUser(test);
+        //currentUser = new User("Connor", "resler@ualberta.ca", "123");
+
+        /*UserController.setUser(test);
+        Game zelda = new Game("Zelda", "Action RPG", UserController.getCurrentUser());
+        zelda.setStatus(GameController.STATUS_BIDDED);
+        currentUser.getMyGames().addGame(zelda);
+
+        Game chrono = new Game("Chrono Trigger", "RPG", UserController.getCurrentUser());
+        chrono.setStatus(GameController.STATUS_AVAILABLE);
+        currentUser.getMyGames().addGame(chrono);
+
+        Game ff = new Game("FF10", "RPG", UserController.getCurrentUser());
+        ff.setStatus(GameController.STATUS_BORROWED);
+        currentUser.getMyGames().addGame(ff);
+        UserController.setUser(currentUser);
+
+        User serverUser = currentUser;
+        */
+        //ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
+        //esa.execute(serverUser);
+
+        ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+        esg.execute("Connor");
+
+        try{
+             loadedUser = (esg.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        currentUser = loadedUser;
+        UserController.setUser(currentUser);
+        assert(currentUser.getUserName().equalsIgnoreCase("Connor"));
 
 
-        ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
-        esa.execute(test);
-
-        //ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
-        //esg.execute("Bill");
 
         setContentView(R.layout.activity_main);
         viewpager = (ViewPager) findViewById(R.id.pager);

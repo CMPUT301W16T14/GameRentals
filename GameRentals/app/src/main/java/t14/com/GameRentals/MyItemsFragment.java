@@ -75,6 +75,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
                             Bundle bundle = new Bundle();
+                            //TODO:Need to fix this, doesn't always give the correct item
                             bundle.putSerializable("position", pos);
                             intent.putExtras(bundle);
                             startActivity(intent);

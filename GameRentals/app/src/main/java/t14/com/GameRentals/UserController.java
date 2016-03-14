@@ -57,10 +57,13 @@ public class UserController {
 
     public static void addMyGame(Game game){
         //currentUser.getMyGames().addGame(game);
-        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        //ese.execute(currentUser);
+        //User tempUser = currentUser;
+
         ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
         addGameTask.execute(game);
+
+        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        ese.execute(currentUser);
     }
 
     public void deleteGame(){

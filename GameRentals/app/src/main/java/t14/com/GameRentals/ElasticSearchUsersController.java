@@ -32,7 +32,6 @@ public class ElasticSearchUsersController {
         return null;
     }
 
-
     public static class EditUserTask extends AsyncTask<User,Void,Void>{
         Gson gson = new Gson();
         @Override
@@ -41,9 +40,9 @@ public class ElasticSearchUsersController {
             for(User user : params) {
                 String json = gson.toJson(user);
                 try {
-                    DocumentResult execute = client.execute(new Update.Builder(json).index("cmput301w16t14").type("user").build());
+                    DocumentResult execute = client.execute(new Update.Builder(json).index("cmput301w16t14").type("try").build());
                     if(execute.isSucceeded()) {
-                        user.setUserName(execute.getId());
+                        user.setID(execute.getId());
                     } else {
                         Log.e("TODO", "Our insert of user failed, oh no!");
                     }
@@ -80,7 +79,7 @@ public class ElasticSearchUsersController {
                     "    }\n" +
                     "}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("user").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("try").build();
             try {
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()) {
@@ -91,8 +90,11 @@ public class ElasticSearchUsersController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return user;
+        }
+
+        protected void onPostExecute(User user){
+            UserController.setUser(user);
         }
     }
 
@@ -104,12 +106,12 @@ public class ElasticSearchUsersController {
 
             for(User user : params) {
                 String json = gson.toJson(user);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("users").build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("try").build();
 
                 try {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
-                        user.setID(execute.getId());
+                        user.setUserName(execute.getId());
                     } else {
                         Log.e("TODO", "Our insert of game failed, oh no!");
                     }
