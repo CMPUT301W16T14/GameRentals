@@ -15,7 +15,6 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import io.searchbox.core.Update;
 
 /**
  * Created by margaret on 16/3/7.
@@ -39,12 +38,13 @@ public class ElasticSearchUsersController {
             verifyConfig();
             for(User user : params) {
                 String json = gson.toJson(user);
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("try").id(user.getID()).build();
                 try {
-                    DocumentResult execute = client.execute(new Update.Builder(json).index("cmput301w16t14").type("try").build());
+                    DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
                         user.setID(execute.getId());
                     } else {
-                        Log.e("TODO", "Our insert of user failed, oh no!");
+                        Log.e("TODO", "Our edit of user failed, oh no!");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -111,7 +111,7 @@ public class ElasticSearchUsersController {
                 try {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
-                        user.setUserName(execute.getId());
+                        user.setID(execute.getId());
                     } else {
                         Log.e("TODO", "Our insert of game failed, oh no!");
                     }

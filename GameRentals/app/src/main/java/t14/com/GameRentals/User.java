@@ -7,9 +7,11 @@ import io.searchbox.annotations.JestId;
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class User{
+public class User implements Serializable{
     @JestId
-    private String id;
+    protected String id;
+
+
     private String userName;
     private String email;
     private String phoneNumber;
@@ -86,4 +88,6 @@ public class User{
     public void addMyGame(Game game) {
         UserController.addMyGame(game);
     }
+
+
 }

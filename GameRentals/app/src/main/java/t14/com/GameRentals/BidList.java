@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class BidList{
+public class BidList implements Serializable{
     private ArrayList<Bid> list;
 
     public BidList() {
