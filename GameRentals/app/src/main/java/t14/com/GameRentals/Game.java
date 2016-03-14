@@ -11,7 +11,7 @@ import io.searchbox.annotations.JestId;
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class Game{
+public class Game implements Serializable{
     private String gameName;
     @JestId
     private String gameID;

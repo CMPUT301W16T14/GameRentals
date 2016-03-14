@@ -10,6 +10,7 @@ public class AddGameActivity extends Activity {
     private EditText gameName;
     private EditText gameDescription;
     private User currentUser;
+    private Game game;
 
 
     @Override
@@ -17,6 +18,7 @@ public class AddGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
         currentUser = UserController.getCurrentUser();
+        game = (Game) getIntent().getSerializableExtra("test");
         gameName = (EditText)findViewById(R.id.addGameNameEditText);
         gameDescription = (EditText)findViewById(R.id.addGameDescriptionEditText);
         Button okButton = (Button)findViewById(R.id.addGameOkButton);
@@ -36,15 +38,26 @@ public class AddGameActivity extends Activity {
                 }
                 //else, proper input
                 else{
-                    Game temp = new Game(name, description, currentUser);
-                    //User test = new User("Connor", "resler@ualberta.ca", "999");
-
+                    //game.setGameName(name);
+                    //tempGame.setDescription(description);
+                    //Game game2 = new Game(name, description, currentUser);
+                    //game2.copyGame(temp);
+                    //currentUser.getMyGames().addGame(tempGame);
+                    //updateServer();
                     //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                     //ese.execute(currentUser);
                     //ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
                     //addGameTask.execute(temp);
-                    currentUser.addMyGame(temp);
+                    //currentUser.addMyGame(temp);
+
+                    //finish();
+
+                    game.setGameName(name);
+                    game.setDescription(description);
+                    currentUser.getMyGames().addGame(game);
+                    updateServer();
                     finish();
+
                 }
             }
         });
@@ -56,5 +69,13 @@ public class AddGameActivity extends Activity {
                 //finish();
             }
         });
+    }
+
+    public void updateServer(){
+        ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+        addGameTask.execute(game);
+
+        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        ese.execute(currentUser);
     }
 }

@@ -7,7 +7,7 @@ import java.util.Collections;
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class GameList{
+public class GameList implements Serializable{
     private ArrayList<Game> list;
 
     public GameList() {

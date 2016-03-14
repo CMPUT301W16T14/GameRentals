@@ -50,11 +50,10 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onClick(View v) {
+                Game test = new Game("", "", currentUser);
                 Intent intent = new Intent(getActivity(), AddGameActivity.class);
+                intent.putExtra("test", test);
                 startActivity(intent);
-                //Game latestGame = currentUser.getMyGames().getGame(gameList.getSize() - 1);
-                //ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
-                //addGameTask.execute(latestGame);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -74,10 +73,11 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
-                            Bundle bundle = new Bundle();
+                            //Bundle bundle = new Bundle();
                             //TODO:Need to fix this, doesn't always give the correct item
-                            bundle.putSerializable("position", pos);
-                            intent.putExtras(bundle);
+                            //bundle.putSerializable("position", pos);
+                            //intent.putExtras(bundle);
+                            intent.putExtra("Game", selectedGame);
                             startActivity(intent);
                             Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
                         }
@@ -96,7 +96,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
-                            intent.putExtra("position", pos);
+                            intent.putExtra("Game", selectedGame);
                             startActivity(intent);
                             Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
                         }
@@ -118,7 +118,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
-                            intent.putExtra("position", pos);
+                            intent.putExtra("Game", selectedGame);
                             startActivity(intent);
                             Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
                         }
