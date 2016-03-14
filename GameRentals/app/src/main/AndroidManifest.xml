@@ -16,6 +16,8 @@
         <activity android:name=".EditGameActivity"/>
         <activity android:name=".ViewBidsListActivity"/>
         <activity android:name=".ViewBidActivity"/>
+        <activity android:name=".BidOnActivity"/>
+        <activity android:name=".BidOnGameActivity"/>
         <activity android:name=".ProfileMain" android:label="@string/title_activity_profile_main"
             android:parentActivityName=".MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="t14.com.GameRentals.MainActivity" />

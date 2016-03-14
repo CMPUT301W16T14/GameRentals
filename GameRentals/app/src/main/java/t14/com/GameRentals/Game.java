@@ -2,7 +2,6 @@ package t14.com.GameRentals;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import io.searchbox.annotations.JestId;
 
@@ -13,7 +12,7 @@ import io.searchbox.annotations.JestId;
  * Borrower will be initialized to null and only set if game status is borrowed.
  * Created by cjresler on 2016-02-28.
  */
-public class Game {
+public class Game implements Serializable{
     private String gameName;
     @JestId
     private String gameID;

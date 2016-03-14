@@ -5,12 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -65,10 +59,38 @@ public class SearchGameActivity extends Activity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+        setResult(RESULT_OK);
+
         adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
         returnedGamesList.setAdapter(adapter);
 
-        setResult(RESULT_OK);
+        returnedGamesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder adb = new AlertDialog.Builder(SearchGameActivity.this);
+                adb.setTitle("view the game");
+                adb.setMessage("Do you want to view the game?");
+                adb.setCancelable(true);
+                final int pos = i;
+                adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(SearchGameActivity.this, BidOnActivity.class);
+                        intent.putExtra("gamePosition", pos);
+                        startActivity(intent);
+                    }
+                });
+
+                adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+
+                adb.show();
+            }
+        });
     }
 
     /**
@@ -83,31 +105,8 @@ public class SearchGameActivity extends Activity {
         setResult(RESULT_OK);
 
         saveInFile();/////////////save the results to local file to do bid.
-
-        returnedGamesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AlertDialog.Builder adb = new AlertDialog.Builder(SearchGameActivity.this);
-                adb.setTitle("view the game");
-                adb.setMessage("Do you want to view the game?");
-                adb.setCancelable(true);
-
-                adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(SearchGameActivity.this, BidOnActivity.class);
-                        intent.putExtra("gamePosition",i);
-                        startActivity(intent);
-                    }
-                });
-
-                adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
-                });
-            }
-        });
+        adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
+        returnedGamesList.setAdapter(adapter);
 
     }
 
