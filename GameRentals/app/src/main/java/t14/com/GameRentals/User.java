@@ -86,4 +86,6 @@ public class User implements Serializable{
     public void addMyGame(Game game) {
         UserController.addMyGame(game);
     }
+
+
 }
