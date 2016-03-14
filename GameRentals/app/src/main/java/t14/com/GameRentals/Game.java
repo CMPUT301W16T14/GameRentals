@@ -111,6 +111,8 @@ public class Game{
 
    @Override
     public String toString(){
-        return "ID: [" + gameID +" | " + gameName + "]";
+        return "ID: " + gameID +" | Status: " + getStatusString() + "\n" +
+                "Game name: " + gameName + "\n" +
+                "Description: " + description;
     }
 }

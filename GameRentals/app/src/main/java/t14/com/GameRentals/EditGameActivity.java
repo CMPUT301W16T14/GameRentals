@@ -16,10 +16,12 @@ import android.widget.Toast;
  */
 public class EditGameActivity extends Activity {
     private Game game;
+    private User currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_my_item);
+        currentUser = UserController.getCurrentUser();
 
         final EditText gameNameEdit = (EditText) findViewById(R.id.editGameNameEditText);
         final EditText gameDescriptionEdit = (EditText) findViewById(R.id.editGameDescriptionText);
@@ -47,6 +49,7 @@ public class EditGameActivity extends Activity {
             public void onClick(View v) {
                 game.setGameName(gameNameEdit.getText().toString());
                 game.setDescription(gameDescriptionEdit.getText().toString());
+                updateServer();
                 finish();
             }
         });
@@ -64,6 +67,7 @@ public class EditGameActivity extends Activity {
                 adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //TODO: Make this remove from server
                         UserController.getCurrentUser().getMyGames().removeGame(game);
                         finish();
                     }
@@ -82,8 +86,14 @@ public class EditGameActivity extends Activity {
             public void onClick(View v) {
                 game.setStatus(GameController.STATUS_AVAILABLE);
                 statusLabel.setText(game.getStatusString());
+                updateServer();
             }
         });
+    }
+
+    public void updateServer(){
+        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        ese.execute(currentUser);
     }
 
     @Override
