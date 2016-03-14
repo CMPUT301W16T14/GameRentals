@@ -42,7 +42,7 @@ public class ElasticSearchUsersController {
                 try {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
-                        user.setID(execute.getId());
+                        //user.setID(execute.getId());
                     } else {
                         Log.e("TODO", "Our edit of user failed, oh no!");
                     }
@@ -112,6 +112,7 @@ public class ElasticSearchUsersController {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
                         user.setID(execute.getId());
+
                     } else {
                         Log.e("TODO", "Our insert of game failed, oh no!");
                     }
