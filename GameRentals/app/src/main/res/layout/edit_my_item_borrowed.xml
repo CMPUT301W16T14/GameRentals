@@ -16,15 +16,16 @@
         <TextView
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="Status:"
+            android:text="Game ID:"
             android:id="@+id/textView6"
             android:textSize="30dp" />
 
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editGameStatus"
-            android:layout_weight="0.03" />
+            android:id="@+id/editText5"
+            android:layout_weight="0.03"
+            android:editable="false" />
 
         <TextView
             android:layout_width="226dp"
@@ -36,7 +37,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editGameNameEditText"
+            android:id="@+id/editText6"
             android:layout_weight="0.03" />
 
         <TextView
@@ -51,7 +52,7 @@
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/editGameDescriptionText"
+            android:id="@+id/editText7"
             android:layout_weight="0.90" />
 
         <LinearLayout
@@ -64,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save"
-                android:id="@+id/editGameSaveButton"
+                android:id="@+id/SaveButton"
                 android:layout_gravity="bottom"
                 android:layout_weight="0.53" />
 
@@ -72,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cancel"
-                android:id="@+id/editGameCancelButton"
+                android:id="@+id/CancelButton"
                 android:layout_gravity="bottom"
                 android:layout_weight="0.46" />
         </LinearLayout>
@@ -81,13 +82,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Delete"
-            android:id="@+id/editGameDeleteButton" />
+            android:id="@+id/deleteButton" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Return"
-            android:id="@+id/editGameReturnButton" />
+            android:id="@+id/returnButton" />
 
     </LinearLayout>
 

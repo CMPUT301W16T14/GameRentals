@@ -1,9 +1,15 @@
 package t14.com.GameRentals;
 
+import java.io.Serializable;
+
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class User {
+public class User{
+    @JestId
+    private String ID;
     private String userName;
     private String email;
     private String phoneNumber;
@@ -11,7 +17,16 @@ public class User {
     private GameList biddedItems;
     private GameList borrowedItems;
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
     public User(String userName, String email, String phoneNumber) {
+        this.ID = "";
         this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -66,5 +81,9 @@ public class User {
 
     public void setBorrowedItems(GameList borrowedItems) {
         this.borrowedItems = borrowedItems;
+    }
+
+    public void addMyGame(Game game) {
+        UserController.addMyGame(game);
     }
 }

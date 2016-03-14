@@ -12,7 +12,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ViewMyGamesActivity" />
-        <activity android:name=".AddGameActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".AddGameActivity"/>
+        <activity android:name=".EditGameActivity"/>
         <activity android:name=".ProfileMain" android:label="@string/title_activity_profile_main"
             android:parentActivityName=".MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="t14.com.GameRentals.MainActivity" />
