@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 /**
- * Created by yourui on 3/2/16.
+ * The fragment shows all games that are borrowed by the user in a list.
+ * <p>
+ * @author aredmond
  */
 public class BorrowFragment extends Fragment {
 
@@ -23,11 +25,23 @@ public class BorrowFragment extends Fragment {
     private GameList borrowedGames;
     private ArrayAdapter<Game> adapter;
 
+    /**
+     * On creation, the view has one button used to confirm the the search parameters, one edittext to hold
+     * terms to be searched, and one listview that displays all the games that are returned.
+     * <p>
+     *
+     * @param inflater Instantiates a layout XML file into its corresponding View objects.
+     * @param container Hold components together to form the design of your application.
+     * @param savedInstanceState The saved data that the system uses to restore the previous state.
+     * @return The view
+     *
+     */
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.borrow, container, false);
         searchButton = (Button) v.findViewById(R.id.SearchButton);
+
         searchText = (EditText) v.findViewById(R.id.SearchText);
         borrowedGameList = (ListView)v.findViewById(R.id.BorrowedItems);
 
@@ -45,6 +59,11 @@ public class BorrowFragment extends Fragment {
         return v;
     }
 
+    /**
+     * On start, the fragment sets the adapter so that the view shows the most up-to-date list of
+     * borrowed games.
+     * <p>
+     */
     @Override
     public void onStart() {
         super.onStart();

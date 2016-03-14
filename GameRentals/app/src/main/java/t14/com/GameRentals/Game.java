@@ -13,7 +13,7 @@ import io.searchbox.annotations.JestId;
  * Borrower will be initialized to null and only set if game status is borrowed.
  * Created by cjresler on 2016-02-28.
  */
-public class Game implements Serializable{
+public class Game {
     private String gameName;
     @JestId
     private String gameID;
