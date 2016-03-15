@@ -16,10 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ViewMyGamesActivity" />
-        <activity
-            android:name=".AddGameActivity"
-            android:theme="@android:style/Theme.Dialog" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        <activity android:name="t14.com.GameRentals.ViewMyGamesActivity"></activity>
+        <activity android:name="t14.com.GameRentals.AddGameActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
