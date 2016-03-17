@@ -22,7 +22,7 @@ public class AddGameActivityTest extends ActivityInstrumentationTestCase2{
     public AddGameActivityTest(){
         super(AddGameActivity.class);
     }
-
+/*
     public void testViewOnScreen(){
         Intent intent = new Intent();
         Game game = new Game("test", "test", null);
@@ -35,7 +35,7 @@ public class AddGameActivityTest extends ActivityInstrumentationTestCase2{
 
         ViewAsserts.assertOnScreen(addGameActivity.getWindow().getDecorView(), editText);
     }
-
+*/
 /*
     protected void setUp() throws Exception {
         super.setUp();

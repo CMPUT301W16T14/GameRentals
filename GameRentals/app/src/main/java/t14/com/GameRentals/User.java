@@ -1,6 +1,7 @@
 package t14.com.GameRentals;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import io.searchbox.annotations.JestId;
 
@@ -9,13 +10,16 @@ import io.searchbox.annotations.JestId;
  */
 public class User implements Serializable{
     @JestId
-    private String id;
+    protected String id;
+
+
     private String userName;
     private String email;
     private String phoneNumber;
     private GameList myGames;
     private GameList biddedItems;
     private GameList borrowedItems;
+    private ArrayList<User> users;
 
     public String getID() {
         return id;
@@ -33,6 +37,14 @@ public class User implements Serializable{
         myGames = new GameList();
         biddedItems = new GameList();
         borrowedItems = new GameList();
+    }
+
+    public ArrayList<User> getUsers(String s) {
+        return this.users;
+    }
+
+    public void viewUser(User user){
+        this.users.add(user);
     }
 
     public String getUserName() {
@@ -86,4 +98,7 @@ public class User implements Serializable{
     public void addMyGame(Game game) {
         UserController.addMyGame(game);
     }
+
+
+
 }
