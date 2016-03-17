@@ -31,6 +31,10 @@ public class BidList implements Serializable{
         list.add(bid);
     }
 
+    public void addBid(Bid bid){
+        list.add(bid);
+    }
+
     public void RemoveBid(Game game){
         list.remove(game);
     }
