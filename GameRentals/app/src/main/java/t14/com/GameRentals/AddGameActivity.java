@@ -50,6 +50,7 @@ public class AddGameActivity extends Activity {
                     game.setDescription(description);
                     currentUser.getMyGames().addGame(game);
                     //Update user and add game to server
+                    //addTestData();
                     updateServer();
                     finish();
                 }
@@ -74,4 +75,24 @@ public class AddGameActivity extends Activity {
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         ese.execute(currentUser);
     }
+/*
+    public void addTestData(){
+        User test = new User("Dude", "dude", "123");
+        Game mario = new Game("Mario", "Platform", test);
+        mario.setStatus(GameController.STATUS_BORROWED);
+        test.getMyGames().addGame(mario);
+        currentUser.getBorrowedItems().addGame(mario);
+        mario.setBorrower(currentUser);
+        ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+        addGameTask.execute(mario);
+        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        ese.execute(currentUser);
+
+        ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
+        esa.execute(test);
+        ElasticSearchUsersController.EditUserTask ese2 = new ElasticSearchUsersController.EditUserTask();
+        ese2.execute(test);
+
+    }*/
+
 }

@@ -55,7 +55,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
-        esg.execute("evan");
+        esg.execute("ev");
 
         try{
              loadedUser = (esg.get());
