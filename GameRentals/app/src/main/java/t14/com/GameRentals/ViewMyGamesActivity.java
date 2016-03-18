@@ -29,7 +29,7 @@ public class ViewMyGamesActivity extends Activity {
 
         //Set up adapter
         myGamesList = (ListView) findViewById(R.id.myGames);
-        games = UserController.getCurrentUser().getMyGames();
+        games.copyRefListToGames(UserController.getCurrentUser().getMyGames());
         adapter = new ArrayAdapter<Game>(this,
                 R.layout.game_list, games.getList());
         myGamesList.setAdapter(adapter);

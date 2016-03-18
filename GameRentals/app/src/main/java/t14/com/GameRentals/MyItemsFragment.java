@@ -63,7 +63,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-                final Game selectedGame = gameList.getList().get(position);
+                final Game selectedGame = gameList.getGame(position);
                 final int pos = position;
                 //Handle if game clicked has available status
                 if(selectedGame.getStatus() == GameController.STATUS_AVAILABLE){
@@ -146,7 +146,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
     /**Called when app returns to this screen */
     public void onResume(){
         super.onResume();
-        gameList.copyList(currentUser.getMyGames());
+        gameList.copyRefListToGames(currentUser.getMyGames());
     }
 
     @Override
@@ -155,7 +155,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         currentUser = UserController.getCurrentUser();
         gameList = new GameList();
-        gameList.copyList(currentUser.getMyGames());
+        gameList.copyRefListToGames(currentUser.getMyGames());
     }
 
     @Override
@@ -183,28 +183,28 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             //Display All user's games
             case R.id.withAllCheckBox:
                 if (checked) {
-                    gameList.copyList(currentUser.getMyGames());
+                    gameList.copyRefListToGames(currentUser.getMyGames());
                     adapter.notifyDataSetChanged();
                 }
                 break;
             //Display user's available games
             case R.id.withAvailableCheckBox:
                 if (checked){
-                    gameList.copyList(UserController.getAvailable(currentUser.getMyGames()));
+                    gameList.copyRefListToGames(UserController.getAvailable(currentUser.getMyGames()));
                     adapter.notifyDataSetChanged();
                 }
                 break;
             //Display user's games with bids on them
             case R.id.withBidCheckBox:
                 if(checked){
-                    gameList.copyList(UserController.getBidded(currentUser.getMyGames()));
+                    gameList.copyRefListToGames(UserController.getBidded(currentUser.getMyGames()));
                     adapter.notifyDataSetChanged();
                 }
                 break;
             //Display user's games that are currently lent out
             case R.id.withLentCheckBox:
                 if(checked){
-                    gameList.copyList(UserController.getBorrowed(currentUser.getMyGames()));
+                    gameList.copyRefListToGames(UserController.getBorrowed(currentUser.getMyGames()));
                     adapter.notifyDataSetChanged();
                 }
                 break;

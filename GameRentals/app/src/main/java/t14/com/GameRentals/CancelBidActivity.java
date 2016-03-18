@@ -22,7 +22,7 @@ public class CancelBidActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         currentUser = UserController.getCurrentUser();
-        biddedItems = currentUser.getBiddedItems();
+        biddedItems.copyRefListToGames(currentUser.getBiddedItems());
         int position = getIntent().getExtras().getInt("bidPosition");
         game = biddedItems.getGame(position);
 
@@ -32,7 +32,7 @@ public class CancelBidActivity extends Activity {
             @Override
             public void onClick(View view) {
                 game.getBidList().RemoveBid(game);
-                currentUser.getBiddedItems().removeGame(game);
+                currentUser.getBiddedItems().removeGame(game.getGameID());
                 ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                 ese.execute(currentUser);
                 Toast.makeText(CancelBidActivity.this,"cancel this bid",Toast.LENGTH_SHORT);

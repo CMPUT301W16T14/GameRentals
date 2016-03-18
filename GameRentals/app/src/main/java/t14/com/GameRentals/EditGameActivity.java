@@ -94,7 +94,7 @@ public class EditGameActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //TODO: Make this remove from server
-                        UserController.getCurrentUser().getMyGames().removeGame(game);
+                        //UserController.getCurrentUser().getMyGames().removeGame(game);
                         updateServer();
                         finish();
                     }
@@ -120,8 +120,10 @@ public class EditGameActivity extends Activity {
 
     /** Update user on server to reflect any edits made */
     public void updateServer(){
-        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.execute(currentUser);
+        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        //ese.execute(currentUser);
+        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+        editGameTask.execute(game);
     }
 
     @Override

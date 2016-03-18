@@ -33,29 +33,45 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*currentUser = new User("evan","123@123","123");
+        ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+
+        ElasticsearchGameController.AddGameTask addGameTask2 = new ElasticsearchGameController.AddGameTask();
+        ElasticsearchGameController.EditGameTask editGameTask2 = new ElasticsearchGameController.EditGameTask();
+
+        ElasticsearchGameController.AddGameTask addGameTask3 = new ElasticsearchGameController.AddGameTask();
+        ElasticsearchGameController.EditGameTask editGameTask3 = new ElasticsearchGameController.EditGameTask();
+        //editGameTask.execute(game);
+        //addGameTask.execute(game);
+        currentUser = new User("Maya","123@123","123");
         //UserController.setUser(test);
-        Game zelda = new Game("Zelda", "Action RPG", UserController.getCurrentUser());
+        Game zelda = new Game("Zelda", "Action RPG", currentUser);
         zelda.setStatus(GameController.STATUS_BIDDED);
-        currentUser.getMyGames().addGame(zelda);
-        Game chrono = new Game("Chrono Trigger", "RPG", UserController.getCurrentUser());
+        addGameTask.execute(zelda);
+        editGameTask.execute(zelda);
+        currentUser.getMyGames().addGame(zelda.getGameID());
+        Game chrono = new Game("Chrono Trigger", "RPG", currentUser);
         chrono.setStatus(GameController.STATUS_AVAILABLE);
-        currentUser.getMyGames().addGame(chrono);
-        Game ff = new Game("FF10", "RPG", UserController.getCurrentUser());
-        ff.setStatus(GameController.STATUS_BORROWED);
-        currentUser.getMyGames().addGame(ff);
+        addGameTask2.execute(chrono);
+        editGameTask2.execute(chrono);
+        currentUser.getMyGames().addGame(chrono.getGameID());
+        Game roller = new Game("RollerCoaster Tycoon", "Simulation", currentUser);
+        roller.setStatus(GameController.STATUS_BORROWED);
+        addGameTask3.execute(roller);
+        editGameTask3.execute(roller);
+        currentUser.getMyGames().addGame(roller.getGameID());
         UserController.setUser(currentUser);
         User serverUser = currentUser;
 
         ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
         esa.execute(serverUser);
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.execute(serverUser);*/
+        ese.execute(serverUser);
         /**Load user from server */
 
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
-        esg.execute("ev");
+        esg.execute("Maya");
 
         try{
              loadedUser = (esg.get());
@@ -66,7 +82,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }
         //Set current user of app to user that logged in
         currentUser = loadedUser;
-        UserController.setUser(currentUser);
+
+
+        //UserController.setUser(currentUser);
 
 
 

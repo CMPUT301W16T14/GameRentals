@@ -29,7 +29,7 @@ public class BidsFragment  extends Fragment {
         View v = inflater.inflate(R.layout.bids, container,false);
 
         currentUser = UserController.getCurrentUser();
-        biddedItems = currentUser.getBiddedItems();
+        biddedItems.copyRefListToGames(currentUser.getBiddedItems());
 
         biddedItemsView = (ListView)v.findViewById(R.id.biddedItemList);
 
