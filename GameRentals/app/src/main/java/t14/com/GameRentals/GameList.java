@@ -51,9 +51,10 @@ public class GameList implements Serializable{
 
     public void copyRefListToGames(GameRefList copy){
         list.clear();
-        for(int i = 0; i < copy.getSize(); i++){
-            list.add(copy.getGame(i));
-        }
+        if (copy.getSize() > 0)
+            for(int i = 0; i < copy.getSize(); i++){
+                list.add(copy.getGame(i));
+            }
     }
 
     public void removeGame(Game game){

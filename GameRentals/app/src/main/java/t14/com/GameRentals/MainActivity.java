@@ -33,33 +33,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
-        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
-
-        ElasticsearchGameController.AddGameTask addGameTask2 = new ElasticsearchGameController.AddGameTask();
-        ElasticsearchGameController.EditGameTask editGameTask2 = new ElasticsearchGameController.EditGameTask();
-
-        ElasticsearchGameController.AddGameTask addGameTask3 = new ElasticsearchGameController.AddGameTask();
-        ElasticsearchGameController.EditGameTask editGameTask3 = new ElasticsearchGameController.EditGameTask();
         //editGameTask.execute(game);
         //addGameTask.execute(game);
-        currentUser = new User("Maya","123@123","123");
-        //UserController.setUser(test);
-        Game zelda = new Game("Zelda", "Action RPG", currentUser);
-        zelda.setStatus(GameController.STATUS_BIDDED);
-        addGameTask.execute(zelda);
-        editGameTask.execute(zelda);
-        currentUser.getMyGames().addGame(zelda.getGameID());
-        Game chrono = new Game("Chrono Trigger", "RPG", currentUser);
-        chrono.setStatus(GameController.STATUS_AVAILABLE);
-        addGameTask2.execute(chrono);
-        editGameTask2.execute(chrono);
-        currentUser.getMyGames().addGame(chrono.getGameID());
-        Game roller = new Game("RollerCoaster Tycoon", "Simulation", currentUser);
-        roller.setStatus(GameController.STATUS_BORROWED);
-        addGameTask3.execute(roller);
-        editGameTask3.execute(roller);
-        currentUser.getMyGames().addGame(roller.getGameID());
+        currentUser = new User("test27","piupiupiu@123","123");
+
         UserController.setUser(currentUser);
         User serverUser = currentUser;
 
@@ -68,13 +45,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         ese.execute(serverUser);
         /**Load user from server */
-
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
-        esg.execute("Maya");
+        esg.execute("test27");
 
         try{
-             loadedUser = (esg.get());
+            loadedUser = (esg.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -83,10 +59,34 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         //Set current user of app to user that logged in
         currentUser = loadedUser;
 
+        //UserController.setUser(test);
+        /*Game zelda = new Game("mlgb8", "Action RPG", currentUser.getID());
+        zelda.setStatus(GameController.STATUS_BIDDED);
+        ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+        addGameTask.execute(zelda);
+        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+        editGameTask.execute(zelda);
 
-        //UserController.setUser(currentUser);
+        //currentUser.getMyGames().addGame(zelda);
 
+        Game chrono = new Game("mlgb9", "RPG", currentUser.getID());
+        chrono.setStatus(GameController.STATUS_AVAILABLE);
+        ElasticsearchGameController.AddGameTask addGameTask2 = new ElasticsearchGameController.AddGameTask();
+        addGameTask2.execute(chrono);
+        ElasticsearchGameController.EditGameTask editGameTask2 = new ElasticsearchGameController.EditGameTask();
+        editGameTask2.execute(chrono);
+       // currentUser.getMyGames().addGame(chrono);
+        //editGameTask2.execute(chrono);
 
+        Game roller = new Game("mlgb10", "Simulation", currentUser.getID());
+        roller.setStatus(GameController.STATUS_BORROWED);
+        ElasticsearchGameController.AddGameTask addGameTask3 = new ElasticsearchGameController.AddGameTask();
+        addGameTask3.execute(roller);
+        ElasticsearchGameController.EditGameTask editGameTask3 = new ElasticsearchGameController.EditGameTask();
+        editGameTask3.execute(roller);*/
+
+        //currentUser.getMyGames().addGame(roller);
+        //editGameTask3.execute(roller);
 
         setContentView(R.layout.activity_main);
 

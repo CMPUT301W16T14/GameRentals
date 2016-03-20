@@ -50,7 +50,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onClick(View v) {
-                Game test = new Game("", "", currentUser);
+                Game test = new Game("", "", currentUser.getID());
                 Intent intent = new Intent(getActivity(), AddGameActivity.class);
                 intent.putExtra("test", (Serializable)test);
                 startActivity(intent);

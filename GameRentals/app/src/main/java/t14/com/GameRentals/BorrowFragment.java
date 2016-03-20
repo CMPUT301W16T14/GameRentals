@@ -41,6 +41,7 @@ public class BorrowFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.borrow, container, false);
         searchButton = (Button) v.findViewById(R.id.SearchButton);
+        borrowedGames = new GameList();
 
         searchText = (EditText) v.findViewById(R.id.SearchText);
         borrowedGameList = (ListView)v.findViewById(R.id.BorrowedItems);

@@ -4,13 +4,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.List;
 
 import io.searchbox.core.DocumentResult;
@@ -26,7 +24,7 @@ import io.searchbox.core.SearchResult;
  */
 public class ElasticsearchGameController {
     private static JestDroidClient client;
-
+    private static User currentUser;
 
     public static class GetGamesTask extends AsyncTask<String,Void,GameList> {
 
@@ -63,7 +61,6 @@ public class ElasticsearchGameController {
 
     public static class AddGameTask extends AsyncTask<Game,Void,Void> {
         Gson gson = new Gson();
-
         /**
          *
          * @param params These are the games we wish to add.
@@ -72,6 +69,7 @@ public class ElasticsearchGameController {
         @Override
         protected Void doInBackground(Game... params) {
             verifyConfig();
+            currentUser = UserController.getCurrentUser();
 
             for(Game game : params) {
                 String json = gson.toJson(game);
@@ -81,6 +79,7 @@ public class ElasticsearchGameController {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
                         game.setGameID(execute.getId());
+                        currentUser.getMyGames().addGame(game);
                     } else {
                         Log.e("TODO", "Our insert of game failed, oh no!");
                     }
