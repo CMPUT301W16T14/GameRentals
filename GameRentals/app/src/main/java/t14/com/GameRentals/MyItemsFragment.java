@@ -146,8 +146,9 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
     /**Called when app returns to this screen */
     public void onResume(){
         super.onResume();
-        gameList.copyRefListToGames(currentUser.getMyGames());
-        adapter.notifyDataSetChanged();
+        //TODO:For some reason crashes sometimes so disabled for now
+        //gameList.copyRefListToGames(currentUser.getMyGames());
+        //adapter.notifyDataSetChanged();
     }
 
     @Override
