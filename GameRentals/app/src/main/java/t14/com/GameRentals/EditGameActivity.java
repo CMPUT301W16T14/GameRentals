@@ -67,7 +67,7 @@ public class EditGameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 for(int i = 0; i < currentUser.getMyGames().getSize(); i++){
-                    if (currentUser.getMyGames().getGame(i).getGameName().equals(game.getGameName()))
+                    if (currentUser.getMyGames().getGame(i).getGameID().equals(game.getGameID()))
                         game = currentUser.getMyGames().getGame(i);
                 }
                 game.setGameName(gameNameEdit.getText().toString());
@@ -95,7 +95,8 @@ public class EditGameActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         //TODO: Make this remove from server
                         //UserController.getCurrentUser().getMyGames().removeGame(game);
-                        updateServer();
+                        ElasticsearchGameController.RemoveGameTask removeGameTask = new ElasticsearchGameController.RemoveGameTask();
+                        removeGameTask.execute(game);
                         finish();
                     }
                 });

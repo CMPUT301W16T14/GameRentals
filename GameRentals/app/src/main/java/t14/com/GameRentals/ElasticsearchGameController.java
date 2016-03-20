@@ -11,6 +11,7 @@ import com.searchly.jestdroid.JestDroidClient;
 import java.io.IOException;
 import java.util.List;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -98,6 +99,46 @@ public class ElasticsearchGameController {
             editGameTask.execute(addedGame);
             String testID = addedGame.getGameID();
             UserController.getCurrentUser().getMyGames().addGame(testID);
+            ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+            ese.execute(UserController.getCurrentUser());
+        }
+    }
+
+    public static class RemoveGameTask extends AsyncTask<Game,Void,Game> {
+        Game removedGame;
+
+        /**
+         *
+         * @param params These are the games we wish to add.
+         * @return null
+         */
+        @Override
+        protected Game doInBackground(Game... params) {
+            verifyConfig();
+            //currentUser = UserController.getCurrentUser();
+
+            for(Game game : params) {
+                Delete delete = new Delete.Builder(game.getGameID()).index("cmput301w16t14").type("game").build();
+
+                try {
+                    DocumentResult execute = client.execute(delete);
+                    if(execute.isSucceeded()) {
+                        //game.setGameID(execute.getId());
+                        removedGame = game;
+                        //currentUser.getMyGames().addGame(execute.getId());
+                    } else {
+                        Log.e("TODO", "Our insert of game failed, oh no!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return removedGame;
+        }
+
+        protected void onPostExecute(Game removedGame){
+            String testID = removedGame.getGameID();
+            UserController.getCurrentUser().getMyGames().removeGame(testID);
             ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
             ese.execute(UserController.getCurrentUser());
         }
