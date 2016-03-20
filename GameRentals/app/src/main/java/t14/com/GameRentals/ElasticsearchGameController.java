@@ -59,17 +59,19 @@ public class ElasticsearchGameController {
         }
     }
 
-    public static class AddGameTask extends AsyncTask<Game,Void,Void> {
+    public static class AddGameTask extends AsyncTask<Game,Void,Game> {
         Gson gson = new Gson();
+        Game addedGame;
+
         /**
          *
          * @param params These are the games we wish to add.
          * @return null
          */
         @Override
-        protected Void doInBackground(Game... params) {
+        protected Game doInBackground(Game... params) {
             verifyConfig();
-            currentUser = UserController.getCurrentUser();
+            //currentUser = UserController.getCurrentUser();
 
             for(Game game : params) {
                 String json = gson.toJson(game);
@@ -79,7 +81,8 @@ public class ElasticsearchGameController {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
                         game.setGameID(execute.getId());
-                        currentUser.getMyGames().addGame(game);
+                        addedGame = game;
+                        //currentUser.getMyGames().addGame(execute.getId());
                     } else {
                         Log.e("TODO", "Our insert of game failed, oh no!");
                     }
@@ -87,8 +90,16 @@ public class ElasticsearchGameController {
                     e.printStackTrace();
                 }
             }
+            return addedGame;
+        }
 
-            return null;
+        protected void onPostExecute(Game addedGame){
+            ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+            editGameTask.execute(addedGame);
+            String testID = addedGame.getGameID();
+            UserController.getCurrentUser().getMyGames().addGame(testID);
+            ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+            ese.execute(UserController.getCurrentUser());
         }
     }
 

@@ -35,19 +35,19 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
         //editGameTask.execute(game);
         //addGameTask.execute(game);
-        currentUser = new User("test27","piupiupiu@123","123");
+        //currentUser = new User("NEWTEST","piupiupiu@123","123");
 
-        UserController.setUser(currentUser);
-        User serverUser = currentUser;
+        //UserController.setUser(currentUser);
+        //User serverUser = currentUser;
 
-        ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
-        esa.execute(serverUser);
-        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.execute(serverUser);
+        //ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
+        //esa.execute(serverUser);
+        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        //ese.execute(serverUser);
         /**Load user from server */
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
-        esg.execute("test27");
+        esg.execute("NEWTEST");
 
         try{
             loadedUser = (esg.get());
@@ -60,6 +60,21 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         currentUser = loadedUser;
 
         //UserController.setUser(test);
+        //Game test = new Game("PunchOut", "Fighting", currentUser.getID());
+        //ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+        //addGameTask.execute(test);
+
+        //ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+        //editGameTask.execute(paper);
+        //String testID = paper.getGameID();
+        //currentUser.getMyGames().addGame(testID);
+
+
+
+
+
+        //ElasticSearchUsersController.EditUserTask ese2 = new ElasticSearchUsersController.EditUserTask();
+        //ese2.execute(currentUser);
         /*Game zelda = new Game("mlgb8", "Action RPG", currentUser.getID());
         zelda.setStatus(GameController.STATUS_BIDDED);
         ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
@@ -67,7 +82,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
         editGameTask.execute(zelda);
 
-        //currentUser.getMyGames().addGame(zelda);
+        currentUser.getMyGames().addGame(zelda);
 
         Game chrono = new Game("mlgb9", "RPG", currentUser.getID());
         chrono.setStatus(GameController.STATUS_AVAILABLE);
