@@ -6,23 +6,22 @@ import java.io.Serializable;
  * Created by cjresler on 2016-02-28.
  */
 public class Bid{
-    private User bidMaker;
+    private String bidMaker;
     private double rate;
     private boolean accepted;
 
     public Bid(User bidMaker, double rate) {
-        this.bidMaker = bidMaker;
+        this.bidMaker = bidMaker.getID();
         this.rate = rate;
         this.accepted = false;
     }
 
 
-
-    public User getBidMaker() {
+    public String getBidMaker() {
         return bidMaker;
     }
 
-    public void setBidMaker(User bidMaker) {
+    public void setBidMaker(String bidMaker) {
         this.bidMaker = bidMaker;
     }
 

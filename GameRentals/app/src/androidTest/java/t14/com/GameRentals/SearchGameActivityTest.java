@@ -43,7 +43,8 @@ public class SearchGameActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSearch() {
-        Game EUIV = new Game("EUIV", "grand strategy", new User("Austin", "aredmond@ualberta.ca", "780"));
+        User Austin = new User("Austin", "aredmond@ualberta.ca", "780");
+        Game EUIV = new Game("EUIV", "grand strategy", Austin);
 
         Intent intent = new Intent();
         intent.putExtra("SEARCH_TERM", "grand");

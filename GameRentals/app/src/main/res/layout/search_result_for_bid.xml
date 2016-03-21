@@ -14,19 +14,6 @@
         android:weightSum="1">
 
         <TextView
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:text="Game ID:"
-            android:id="@+id/textView6"
-            android:textSize="30dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText5"
-            android:layout_weight="0.03" />
-
-        <TextView
             android:layout_width="226dp"
             android:layout_height="wrap_content"
             android:text="Game Name"
@@ -36,7 +23,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText6"
+            android:id="@+id/searchGameName"
             android:layout_weight="0.03" />
 
         <TextView
@@ -51,7 +38,7 @@
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/editText7"
+            android:id="@+id/searchGameDescription"
             android:layout_weight="0.89" />
 
         <LinearLayout
