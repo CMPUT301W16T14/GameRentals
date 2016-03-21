@@ -14,13 +14,15 @@ import io.searchbox.annotations.JestId;
  */
 public class Game implements Serializable{
     private String gameName;
+
     @JestId
     private String gameID;
+
     private String description;
     private int status;
     private BidList bidList;
-    private User owner;
-    private User borrower;
+    private String ownerID;
+    private String borrowerID;
 
     /** Constructor for game object.
      *
@@ -28,46 +30,45 @@ public class Game implements Serializable{
      * @param description A description of the game.
      * @param owner The user that owns this game.
      */
-    public Game(String gameName, String description, User owner) {
+    public Game(String gameName, String description, String owner) {
         this.gameName = gameName;
         this.description = description;
-        this.gameID = "";
         this.status = 0;
         this.bidList = new BidList();
-        this.owner = owner;
-        this.borrower = null;
+        this.ownerID = owner;
+        this.borrowerID = null;
     }
 
     /** Return the borrower of game
      *
      * @return User that is borrowing this game
      */
-    public User getBorrower() {
-        return borrower;
+    public String getBorrower() {
+        return borrowerID;
     }
 
     /** Set borrower of game
      *
      * @param borrower Set borrower to user that is borrowing the game
      */
-    public void setBorrower(User borrower) {
-        this.borrower = borrower;
+    public void setBorrower(String borrower) {
+        this.borrowerID = borrower;
     }
 
     /** Return the owner of game
      *
      * @return User that is the owner of this game
      */
-    public User getOwner() {
-        return owner;
+    public String getOwner() {
+        return ownerID;
     }
 
     /** Set the owner of a game
      *
      * @param owner User that owns this game
      */
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwner(String owner) {
+        this.ownerID = owner;
     }
 
     /** Return the status of a game
@@ -143,12 +144,13 @@ public class Game implements Serializable{
         return gameID;
     }
 
+
     /** Set ID of game
      *
-     * @param gameID String of ID that game ID should be set to
+     * @param gameid String of ID that game ID should be set to
      */
-    public void setGameID(String gameID) {
-        this.gameID = gameID;
+    public void setGameID(String gameid) {
+        this.gameID = gameid;
     }
 
     /** Get name of game
@@ -177,8 +179,8 @@ public class Game implements Serializable{
         this.gameID = game.getGameID();
         this.status = game.getStatus();
         this.bidList = game.getBidList();
-        this.owner = game.getOwner();
-        this.borrower = game.getBorrower();
+        this.ownerID = game.getOwner();
+        this.borrowerID = game.getBorrower();
     }
 
    @Override

@@ -48,10 +48,12 @@ public class AddGameActivity extends Activity {
                 else{
                     game.setGameName(name);
                     game.setDescription(description);
-                    currentUser.getMyGames().addGame(game);
+                    //currentUser.getMyGames().addGame(game);
                     //Update user and add game to server
                     //addTestData();
                     updateServer();
+                    //String gameID = game.getGameID();
+                    //currentUser.getMyGames().addGame(gameID);
                     finish();
                 }
             }
@@ -71,9 +73,11 @@ public class AddGameActivity extends Activity {
     public void updateServer(){
         ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
         addGameTask.execute(game);
+        //ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+        //editGameTask.execute(game);
 
-        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.execute(currentUser);
+        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        //ese.execute(currentUser);
     }
 /*
     public void addTestData(){

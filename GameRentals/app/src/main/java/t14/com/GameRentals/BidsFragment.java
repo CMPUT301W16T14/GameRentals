@@ -27,9 +27,9 @@ public class BidsFragment  extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.bids, container,false);
-
+        biddedItems = new GameList();
         currentUser = UserController.getCurrentUser();
-        biddedItems = currentUser.getBiddedItems();
+        biddedItems.copyRefListToGames(currentUser.getBiddedItems());
 
         biddedItemsView = (ListView)v.findViewById(R.id.biddedItemList);
 
