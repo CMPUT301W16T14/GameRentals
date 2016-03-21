@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Test</string>
-    <string name="title_activity_view_profile">ViewProfileActivity</string>
-    <string name="title_activity_profile_main">MyProfile</string>
-    <string name="action_settings">Settings</string>
-</resources>
