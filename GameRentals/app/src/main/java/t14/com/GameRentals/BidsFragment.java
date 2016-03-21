@@ -29,7 +29,6 @@ public class BidsFragment  extends Fragment {
         View v = inflater.inflate(R.layout.bids, container,false);
         biddedItems = new GameList();
         currentUser = UserController.getCurrentUser();
-        biddedItems.copyRefListToGames(currentUser.getBiddedItems());
 
         biddedItemsView = (ListView)v.findViewById(R.id.biddedItemList);
 
@@ -65,6 +64,7 @@ public class BidsFragment  extends Fragment {
     public void onStart(){
         super.onStart();
         //TODO: SET THE BIDLIST TO THE ONE IN SERVER
+        biddedItems.copyRefListToGames(currentUser.getBiddedItems());
         adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),R.layout.game_list,biddedItems.getList());
         biddedItemsView.setAdapter(adapter);
     }

@@ -99,6 +99,49 @@ public class ElasticSearchUsersController {
         }
     }
 
+    public static class GetUserByIDTask extends AsyncTask<String,Void,User> {
+
+        @Override
+        protected User doInBackground(String... params) {
+            verifyConfig();
+
+            // Hold (eventually) the tweets that we get back from Elasticsearch
+            User user = new User(null,null,null);
+            // NOTE: A HUGE ASSUMPTION IS ABOUT TO BE MADE!
+            // Assume that only one string is passed in.
+
+            // The following gets the top "10000" tweets
+            //String search_string = "{\"from\":0,\"size\":10000}";
+
+            // The following searches for the top 10 tweets matching the string passed in (NOTE: HUGE ASSUMPTION PREVIOUSLY)
+            //String search_string = "{\"query\":{\"match\":{\"message\":\"" + params[0] + "\"}}}";
+
+            // The following gets the top 10000 tweets matching the string passed in
+            String search_string = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"match\" : { \"id\" : \""+params[0]+"\" }\n" +
+                    "    }\n" +
+                    "}";
+
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("try").build();
+            try {
+                SearchResult result = client.execute(search);
+                if(result.isSucceeded()) {
+                    user = result.getSourceAsObject(User.class);
+                } else {
+                    Log.i("TODO", "Search was unsuccessful, do something!");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return user;
+        }
+
+        protected void onPostExecute(User user){
+            UserController.setUser(user);
+        }
+    }
+
     public static class AddUserTask extends AsyncTask<User,Void,Void> {
         Gson gson = new Gson();
         @Override

@@ -50,6 +50,7 @@ public class BidOnActivity extends Activity {
                 Intent intent = new Intent(BidOnActivity.this, BidOnGameActivity.class);
                 intent.putExtra("gamePosition", gamePosition);
                 startActivity(intent);
+                finish();
             }
         });
     }
