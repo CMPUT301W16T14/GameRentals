@@ -1,8 +1,12 @@
 package t14.com.GameRentals;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
+=======
+import java.util.ArrayList;
+>>>>>>> testmergething
 
 /**
  * Created by cjresler on 2016-02-28.
@@ -100,5 +104,10 @@ public class User implements Serializable{
     }
 
 
+<<<<<<< HEAD
 
+=======
+    public void setUserID(String id) {
+    }
+>>>>>>> testmergething
 }
