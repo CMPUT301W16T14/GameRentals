@@ -36,7 +36,7 @@ public class BidOnGameActivity extends Activity {
         Button okButton = (Button)findViewById(R.id.OKButton);
         loadFromFile();
         currentUser = UserController.getCurrentUser();
-        int gamePosition = getIntent().getExtras().getInt("ging tamePosition");
+        int gamePosition = getIntent().getExtras().getInt("gamePosition");
         game = returnedGames.get(gamePosition);
         final EditText bidMoney = (EditText) findViewById(R.id.bidMoney);
 
@@ -52,10 +52,13 @@ public class BidOnGameActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         //////////TODO:GET RATE VALUE
                         rate = Double.parseDouble(bidMoney.getText().toString());
-                        game.getBidList().AddBid(currentUser,rate);
+                        game.getBidList().AddBid(currentUser, rate);
                         currentUser.getBiddedItems().addGame(game.getGameID());
                         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                         ese.execute(currentUser);
+                        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                        editGameTask.execute(game);
+                        finish();
                     }
                 });
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
