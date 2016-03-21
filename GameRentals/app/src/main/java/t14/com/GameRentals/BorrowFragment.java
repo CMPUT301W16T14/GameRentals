@@ -41,6 +41,7 @@ public class BorrowFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.borrow, container, false);
         searchButton = (Button) v.findViewById(R.id.SearchButton);
+        borrowedGames = new GameList();
 
         searchText = (EditText) v.findViewById(R.id.SearchText);
         borrowedGameList = (ListView)v.findViewById(R.id.BorrowedItems);
@@ -67,7 +68,7 @@ public class BorrowFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        borrowedGames = UserController.getCurrentUser().getBorrowedItems();
+        borrowedGames.copyRefListToGames(UserController.getCurrentUser().getBorrowedItems());
         adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),
                 R.layout.game_list, borrowedGames.getList());
         borrowedGameList.setAdapter(adapter);

@@ -4,15 +4,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.List;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -26,7 +25,7 @@ import io.searchbox.core.SearchResult;
  */
 public class ElasticsearchGameController {
     private static JestDroidClient client;
-
+    private static User currentUser;
 
     public static class GetGamesTask extends AsyncTask<String,Void,GameList> {
 
@@ -61,8 +60,9 @@ public class ElasticsearchGameController {
         }
     }
 
-    public static class AddGameTask extends AsyncTask<Game,Void,Void> {
+    public static class AddGameTask extends AsyncTask<Game,Void,Game> {
         Gson gson = new Gson();
+        Game addedGame;
 
         /**
          *
@@ -70,8 +70,9 @@ public class ElasticsearchGameController {
          * @return null
          */
         @Override
-        protected Void doInBackground(Game... params) {
+        protected Game doInBackground(Game... params) {
             verifyConfig();
+            //currentUser = UserController.getCurrentUser();
 
             for(Game game : params) {
                 String json = gson.toJson(game);
@@ -81,6 +82,8 @@ public class ElasticsearchGameController {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
                         game.setGameID(execute.getId());
+                        addedGame = game;
+                        //currentUser.getMyGames().addGame(execute.getId());
                     } else {
                         Log.e("TODO", "Our insert of game failed, oh no!");
                     }
@@ -88,8 +91,93 @@ public class ElasticsearchGameController {
                     e.printStackTrace();
                 }
             }
+            return addedGame;
+        }
 
-            return null;
+        protected void onPostExecute(Game addedGame){
+            ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+            editGameTask.execute(addedGame);
+            String testID = addedGame.getGameID();
+            UserController.getCurrentUser().getMyGames().addGame(testID);
+            ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+            ese.execute(UserController.getCurrentUser());
+        }
+    }
+
+    public static class RemoveGameTask extends AsyncTask<Game,Void,Game> {
+        Game removedGame;
+
+        /**
+         *
+         * @param params These are the games we wish to add.
+         * @return null
+         */
+        @Override
+        protected Game doInBackground(Game... params) {
+            verifyConfig();
+            //currentUser = UserController.getCurrentUser();
+
+            for(Game game : params) {
+                Delete delete = new Delete.Builder(game.getGameID()).index("cmput301w16t14").type("game").build();
+
+                try {
+                    DocumentResult execute = client.execute(delete);
+                    if(execute.isSucceeded()) {
+                        //game.setGameID(execute.getId());
+                        removedGame = game;
+                        //currentUser.getMyGames().addGame(execute.getId());
+                    } else {
+                        Log.e("TODO", "Our insert of game failed, oh no!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return removedGame;
+        }
+
+        protected void onPostExecute(Game removedGame){
+            String testID = removedGame.getGameID();
+            UserController.getCurrentUser().getMyGames().removeGame(testID);
+            ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+            ese.execute(UserController.getCurrentUser());
+        }
+    }
+
+    public static class GetGameTask extends AsyncTask<String,Void,Game>{
+        @Override
+        protected Game doInBackground(String... params) {
+            verifyConfig();
+
+            // Hold (eventually) the game that we get back from Elasticsearch
+            Game game = new Game("", "", null);
+
+            String insertTerms = "";
+
+            for (String searchTerm: params) {
+                insertTerms += "{\"match\": {\"gameID\": \"" + searchTerm + "\"}}, ";
+            }
+
+            insertTerms = insertTerms.substring(0, insertTerms.length()-2);
+
+            // The following gets the games with all the search terms
+            String search_string = "{\"from\":0,\"size\":10000,\"query\":{\"bool\":{\"must\":[ " + insertTerms + " ]}}}";
+
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("game").build();
+            try {
+                SearchResult execute = client.execute(search);
+                if(execute.isSucceeded()) {
+                    Game foundGame = execute.getSourceAsObject(Game.class);
+                    //games.getList().addAll(foundGames);
+                    game = foundGame;
+                } else {
+                    Log.i("TODO", "Search was unsuccessful, do something!");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return game;
         }
     }
 
@@ -146,6 +234,30 @@ public class ElasticsearchGameController {
             }
 
             return games;
+        }
+    }
+
+    public static class EditGameTask extends AsyncTask<Game,Void,Void>{
+        Gson gson = new Gson();
+        @Override
+        protected Void doInBackground(Game... params) {
+            verifyConfig();
+            for(Game game : params) {
+                String json = gson.toJson(game);
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("game").id(game.getGameID()).build();
+                try {
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()) {
+                        //user.setID(execute.getId());
+                    } else {
+                        Log.e("TODO", "Our edit of user failed, oh no!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
         }
     }
 

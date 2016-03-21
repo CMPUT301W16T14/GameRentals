@@ -53,7 +53,7 @@ public class BidOnGameActivity extends Activity {
                         //////////TODO:GET RATE VALUE
                         rate = Double.parseDouble(bidMoney.getText().toString());
                         game.getBidList().AddBid(currentUser,rate);
-                        currentUser.getBiddedItems().addGame(game);
+                        currentUser.getBiddedItems().addGame(game.getGameID());
                         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                         ese.execute(currentUser);
                     }
