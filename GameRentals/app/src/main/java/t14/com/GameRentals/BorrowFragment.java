@@ -50,13 +50,23 @@ public class BorrowFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LocationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /*
+        searchButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
                 String sSearchText = searchText.getText().toString();
                 Intent intent = new Intent(getActivity(), SearchGameActivity.class);
                 intent.putExtra("SEARCH_TERM", sSearchText);
                 startActivity(intent);
             }
         });
-
+        */
         return v;
     }
 

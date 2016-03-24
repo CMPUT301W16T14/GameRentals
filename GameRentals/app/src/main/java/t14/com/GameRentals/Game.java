@@ -31,7 +31,7 @@ public class Game implements Serializable{
      * @param description A description of the game.
      * @param owner The user that owns this game.
      */
-    public Game(String gameName, String description, User owner) {
+    public Game(String gameName, String description, String owner) {
         this.gameName = gameName;
         this.description = description;
         this.status = 0;
