@@ -5,6 +5,7 @@ import java.io.Serializable;
 import io.searchbox.annotations.JestId;
 
 
+
 /**
  * Created by cjresler on 2016-02-28.
  */
@@ -99,6 +100,7 @@ public class User implements Serializable {
         Game game = myGames.getGame(gameID);
         UserController.addMyGame(game);
     }
+
 
 
 }

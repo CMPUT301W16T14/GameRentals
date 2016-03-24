@@ -3,7 +3,7 @@
     <string name="title_activity_view_profile">ViewProfileActivity</string>
     <string name="title_activity_profile_main">MyProfile</string>
     <string name="title_activity_search_game">SearchGameActivity</string>
-
+    
     <string name="action_settings">Settings</string>
     <string name="action_profile">Edit Profile</string>
 
