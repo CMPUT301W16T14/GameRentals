@@ -1,10 +1,11 @@
 package t14.com.GameRentals;
 
 import java.io.Serializable;
-
 import io.searchbox.annotations.JestId;
 
+
 import java.util.ArrayList;
+
 
 /**
  * Created by cjresler on 2016-02-28.
@@ -100,4 +101,8 @@ public class User implements Serializable {
         Game game = myGames.getGame(gameID);
         UserController.addMyGame(game);
     }
+
+    public void setUserID(String id) {
+    }
+
 }
