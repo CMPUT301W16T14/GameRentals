@@ -3,11 +3,8 @@
     <string name="title_activity_view_profile">ViewProfileActivity</string>
     <string name="title_activity_profile_main">MyProfile</string>
     <string name="title_activity_search_game">SearchGameActivity</string>
-<<<<<<< HEAD
     <string name="action_settings">Settings</string>
     <string name="action_profile">Edit Profile</string>
-=======
->>>>>>> testmergething
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -22,8 +19,4 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-<<<<<<< HEAD
-=======
-    <string name="action_settings">Settings</string>
->>>>>>> testmergething
 </resources>
