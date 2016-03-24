@@ -54,8 +54,9 @@ public class EditGameActivity extends Activity {
             returnButton.setClickable(true);
             borrowerName.setVisibility(View.VISIBLE);
             borrowerNameLabel.setVisibility(View.VISIBLE);
-            //borrowerName.setText(game.getBorrower().getUserName());
-            borrowerName.setText("Borrow name will go here when not NULL");
+            borrowerName.setText(game.getBorrowerName());
+            borrowerName.setClickable(true);
+            //borrowerName.setText("Borrow name will go here when not NULL");
         }
 
         gameNameEdit.setText(game.getGameName());
@@ -115,6 +116,13 @@ public class EditGameActivity extends Activity {
                 game.setStatus(GameController.STATUS_AVAILABLE);
                 statusLabel.setText(game.getStatusString());
                 updateServer();
+            }
+        });
+
+        borrowerName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Go to borrower's profile
             }
         });
     }

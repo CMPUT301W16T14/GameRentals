@@ -2,6 +2,7 @@ package t14.com.GameRentals;
 
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 
 import io.searchbox.annotations.JestId;
 
@@ -47,6 +48,22 @@ public class Game implements Serializable{
         return borrowerID;
     }
 
+    public String getBorrowerName(){
+        User loadedUser = new User(null, null, null);
+        ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+        //TODO:Set this to load whatever username is given from login screen
+        esg.execute(borrowerID);
+
+        try{
+            loadedUser = (esg.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return loadedUser.getUserName();
+    }
+
     /** Set borrower of game
      *
      * @param borrower Set borrower to user that is borrowing the game
@@ -82,7 +99,7 @@ public class Game implements Serializable{
     /** Return a string that represents the status of game
      *
      * @return The string of the status of the game
-     * can be "available", "bidded", or "borrowoed"
+     * can be "available", "bidded", or "borrowed"
      */
     public String getStatusString(){
         switch(this.status){
