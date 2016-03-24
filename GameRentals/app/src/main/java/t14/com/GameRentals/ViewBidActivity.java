@@ -15,9 +15,10 @@ import java.util.concurrent.ExecutionException;
  */
 public class ViewBidActivity extends Activity {
     private Bid bid;
+    private Game game;
     private BidList bidList;
     private User currentUser;
-
+    private User bidMaker = null;
     private Button cancelButton;
     private Button acceptButton;
 
@@ -26,27 +27,28 @@ public class ViewBidActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_bid);
 
-        currentUser = UserController.getCurrentUser();
         final EditText gameNameEdit = (EditText) findViewById(R.id.BidGameName);
         final EditText gameDescriptionEdit = (EditText) findViewById(R.id.BidGameDescription);
         final EditText bidUser = (EditText) findViewById(R.id.bidUser);
         final EditText bidRate = (EditText) findViewById(R.id.bidRate);
-        int gamePosition = getIntent().getExtras().getInt("gamePosition");
-        int bidPosition = getIntent().getExtras().getInt("bidPosition");
+        final int gamePosition = getIntent().getExtras().getInt("gamePosition");
+        final int bidPosition = getIntent().getExtras().getInt("bidPosition");
+
+        currentUser = (User) getIntent().getExtras().get("currentUser");
 
         gameNameEdit.setText(currentUser.getMyGames().getGame(gamePosition).getGameName());
         gameDescriptionEdit.setText(currentUser.getMyGames().getGame(gamePosition).getDescription());
 
         bidList = currentUser.getMyGames().getGame(gamePosition).getBidList();
         bid = bidList.getItem(bidPosition);
-        final String gameName = currentUser.getMyGames().getGame(gamePosition).getGameName();
+        game = currentUser.getMyGames().getGame(gamePosition);
 
         String bidUserID = bid.getBidMaker();
 
         ElasticSearchUsersController.GetUserByIDTask getUserByIDTask = new ElasticSearchUsersController.GetUserByIDTask();
         getUserByIDTask.execute(bidUserID);
 
-        User bidMaker = null;
+
         try {
             bidMaker = getUserByIDTask.get();
         } catch (InterruptedException e) {
@@ -56,7 +58,7 @@ public class ViewBidActivity extends Activity {
         }
 
         bidUser.setText(bidMaker.getUserName());
-        bidRate.setText((CharSequence) bidMaker.getBiddedItems().getGame(gameName));
+        bidRate.setText(Double.toString(bid.getRate()));
 
         cancelButton = (Button)findViewById(R.id.CancelBidButton);
         acceptButton = (Button)findViewById(R.id.acceptBidButton);
@@ -66,9 +68,12 @@ public class ViewBidActivity extends Activity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bid.setAccepted(false);
-                ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-                ese.execute(currentUser);
+                game.getBidList().getItem(bidPosition).setAccepted(false);
+
+                ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                editGameTask.execute(game);
+                finish();
+
             }
         });
 
@@ -85,9 +90,14 @@ public class ViewBidActivity extends Activity {
                     }
                 }
                 if (length == i) {
-                    bid.setAccepted(true);
+                    game.getBidList().getItem(bidPosition).setAccepted(true);
+                    game.setStatus(2);
+                    bidMaker.getBorrowedItems().addGame(game.getGameID());
                     ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-                    ese.execute(currentUser);
+                    ese.execute(bidMaker);
+                    ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                    editGameTask.execute(game);
+                    finish();
                 }
             }
         });
