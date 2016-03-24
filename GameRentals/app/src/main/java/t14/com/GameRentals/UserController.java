@@ -6,53 +6,64 @@ package t14.com.GameRentals;
 public class UserController {
     private static User currentUser;
 
+    public UserController(User user) {
+        setUser(user);
+    }
+
     public static User getCurrentUser() {
         return currentUser;
     }
 
-    public static void setUser(User current) {
-        currentUser = current;
+    public static void setUser(User user) {
+        currentUser = user;
     }
 
     //Given a GameList, return all games with available status
-    public static GameList getAvailable(GameList games){
-        GameList gameList = new GameList();
+    public static GameRefList getAvailable(GameRefList games){
+        GameRefList gameList = new GameRefList();
         for(int i = 0; i < games.getSize(); i++){
             if(games.getGame(i).getStatus() == GameController.STATUS_AVAILABLE){
-                gameList.addGame(games.getGame(i));
+                gameList.addGame(games.getGame(i).getGameID());
             }
         }
         return gameList;
     }
 
     //Given a GameList, return all games with borrowed status
-    public static GameList getBorrowed(GameList games){
-        GameList gameList = new GameList();
+    public static GameRefList getBorrowed(GameRefList games){
+        GameRefList gameList = new GameRefList();
         for(int i = 0; i < games.getSize(); i++){
             if(games.getGame(i).getStatus() == GameController.STATUS_BORROWED){
-                gameList.addGame(games.getGame(i));
+                gameList.addGame(games.getGame(i).getGameID());
             }
         }
         return gameList;
     }
 
     //Given a GameList, return all games with bidded status
-    public static GameList getBidded(GameList games){
-        GameList gameList = new GameList();
+    public static GameRefList getBidded(GameRefList games){
+        GameRefList gameList = new GameRefList();
         for(int i = 0; i < games.getSize(); i++){
             if(games.getGame(i).getStatus() == GameController.STATUS_BIDDED){
-                gameList.addGame(games.getGame(i));
+                gameList.addGame(games.getGame(i).getGameID());
             }
         }
         return gameList;
     }
 
-    public GameList getGameList() {
+    public GameRefList getGameList() {
         return currentUser.getMyGames();
     }
 
     public static void addMyGame(Game game){
-        currentUser.getMyGames().addGame(game);
+        //currentUser.getMyGames().addGame(game);
+        //User tempUser = currentUser;
+
+        ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+        addGameTask.execute(game);
+
+        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        ese.execute(currentUser);
     }
 
     public void deleteGame(){
@@ -63,19 +74,20 @@ public class UserController {
         //TODO
     }
 
-    public void addBiddedGame(){
-        //TODO
+    /*public static void addBiddedGame(Game game){
+        currentUser.getBiddedItems().addGame(game);
+        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        ese.execute(currentUser);
     }
 
     public Game getGame(GameList list, int index){
         return list.getGame(index);
     }
 
-    public void deleteBiddedGame(){
-        //TODO
-    }
+    public static void deleteBiddedGame(Game game){
+        currentUser.getBiddedItems().removeGame(game);
+        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        ese.execute(currentUser);
+    }*/
 
-    public void searchGamesByOwner(){
-        //TODO
-    }
 }
