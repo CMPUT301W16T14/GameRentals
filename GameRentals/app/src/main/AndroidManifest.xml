@@ -24,7 +24,7 @@
         <activity android:name=".ViewBidActivity"/>
         <activity android:name=".BidOnActivity"/>
         <activity android:name=".BidOnGameActivity"/>
-        
+        <activity android:name=".CancelBidActivity"/>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">

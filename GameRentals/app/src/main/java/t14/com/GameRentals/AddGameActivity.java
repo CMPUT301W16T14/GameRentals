@@ -22,7 +22,7 @@ public class AddGameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
-        currentUser = UserController.getCurrentUser();
+        currentUser = (User)getIntent().getExtras().get("currentUser");
         game = (Game) getIntent().getSerializableExtra("test");
         gameName = (EditText)findViewById(R.id.addGameNameEditText);
         gameDescription = (EditText)findViewById(R.id.addGameDescriptionEditText);

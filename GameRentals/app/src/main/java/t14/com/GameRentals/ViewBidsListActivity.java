@@ -27,13 +27,12 @@ public class ViewBidsListActivity extends Activity {
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.view_bids_list);
-        currentUser = UserController.getCurrentUser();
+        currentUser = (User)getIntent().getExtras().get("currentUser");
 
         gamePosition = getIntent().getExtras().getInt("gamePosition");
         bidListView = (ListView)findViewById(R.id.bidListView);
 
         bidList = new ArrayList<Bid>();
-
         bidList.addAll(currentUser.getMyGames().getGame(gamePosition).getBidList().getList());
 
         adapter = new ArrayAdapter<Bid>(this.getApplicationContext(), R.layout.game_list, bidList);
@@ -57,6 +56,8 @@ public class ViewBidsListActivity extends Activity {
     public void onStart(){
         super.onStart();
         //TODO: SET THE BIDLIST TO THE ONE IN SERVER
+        bidList = new ArrayList<Bid>();
+        bidList.addAll(currentUser.getMyGames().getGame(gamePosition).getBidList().getList());
         adapter = new ArrayAdapter<Bid>(this.getApplicationContext(),R.layout.game_list,bidList);
         bidListView.setAdapter(adapter);
     }

@@ -24,7 +24,7 @@ public class EditGameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_my_item);
-        currentUser = UserController.getCurrentUser();
+        currentUser = (User) getIntent().getExtras().get("currentUser");
 
         //Set up buttons and text boxes
         final EditText gameNameEdit = (EditText) findViewById(R.id.editGameNameEditText);

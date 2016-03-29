@@ -7,6 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -68,10 +75,15 @@ public class ViewBidActivity extends Activity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                game.getBidList().getItem(bidPosition).setAccepted(false);
-
+                game.getBidList().getItem(bidPosition).setAccepted(2);//decline
+                if (game.getBidList().getSize() == 0) {
+                    game.setStatus(0);
+                }
+                bidList.getItem(bidPosition).setAccepted(2);//decline
                 ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
                 editGameTask.execute(game);
+                ElasticSearchUsersController.EditUserTask ese1 = new ElasticSearchUsersController.EditUserTask();
+                ese1.execute(currentUser);
                 finish();
 
             }
@@ -82,19 +94,23 @@ public class ViewBidActivity extends Activity {
             public void onClick(View view) {
                 int i;
                 for(i = 0; i < length; i++){
-                    if (bidList.getItem(i).isAccepted()){
+                    if (bidList.getItem(i).isAccepted() == 1){
                         AlertDialog.Builder adb = new AlertDialog.Builder(ViewBidActivity.this);
                         adb.setTitle("Alert");
                         adb.setMessage("You can't accept it cause you have already accepted other bid");
-                        break;
+                        finish();
                     }
                 }
                 if (length == i) {
-                    game.getBidList().getItem(bidPosition).setAccepted(true);
+                    game.getBidList().getItem(bidPosition).setAccepted(1);
+                    game.setBorrower(bidMaker.getID());
                     game.setStatus(2);
+                    bid.setAccepted(1);
                     bidMaker.getBorrowedItems().addGame(game.getGameID());
                     ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                     ese.execute(bidMaker);
+                    ElasticSearchUsersController.EditUserTask ese1 = new ElasticSearchUsersController.EditUserTask();
+                    ese1.execute(currentUser);
                     ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
                     editGameTask.execute(game);
                     finish();

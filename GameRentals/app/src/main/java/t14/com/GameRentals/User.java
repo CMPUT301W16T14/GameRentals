@@ -101,6 +101,13 @@ public class User implements Serializable {
         UserController.addMyGame(game);
     }
 
-
+    public int getBid(Game game){
+        for (int i = 0; i < getBiddedItems().getSize(); i++){
+            if(getBiddedItems().getGame(i).equals(game.getGameID())){
+                return i;
+            }
+        }
+        return 0;
+    }
 
 }
