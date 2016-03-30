@@ -43,7 +43,6 @@ public class User implements Serializable {
     /*public ArrayList<User> getUsers(String s) {
         return this.users;
     }
-
     public void viewUser(User user){
         this.users.add(user);
     }*/
