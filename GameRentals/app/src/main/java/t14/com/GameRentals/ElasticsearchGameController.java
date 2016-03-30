@@ -167,8 +167,9 @@ public class ElasticsearchGameController {
             try {
                 SearchResult execute = client.execute(search);
                 if(execute.isSucceeded()) {
-                    game = execute.getSourceAsObject(Game.class);
+                    Game foundGame = execute.getSourceAsObject(Game.class);
                     //games.getList().addAll(foundGames);
+                    game = foundGame;
                 } else {
                     Log.i("TODO", "Search was unsuccessful, do something!");
                 }
