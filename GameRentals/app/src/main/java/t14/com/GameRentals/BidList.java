@@ -41,4 +41,6 @@ public class BidList implements Serializable{
                 list.remove(user.getID());
         }
     }
+
+
 }

@@ -1,17 +1,15 @@
 package t14.com.GameRentals;
 
-<<<<<<< HEAD
 import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
-=======
-import java.util.ArrayList;
->>>>>>> testmergething
+
+
 
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class User implements Serializable{
+public class User implements Serializable {
     @JestId
     protected String id;
 
@@ -22,7 +20,7 @@ public class User implements Serializable{
     private GameRefList myGames;
     private GameRefList biddedItems;
     private GameRefList borrowedItems;
-   // private ArrayList<User> users;
+    // private ArrayList<User> users;
 
     public String getID() {
         return id;
@@ -104,10 +102,5 @@ public class User implements Serializable{
     }
 
 
-<<<<<<< HEAD
 
-=======
-    public void setUserID(String id) {
-    }
->>>>>>> testmergething
 }

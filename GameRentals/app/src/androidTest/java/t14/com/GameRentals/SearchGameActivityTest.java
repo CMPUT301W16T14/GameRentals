@@ -1,13 +1,14 @@
 package t14.com.GameRentals;
 
-import android.app.Activity;
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
+<<<<<<< HEAD
 import android.test.ViewAsserts;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+=======
+>>>>>>> origin/stable4
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -25,9 +26,14 @@ public class SearchGameActivityTest extends ActivityInstrumentationTestCase2 {
         intent.putExtra("SEARCH_TERM", "rpg");
         setActivityIntent(intent);
 
+<<<<<<< HEAD
         SearchGameActivity activity = (SearchGameActivity) getActivity();
         assertNotNull(activity);
     }
+=======
+        Game EUIV = new Game("EUIV", "grand strategy", "Austin");
+        EUIV.setStatus(GameController.STATUS_BIDDED);
+>>>>>>> origin/stable4
 
 
     public void testViewOnScreen(){

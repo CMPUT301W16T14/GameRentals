@@ -43,7 +43,7 @@ public class ElasticsearchGameController {
 
             String search_string = "{\"from\":0,\"size\":10000,\"query\":{\"match\":{\"" + params[0] +"\":\"" + params[1] + "\"}}}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("game").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("games").build();
             try {
                 SearchResult execute = client.execute(search);
                 if(execute.isSucceeded()) {
@@ -76,7 +76,7 @@ public class ElasticsearchGameController {
 
             for(Game game : params) {
                 String json = gson.toJson(game);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("game").build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("games").build();
 
                 try {
                     DocumentResult execute = client.execute(index);
@@ -118,7 +118,7 @@ public class ElasticsearchGameController {
             //currentUser = UserController.getCurrentUser();
 
             for(Game game : params) {
-                Delete delete = new Delete.Builder(game.getGameID()).index("cmput301w16t14").type("game").build();
+                Delete delete = new Delete.Builder(game.getGameID()).index("cmput301w16t14").type("games").build();
 
                 try {
                     DocumentResult execute = client.execute(delete);
@@ -163,13 +163,12 @@ public class ElasticsearchGameController {
             // The following gets the games with all the search terms
             String search_string = "{\"from\":0,\"size\":10000,\"query\":{\"bool\":{\"must\":[ " + insertTerms + " ]}}}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("game").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("games").build();
             try {
                 SearchResult execute = client.execute(search);
                 if(execute.isSucceeded()) {
-                    Game foundGame = execute.getSourceAsObject(Game.class);
+                    game = execute.getSourceAsObject(Game.class);
                     //games.getList().addAll(foundGames);
-                    game = foundGame;
                 } else {
                     Log.i("TODO", "Search was unsuccessful, do something!");
                 }
@@ -220,7 +219,7 @@ public class ElasticsearchGameController {
             // The following gets the games with all the search terms
             String search_string = "{\"from\":0,\"size\":10000,\"query\":{\"bool\":{\"must\":[ " + insertTerms + " ], \"must_not\": {\"match\": {\"status\": 2}}}}}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("game").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("games").build();
             try {
                 SearchResult execute = client.execute(search);
                 if(execute.isSucceeded()) {
@@ -244,7 +243,7 @@ public class ElasticsearchGameController {
             verifyConfig();
             for(Game game : params) {
                 String json = gson.toJson(game);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("game").id(game.getGameID()).build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("games").id(game.getGameID()).build();
                 try {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
