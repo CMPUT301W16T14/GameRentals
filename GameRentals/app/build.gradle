@@ -6,15 +6,10 @@ android {
 
     defaultConfig {
         applicationId "t14.com.GameRentals"
-        minSdkVersion 15
+        minSdkVersion 8
         targetSdkVersion 18
         versionCode 1
         versionName "1.0"
-    }
-    packagingOptions{
-        exclude 'META-INF/LGPL2.1'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
     }
     buildTypes {
         release {
@@ -25,8 +20,7 @@ android {
 }
 
 dependencies {
-    compile 'com.esri.arcgis.android:arcgis-android:10.2.7'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:18.0.0'
     compile files('src/include/jest-droid-2.0.1-SNAPSHOT.jar')
