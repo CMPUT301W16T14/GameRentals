@@ -28,7 +28,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     ViewPager viewpager;
     PagerAdapter ft;
     User currentUser;
-    User loadedUser;
+    //User loadedUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +45,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         //ese.execute(serverUser);
         /**Load user from server */
+        /*
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
         esg.execute("bug");
@@ -55,9 +56,28 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
-        //Set current user of app to user that logged in
-        currentUser = loadedUser;
+        }*/
+                //Set current user of app to user that logged in
+        //currentUser = loadedUser;
+
+        UserSingleton singleton = UserSingleton.getInstance();
+        currentUser = singleton.getUser();
+
+        /*ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+        esg.execute(currentUser.getUserName());
+        try{
+            currentUser = (esg.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }*/
+
+
+
+
+
+
 
         //UserController.setUser(test);
         //Game test = new Game("PunchOut", "Fighting", currentUser.getID());

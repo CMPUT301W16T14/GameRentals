@@ -5,9 +5,19 @@ import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
 
-/** This class contains information for Game objects.
- * Each game has a game name, game ID, descirption, status, list of bids, owner,
- * and borrower.
+
+/** This class contains information for Game objects. <br>
+ * Each game has the following attributes: <br>
+ *     <ul>
+ *             <li>gameName </li>
+ *             <li>gameID</li>
+ *             <li>description</li>
+ *             <li>status</li>
+ *             <li>Bids list (the bids being offered to the owner)</li>
+ *             <li>owner</li>
+ *             <li>borrower</li>
+ *         </ul>
+ *
  * Game status can be either available, bidded, or borrowed.
  * Borrower will be initialized to null and only set if game status is borrowed.
  * Created by cjresler on 2016-02-28.

@@ -3,7 +3,8 @@ package t14.com.GameRentals;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
+/** This class returns a list of Game objects.
+ * It is mostly used for myGames list, borrowed list, and bid list where users can see the games and interact with them.
  * Created by cjresler on 2016-02-28.
  */
 public class GameList implements Serializable{

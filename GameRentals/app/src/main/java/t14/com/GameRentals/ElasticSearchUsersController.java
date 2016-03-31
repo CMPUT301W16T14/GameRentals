@@ -17,6 +17,13 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
+ * This controller monitors and controls user interaction with the server/database.
+ *
+ *
+ *
+ *
+ * @author JL
+ *
  * Created by margaret on 16/3/7.
  */
 public class ElasticSearchUsersController {
@@ -31,6 +38,10 @@ public class ElasticSearchUsersController {
         return null;
     }
 
+
+    /**
+     * Updates database when user edits their profile.
+     */
     public static class EditUserTask extends AsyncTask<User,Void,Void>{
         Gson gson = new Gson();
         @Override
@@ -55,6 +66,13 @@ public class ElasticSearchUsersController {
         }
     }
 
+    /**
+     *
+     * @return user with it's attributes if it exists. <br>
+     *     Otherwise, a user with all it's attributes set to null is returned.
+     * @see ProfileMain
+     *
+     */
     public static class GetUserTask extends AsyncTask<String,Void,User> {
 
         @Override
@@ -98,6 +116,17 @@ public class ElasticSearchUsersController {
         }
     }
 
+    /**
+     * This method differs from @GetUserTask as it searches for users <br>
+     *     from the user ID given. </br>
+     *
+     * @param UserID
+     * @return user with it's attributes if it exists. <br>
+     *     Otherwise, a user with all it's attributes set to null is returned. </br>
+     * @see ProfileMain
+     * @see #GetUserTask
+     *
+     */
     public static class GetUserByIDTask extends AsyncTask<String,Void,User> {
 
         @Override
@@ -141,6 +170,13 @@ public class ElasticSearchUsersController {
         }
     }
 
+    /**
+     * This class is to add a new User into the database.
+     *
+     * @param username
+     * @see ProfileMain
+     *
+     */
     public static class AddUserTask extends AsyncTask<User,Void,Void> {
         Gson gson = new Gson();
         @Override
@@ -168,6 +204,14 @@ public class ElasticSearchUsersController {
         }
     }
 
+
+    /**
+     * This class is to add a new User into the database.
+     *
+     * @param username
+     * @see ProfileMain
+     *
+     */
     // If no client, add one
     public static void verifyConfig() {
         if(client == null) {
