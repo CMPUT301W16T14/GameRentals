@@ -60,8 +60,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 //Set current user of app to user that logged in
         //currentUser = loadedUser;
 
-        UserSingleton singleton = UserSingleton.getInstance();
-        currentUser = singleton.getUser();
+        //UserSingleton singleton = UserSingleton.getInstance();
+        //currentUser = singleton.getUser();
 
         /*ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         esg.execute(currentUser.getUserName());

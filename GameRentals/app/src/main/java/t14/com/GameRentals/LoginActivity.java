@@ -134,7 +134,7 @@ public class LoginActivity extends ActionBarActivity  {
             //need to fix this
         }
         User user = isUsernameValid(username);
-        if (user == null) {
+        if (user.getUserName() == null) {
             mUsernameView.setError(getString(R.string.error_invalid_username));
             focusView = mUsernameView;
             cancel = true;
@@ -150,8 +150,13 @@ public class LoginActivity extends ActionBarActivity  {
             showProgress(true);
             //mAuthTask = new UserLoginTask(username);
             //mAuthTask.execute((Void) null);
-            UserSingleton singleton = UserSingleton.getInstance(); // build singleton for the first time?
-            singleton.setUser(user);
+
+            //UserSingleton singleton = UserSingleton.getInstance(); // build singleton for the first time?
+            //singleton.setUser(user);
+
+            //set current user to the login user
+
+            UserController.setUser(user);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
@@ -167,16 +172,19 @@ public class LoginActivity extends ActionBarActivity  {
         try{
             loadedUser = (username.get());
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
+            //e.printStackTrace();
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
+            //e.printStackTrace();
         }
-
+        return loadedUser;
+/*
         if (email.equals(loadedUser.getUserName())){
             return loadedUser;
         } else {
             return null;
-        }
+        }*/
     }
 
     /**

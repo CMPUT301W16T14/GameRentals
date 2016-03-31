@@ -49,7 +49,7 @@ public class ElasticSearchUsersController {
             verifyConfig();
             for(User user : params) {
                 String json = gson.toJson(user);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("Users").id(user.getID()).build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("try").id(user.getID()).build();
                 try {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
@@ -97,7 +97,7 @@ public class ElasticSearchUsersController {
                     "    }\n" +
                     "}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("Users").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("try").build();
             try {
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()) {
@@ -151,7 +151,7 @@ public class ElasticSearchUsersController {
                     "    }\n" +
                     "}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("Users").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("try").build();
             try {
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()) {
