@@ -21,9 +21,11 @@ public class ViewProfileActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_main);
+        setContentView(R.layout.view_profile);
 
-        user = UserController.getCurrentUser();
+        //TODO:Pass username to this activity
+        String givenUsername = (String) getIntent().getSerializableExtra("Username");
+        user = UserController.getUser(givenUsername);
 
         ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener(){
@@ -37,27 +39,35 @@ public class ViewProfileActivity extends Activity {
             }
         });
 
-        final EditText userNameEdit = (EditText) findViewById(R.id.nameText);
-        final EditText userEmailEdit = (EditText) findViewById(R.id.EmailText);
-        final EditText userPhoneEdit = (EditText) findViewById(R.id.PhoneText);
-        final TextView userNameView = (TextView) findViewById(R.id.lblName);
+        final EditText userNameText = (EditText) findViewById(R.id.viewProfileNameText);
+        final EditText emailText = (EditText) findViewById(R.id.viewProfileEmailText);
+        final EditText phoneText = (EditText) findViewById(R.id.viewProfilePhoneText);
+        //final TextView userNameView = (TextView) findViewById(R.id.lblName);
 
 
 
-        final Button saveButton = (Button)findViewById(R.id.SaveButton);
+        final Button exitButton = (Button)findViewById(R.id.viewProfileExitButton);
+        final Button messageButton = (Button)findViewById(R.id.viewProfileSendMessageButton);
 
-        userNameEdit.setText(user.getUserName());
-        userEmailEdit.setText(user.getEmail());
-        userPhoneEdit.setText(user.getPhoneNumber());
+        //TODO:Not a requirement but if time can make this button show a user's games
+        //final Button viewGamesButton = (Button)findViewById(R.id.viewProfileViewGamesButton);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        userNameText.setText(user.getUserName());
+        emailText.setText(user.getEmail());
+        phoneText.setText(user.getPhoneNumber());
+
+        //TODO:Use this button to open the message activity and send a message to this user
+        messageButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                user.setUserName(userNameEdit.getText().toString());
-                user.setEmail(userEmailEdit.getText().toString());
-                user.setPhoneNumber(userPhoneEdit.getText().toString());
-                updateServer();
+
+                finish();
+            }
+        });
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });

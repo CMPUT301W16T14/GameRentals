@@ -3,11 +3,14 @@ package t14.com.GameRentals;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.Serializable;
 
 /** This activity allows the user to edit games on their list of games. <br>
  * User will select a game from their list, and that game will be passed to this <br>
@@ -123,6 +126,10 @@ public class EditGameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //TODO: Go to borrower's profile
+                //User gameOwner = UserController.getUser(game.getOwner());
+                Intent intent = new Intent(EditGameActivity.this, ViewProfileActivity.class);
+                intent.putExtra("Username", game.getBorrower());
+                startActivity(intent);
             }
         });
     }

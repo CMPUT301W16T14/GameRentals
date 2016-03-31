@@ -95,7 +95,7 @@ public class ElasticSearchUsersController {
         }
 
         protected void onPostExecute(User user){
-            UserController.setUser(user);
+            //UserController.setUser(user);
         }
     }
 

@@ -1,5 +1,7 @@
 package t14.com.GameRentals;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by cjresler on 2016-02-28.
  */
@@ -90,4 +92,19 @@ public class UserController {
         ese.execute(currentUser);
     }*/
 
+    public static User getUser(String username){
+        User loadedUser = new User(null, null, null);
+        ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+
+        esg.execute(username);
+
+        try{
+            loadedUser = (esg.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return loadedUser;
+    }
 }

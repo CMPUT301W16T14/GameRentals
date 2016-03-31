@@ -49,7 +49,7 @@ public class Game implements Serializable{
     }
 
     public String getBorrowerName(){
-        User loadedUser = new User(null, null, null);
+        /*User loadedUser = new User(null, null, null);
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
         esg.execute(borrowerID);
@@ -61,7 +61,8 @@ public class Game implements Serializable{
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        return loadedUser.getUserName();
+        return loadedUser.getUserName();*/
+        return borrowerID;
     }
 
     /** Set borrower of game
@@ -106,7 +107,12 @@ public class Game implements Serializable{
             case(GameController.STATUS_AVAILABLE):
                 return "Available";
             case(GameController.STATUS_BORROWED):
-                return "Borrowed";
+                if(UserController.getCurrentUser().getID().equals(ownerID)){
+                    return "Lent out";
+                }
+                else {
+                    return "Borrowed";
+                }
             case(GameController.STATUS_BIDDED):
                 return "Has bids";
         }

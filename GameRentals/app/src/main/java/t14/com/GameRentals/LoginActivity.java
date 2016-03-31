@@ -34,6 +34,7 @@ import java.util.List;
 /**
  * A login screen that offers login via email/password.
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<Cursor> {
 
     /**
