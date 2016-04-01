@@ -186,55 +186,6 @@ public class LoginActivity extends ActionBarActivity  {
         }
     }
 
-    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(LoginActivity.this,
-                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
-
-        mUsernameView.setAdapter(adapter);
-    }
-
-    private interface ProfileQuery {
-        String[] PROJECTION = {
-                ContactsContract.CommonDataKinds.Email.ADDRESS,
-                ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
-        };
-
-        int ADDRESS = 0;
-        int IS_PRIMARY = 1;
-    }
-
-    /**
-     * Use an AsyncTask to fetch the user's email addresses on a background thread, and update
-     * the email text field with results on the main UI thread.
-     */
-    class SetupEmailAutoCompleteTask extends AsyncTask<Void, Void, List<String>> {
-
-        @Override
-        protected List<String> doInBackground(Void... voids) {
-            ArrayList<String> emailAddressCollection = new ArrayList<String>();
-
-            // Get all emails from the user's contacts and copy them to a list.
-            ContentResolver cr = getContentResolver();
-            Cursor emailCur = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
-                    null, null, null);
-            while (emailCur.moveToNext()) {
-                String email = emailCur.getString(emailCur.getColumnIndex(ContactsContract
-                        .CommonDataKinds.Email.DATA));
-                emailAddressCollection.add(email);
-            }
-            emailCur.close();
-
-            return emailAddressCollection;
-        }
-
-        @Override
-        protected void onPostExecute(List<String> emailAddressCollection) {
-            addEmailsToAutoComplete(emailAddressCollection);
-        }
-    }
-
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -268,11 +219,7 @@ public class LoginActivity extends ActionBarActivity  {
 
             if (success) {
                 finish();
-            } /*else {
-                //TODO:
-                // mPasswordView.setError(getString(R.string.error_incorrect_password));
-                //mPasswordView.requestFocus();
-            }*/
+            }
         }
 
         @Override
