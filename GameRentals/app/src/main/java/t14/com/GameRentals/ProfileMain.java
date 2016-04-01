@@ -18,13 +18,17 @@ public class ProfileMain extends ActionBarActivity {
     private User currentUser;
     private static int RESULT_LOAD_IMAGE = 1;
 
+    Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //this is for users that already exist
         currentUser = UserController.getCurrentUser();
+        //if it doesn't i need  blank one and then it should add to elasticsearch
 
         ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener(){
