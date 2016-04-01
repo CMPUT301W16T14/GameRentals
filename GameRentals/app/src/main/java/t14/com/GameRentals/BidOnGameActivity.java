@@ -7,14 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -35,7 +40,7 @@ public class BidOnGameActivity extends Activity {
         setContentView(R.layout.bid_on_game);
         Button okButton = (Button)findViewById(R.id.OKButton);
         loadFromFile();
-        currentUser = UserController.getCurrentUser();
+        currentUser = (User) getIntent().getExtras().get("currentUser");
         int gamePosition = getIntent().getExtras().getInt("gamePosition");
         game = returnedGames.get(gamePosition);
         final EditText bidMoney = (EditText) findViewById(R.id.bidMoney);
@@ -51,14 +56,21 @@ public class BidOnGameActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //////////TODO:GET RATE VALUE
-                        rate = Double.parseDouble(bidMoney.getText().toString());
-                        game.getBidList().AddBid(currentUser, rate);
-                        currentUser.getBiddedItems().addGame(game.getGameID());
-                        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-                        ese.execute(currentUser);
-                        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
-                        editGameTask.execute(game);
-                        finish();
+                        if (currentUser.getID().equals(game.getOwner())){
+                            Toast.makeText(BidOnGameActivity.this,"can't bid your own game",Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        else{
+                            rate = Double.parseDouble(bidMoney.getText().toString());
+                            game.getBidList().AddBid(currentUser, rate);
+                            game.setStatus(1);
+                            currentUser.getBiddedItems().addGame(game.getGameID());
+                            ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                            ese.execute(currentUser);
+                            ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                            editGameTask.execute(game);
+                            finish();
+                        }
                     }
                 });
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -90,4 +102,6 @@ public class BidOnGameActivity extends Activity {
             throw new RuntimeException();
         }
     }
+
+
 }

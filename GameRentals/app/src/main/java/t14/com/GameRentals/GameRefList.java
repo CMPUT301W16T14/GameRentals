@@ -69,6 +69,7 @@ public class GameRefList implements Serializable {
     }
 
     public void removeGame(String game){
+
         if(gameIDs.contains(game)){
             gameIDs.remove(game);
         }

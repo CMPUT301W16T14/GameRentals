@@ -50,7 +50,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         /**Load user from server */
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
-        esg.execute("NEWTEST");
+        esg.execute("debug");
 
         try{
             loadedUser = (esg.get());
@@ -60,6 +60,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             e.printStackTrace();
         }
         //Set current user of app to user that logged in
+        UserController.setUser(loadedUser);
         currentUser = loadedUser;
         UserController.setUser(currentUser);
 

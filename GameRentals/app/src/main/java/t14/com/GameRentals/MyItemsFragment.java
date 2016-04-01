@@ -52,6 +52,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 Game test = new Game("", "", currentUser.getID());
                 Intent intent = new Intent(getActivity(), AddGameActivity.class);
+                intent.putExtra("currentUser",currentUser);
                 intent.putExtra("test", (Serializable)test);
                 startActivity(intent);
                 adapter.notifyDataSetChanged();
@@ -75,6 +76,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                             //Switch to edit games screen
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            intent.putExtra("currentUser",currentUser);
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
@@ -96,6 +98,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                             //Switch to edit games screen
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            intent.putExtra("currentUser",currentUser);
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
@@ -105,6 +108,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO:Go to view bids activity
                             Intent intent = new Intent(getActivity(), ViewBidsListActivity.class);
+                            intent.putExtra("currentUser",currentUser);
                             intent.putExtra("gamePosition",pos);
                             startActivity(intent);
                         }
@@ -121,6 +125,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                             //Change to edit game screen
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            intent.putExtra("currentUser",currentUser);
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
