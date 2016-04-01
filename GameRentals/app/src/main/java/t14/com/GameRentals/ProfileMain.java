@@ -17,22 +17,27 @@ import android.widget.TextView;
 public class ProfileMain extends ActionBarActivity {
     private User currentUser;
     private static int RESULT_LOAD_IMAGE = 1;
+    ImageView contactImageImgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         currentUser = UserController.getCurrentUser();
+        contactImageImgView = (ImageView) findViewById(R.id.profile_image);
 
         ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                Intent i = new Intent();
+                i.setType("ïmage/*");
+                i.setAction(Intent.ACTION_GET_CONTENT);
+
+
+                        //Intent.ACTION_PICK,
+                        //MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(Intent.createChooser(i, "Select Contact Image"), 1);
 
 
             }
@@ -41,8 +46,7 @@ public class ProfileMain extends ActionBarActivity {
         final EditText userNameEdit = (EditText) findViewById(R.id.nameText);
         final EditText userEmailEdit = (EditText) findViewById(R.id.EmailText);
         final EditText userPhoneEdit = (EditText) findViewById(R.id.PhoneText);
-        final TextView userNameView = (TextView) findViewById(R.id.lblName);
-
+        //final ImageView userImageView = (ImageView)findViewById(R.id.profile_image);
 
 
         final Button saveButton = (Button)findViewById(R.id.SaveButton);
@@ -50,6 +54,7 @@ public class ProfileMain extends ActionBarActivity {
         userNameEdit.setText(currentUser.getUserName());
         userEmailEdit.setText(currentUser.getEmail());
         userPhoneEdit.setText(currentUser.getPhoneNumber());
+        //userImageView.setImageURI(currentUser.getImage());
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -67,8 +72,15 @@ public class ProfileMain extends ActionBarActivity {
     public ImageView getImageProfile(){
         return (ImageView) findViewById(R.id.profile_image);
     }
+    public void onActivityResult(int reqCode, int resCode, Intent data){
+        if(resCode == RESULT_OK){
+            if(reqCode ==1)
+                contactImageImgView.setImageURI(data.getData());
 
+        }
+    }
 
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
@@ -92,6 +104,7 @@ public class ProfileMain extends ActionBarActivity {
 
         }
     }
+    */
 
     public void updateServer(){
 

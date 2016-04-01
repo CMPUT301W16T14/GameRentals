@@ -1,5 +1,8 @@
 package t14.com.GameRentals;
 
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 import java.io.Serializable;
 import io.searchbox.annotations.JestId;
 
@@ -21,6 +24,7 @@ public class User implements Serializable {
     private GameRefList myGames;
     private GameRefList biddedItems;
     private GameRefList borrowedItems;
+    private ImageView myProfileImage;
    // private ArrayList<User> users;
 
     public String getID() {
@@ -105,4 +109,7 @@ public class User implements Serializable {
     public void setUserID(String id) {
     }
 
+    public ImageView getImage() {
+        return myProfileImage;
+    }
 }
