@@ -77,7 +77,7 @@
                 <RadioButton
                     android:layout_width="86dp"
                     android:layout_height="wrap_content"
-                    android:text="borrowed"
+                    android:text="lent out"
                     android:id="@+id/withLentCheckBox"
                     android:checked="false"
                     android:layout_weight="1.02" />

@@ -2,14 +2,11 @@ package t14.com.GameRentals;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
-import java.util.ArrayList;
 
 public class ViewMyGamesActivity extends Activity {
     private ListView myGamesList;
@@ -29,14 +26,14 @@ public class ViewMyGamesActivity extends Activity {
 
         //Set up adapter
         myGamesList = (ListView) findViewById(R.id.myGames);
-        games = UserController.getCurrentUser().getMyGames();
+        games.copyRefListToGames(UserController.getCurrentUser().getMyGames());
         adapter = new ArrayAdapter<Game>(this,
                 R.layout.game_list, games.getList());
         myGamesList.setAdapter(adapter);
 
         //For testing
         User user = UserController.getCurrentUser();
-        Game zelda = new Game("Zelda", "Action RPG", user);
+        Game zelda = new Game("Zelda", "Action RPG", user.getID());
         games.addGame(zelda);
         adapter.notifyDataSetChanged();
         //
