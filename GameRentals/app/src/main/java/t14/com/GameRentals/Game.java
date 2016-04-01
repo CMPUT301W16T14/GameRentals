@@ -2,7 +2,7 @@ package t14.com.GameRentals;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import io.searchbox.annotations.JestId;
 
@@ -13,15 +13,17 @@ import io.searchbox.annotations.JestId;
  * Borrower will be initialized to null and only set if game status is borrowed.
  * Created by cjresler on 2016-02-28.
  */
-public class Game {
+public class Game implements Serializable{
     private String gameName;
+
     @JestId
     private String gameID;
+
     private String description;
     private int status;
     private BidList bidList;
-    private User owner;
-    private User borrower;
+    private String ownerID;
+    private String borrowerID;
 
     /** Constructor for game object.
      *
@@ -29,46 +31,62 @@ public class Game {
      * @param description A description of the game.
      * @param owner The user that owns this game.
      */
-    public Game(String gameName, String description, User owner) {
+    public Game(String gameName, String description, String owner) {
         this.gameName = gameName;
         this.description = description;
-        this.gameID = "";
         this.status = 0;
         this.bidList = new BidList();
-        this.owner = owner;
-        this.borrower = null;
+        this.ownerID = owner;
+        this.borrowerID = null;
     }
 
     /** Return the borrower of game
      *
      * @return User that is borrowing this game
      */
-    public User getBorrower() {
-        return borrower;
+    public String getBorrower() {
+        return borrowerID;
+    }
+
+    public String getBorrowerName(){
+        /*User loadedUser = new User(null, null, null);
+        ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+        //TODO:Set this to load whatever username is given from login screen
+        esg.execute(borrowerID);
+
+        try{
+            loadedUser = (esg.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return loadedUser.getUserName();*/
+        return borrowerID;
     }
 
     /** Set borrower of game
      *
      * @param borrower Set borrower to user that is borrowing the game
      */
-    public void setBorrower(User borrower) {
-        this.borrower = borrower;
+    public void setBorrower(String borrower) {
+        this.borrowerID = borrower;
     }
 
     /** Return the owner of game
      *
      * @return User that is the owner of this game
      */
-    public User getOwner() {
-        return owner;
+    public String getOwner() {
+        return ownerID;
     }
 
     /** Set the owner of a game
      *
      * @param owner User that owns this game
      */
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwner(String owner) {
+        this.ownerID = owner;
     }
 
     /** Return the status of a game
@@ -82,14 +100,19 @@ public class Game {
     /** Return a string that represents the status of game
      *
      * @return The string of the status of the game
-     * can be "available", "bidded", or "borrowoed"
+     * can be "available", "bidded", or "borrowed"
      */
     public String getStatusString(){
         switch(this.status){
             case(GameController.STATUS_AVAILABLE):
                 return "Available";
             case(GameController.STATUS_BORROWED):
-                return "Borrowed";
+                if(UserController.getCurrentUser().getID().equals(ownerID)){
+                    return "Lent out";
+                }
+                else {
+                    return "Borrowed";
+                }
             case(GameController.STATUS_BIDDED):
                 return "Has bids";
         }
@@ -144,12 +167,13 @@ public class Game {
         return gameID;
     }
 
+
     /** Set ID of game
      *
-     * @param gameID String of ID that game ID should be set to
+     * @param gameid String of ID that game ID should be set to
      */
-    public void setGameID(String gameID) {
-        this.gameID = gameID;
+    public void setGameID(String gameid) {
+        this.gameID = gameid;
     }
 
     /** Get name of game
@@ -178,8 +202,8 @@ public class Game {
         this.gameID = game.getGameID();
         this.status = game.getStatus();
         this.bidList = game.getBidList();
-        this.owner = game.getOwner();
-        this.borrower = game.getBorrower();
+        this.ownerID = game.getOwner();
+        this.borrowerID = game.getBorrower();
     }
 
    @Override

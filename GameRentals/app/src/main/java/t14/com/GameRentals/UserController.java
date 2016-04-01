@@ -1,5 +1,7 @@
 package t14.com.GameRentals;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by cjresler on 2016-02-28.
  */
@@ -19,39 +21,39 @@ public class UserController {
     }
 
     //Given a GameList, return all games with available status
-    public static GameList getAvailable(GameList games){
-        GameList gameList = new GameList();
+    public static GameRefList getAvailable(GameRefList games){
+        GameRefList gameList = new GameRefList();
         for(int i = 0; i < games.getSize(); i++){
             if(games.getGame(i).getStatus() == GameController.STATUS_AVAILABLE){
-                gameList.addGame(games.getGame(i));
+                gameList.addGame(games.getGame(i).getGameID());
             }
         }
         return gameList;
     }
 
     //Given a GameList, return all games with borrowed status
-    public static GameList getBorrowed(GameList games){
-        GameList gameList = new GameList();
+    public static GameRefList getBorrowed(GameRefList games){
+        GameRefList gameList = new GameRefList();
         for(int i = 0; i < games.getSize(); i++){
             if(games.getGame(i).getStatus() == GameController.STATUS_BORROWED){
-                gameList.addGame(games.getGame(i));
+                gameList.addGame(games.getGame(i).getGameID());
             }
         }
         return gameList;
     }
 
     //Given a GameList, return all games with bidded status
-    public static GameList getBidded(GameList games){
-        GameList gameList = new GameList();
+    public static GameRefList getBidded(GameRefList games){
+        GameRefList gameList = new GameRefList();
         for(int i = 0; i < games.getSize(); i++){
             if(games.getGame(i).getStatus() == GameController.STATUS_BIDDED){
-                gameList.addGame(games.getGame(i));
+                gameList.addGame(games.getGame(i).getGameID());
             }
         }
         return gameList;
     }
 
-    public GameList getGameList() {
+    public GameRefList getGameList() {
         return currentUser.getMyGames();
     }
 
@@ -90,4 +92,19 @@ public class UserController {
         ese.execute(currentUser);
     }*/
 
+    public static User getUser(String username){
+        User loadedUser = new User(null, null, null);
+        ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+
+        esg.execute(username);
+
+        try{
+            loadedUser = (esg.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return loadedUser;
+    }
 }

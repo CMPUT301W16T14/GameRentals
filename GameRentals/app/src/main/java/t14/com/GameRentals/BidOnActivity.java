@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,8 +31,16 @@ public class BidOnActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result_for_bid);
 
+        //final EditText searchGameId = (EditText) findViewById(R.id.searchGameId);
+        final EditText searchGameName = (EditText) findViewById(R.id.searchGameName);
+        final EditText searchGameDescription = (EditText) findViewById(R.id.searchGameDescription);
+        loadFromFile();
         gamePosition = getIntent().getExtras().getInt("gamePosition");
         game = returnedGames.get(gamePosition);
+
+        //searchGameId.setText(game.getGameID());
+        searchGameName.setText(game.getGameName());
+        searchGameDescription.setText(game.getDescription());
 
         Button bidButton = (Button)findViewById(R.id.BidButton);
 
@@ -41,6 +50,7 @@ public class BidOnActivity extends Activity {
                 Intent intent = new Intent(BidOnActivity.this, BidOnGameActivity.class);
                 intent.putExtra("gamePosition", gamePosition);
                 startActivity(intent);
+                finish();
             }
         });
     }

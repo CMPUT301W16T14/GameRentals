@@ -3,11 +3,14 @@ package t14.com.GameRentals;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.Serializable;
 
 /** This activity allows the user to edit games on their list of games. <br>
  * User will select a game from their list, and that game will be passed to this <br>
@@ -54,8 +57,9 @@ public class EditGameActivity extends Activity {
             returnButton.setClickable(true);
             borrowerName.setVisibility(View.VISIBLE);
             borrowerNameLabel.setVisibility(View.VISIBLE);
-            //borrowerName.setText(game.getBorrower().getUserName());
-            borrowerName.setText("Borrow name will go here when not NULL");
+            borrowerName.setText(game.getBorrowerName());
+            borrowerName.setClickable(true);
+            //borrowerName.setText("Borrow name will go here when not NULL");
         }
 
         gameNameEdit.setText(game.getGameName());
@@ -67,7 +71,7 @@ public class EditGameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 for(int i = 0; i < currentUser.getMyGames().getSize(); i++){
-                    if (currentUser.getMyGames().getGame(i).getGameName().equals(game.getGameName()))
+                    if (currentUser.getMyGames().getGame(i).getGameID().equals(game.getGameID()))
                         game = currentUser.getMyGames().getGame(i);
                 }
                 game.setGameName(gameNameEdit.getText().toString());
@@ -94,8 +98,9 @@ public class EditGameActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //TODO: Make this remove from server
-                        UserController.getCurrentUser().getMyGames().removeGame(game);
-                        updateServer();
+                        //UserController.getCurrentUser().getMyGames().removeGame(game);
+                        ElasticsearchGameController.RemoveGameTask removeGameTask = new ElasticsearchGameController.RemoveGameTask();
+                        removeGameTask.execute(game);
                         finish();
                     }
                 });
@@ -116,12 +121,25 @@ public class EditGameActivity extends Activity {
                 updateServer();
             }
         });
+
+        borrowerName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Go to borrower's profile
+                //User gameOwner = UserController.getUser(game.getOwner());
+                Intent intent = new Intent(EditGameActivity.this, ViewProfileActivity.class);
+                intent.putExtra("Username", game.getBorrower());
+                startActivity(intent);
+            }
+        });
     }
 
     /** Update user on server to reflect any edits made */
     public void updateServer(){
-        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.execute(currentUser);
+        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        //ese.execute(currentUser);
+        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+        editGameTask.execute(game);
     }
 
     @Override

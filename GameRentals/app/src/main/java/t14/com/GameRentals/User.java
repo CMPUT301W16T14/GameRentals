@@ -1,14 +1,16 @@
 package t14.com.GameRentals;
 
 import java.io.Serializable;
+import io.searchbox.annotations.JestId;
+
+
 import java.util.ArrayList;
 
-import io.searchbox.annotations.JestId;
 
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class User implements Serializable{
+public class User implements Serializable {
     @JestId
     protected String id;
 
@@ -16,10 +18,10 @@ public class User implements Serializable{
     private String userName;
     private String email;
     private String phoneNumber;
-    private GameList myGames;
-    private GameList biddedItems;
-    private GameList borrowedItems;
-    private ArrayList<User> users;
+    private GameRefList myGames;
+    private GameRefList biddedItems;
+    private GameRefList borrowedItems;
+   // private ArrayList<User> users;
 
     public String getID() {
         return id;
@@ -34,18 +36,18 @@ public class User implements Serializable{
         this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        myGames = new GameList();
-        biddedItems = new GameList();
-        borrowedItems = new GameList();
+        myGames = new GameRefList();
+        biddedItems = new GameRefList();
+        borrowedItems = new GameRefList();
     }
 
-    public ArrayList<User> getUsers(String s) {
+    /*public ArrayList<User> getUsers(String s) {
         return this.users;
     }
 
     public void viewUser(User user){
         this.users.add(user);
-    }
+    }*/
 
     public String getUserName() {
         return userName;
@@ -71,34 +73,36 @@ public class User implements Serializable{
         this.phoneNumber = phoneNumber;
     }
 
-    public GameList getMyGames() {
+    public GameRefList getMyGames() {
         return myGames;
     }
 
-    public void setMyGames(GameList myGames) {
+    public void setMyGames(GameRefList myGames) {
         this.myGames = myGames;
     }
 
-    public GameList getBiddedItems() {
+    public GameRefList getBiddedItems() {
         return biddedItems;
     }
 
-    public void setBiddedItems(GameList biddedItems) {
+    public void setBiddedItems(GameRefList biddedItems) {
         this.biddedItems = biddedItems;
     }
 
-    public GameList getBorrowedItems() {
+    public GameRefList getBorrowedItems() {
         return borrowedItems;
     }
 
-    public void setBorrowedItems(GameList borrowedItems) {
+    public void setBorrowedItems(GameRefList borrowedItems) {
         this.borrowedItems = borrowedItems;
     }
 
-    public void addMyGame(Game game) {
+    public void addMyGame(String gameID) {
+        Game game = myGames.getGame(gameID);
         UserController.addMyGame(game);
     }
 
-
+    public void setUserID(String id) {
+    }
 
 }

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by yourui on 3/3/16.
  * uc 05.06.01 & 05.07.01
@@ -38,8 +40,23 @@ public class ViewBidActivity extends Activity {
         bidList = currentUser.getMyGames().getGame(gamePosition).getBidList();
         bid = bidList.getItem(bidPosition);
         final String gameName = currentUser.getMyGames().getGame(gamePosition).getGameName();
-        bidUser.setText(bid.getBidMaker().getUserName());
-        bidRate.setText((CharSequence) bid.getBidMaker().getBiddedItems().getGame(gameName));
+
+        String bidUserID = bid.getBidMaker();
+
+        ElasticSearchUsersController.GetUserByIDTask getUserByIDTask = new ElasticSearchUsersController.GetUserByIDTask();
+        getUserByIDTask.execute(bidUserID);
+
+        User bidMaker = null;
+        try {
+            bidMaker = getUserByIDTask.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        bidUser.setText(bidMaker.getUserName());
+        bidRate.setText((CharSequence) bidMaker.getBiddedItems().getGame(gameName));
 
         cancelButton = (Button)findViewById(R.id.CancelBidButton);
         acceptButton = (Button)findViewById(R.id.acceptBidButton);

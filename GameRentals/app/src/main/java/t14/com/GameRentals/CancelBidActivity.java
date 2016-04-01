@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 /**
@@ -15,26 +16,39 @@ public class CancelBidActivity extends Activity {
     private GameList biddedItems;
     private Game game;
 
+    private EditText gameNameText;
+    private EditText descriptionText;
+
     private Button cancelBidButton;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.cancel_bid);
 
+        gameNameText = (EditText)findViewById(R.id.gameNameText);
+        descriptionText = (EditText)findViewById(R.id.descriptionText);
+
+        biddedItems = new GameList();
         currentUser = UserController.getCurrentUser();
-        biddedItems = currentUser.getBiddedItems();
+        biddedItems.copyRefListToGames(currentUser.getBiddedItems());
         int position = getIntent().getExtras().getInt("bidPosition");
         game = biddedItems.getGame(position);
+
+        gameNameText.setText(game.getGameName());
+        descriptionText.setText(game.getDescription());
 
         cancelBidButton = (Button)findViewById(R.id.CancelBidButton);
 
         cancelBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                game.getBidList().RemoveBid(game);
-                currentUser.getBiddedItems().removeGame(game);
+                game.getBidList().RemoveBid(currentUser);
+                currentUser.getBiddedItems().removeGame(game.getGameID());
                 ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                 ese.execute(currentUser);
+                ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                editGameTask.execute(game);
                 Toast.makeText(CancelBidActivity.this,"cancel this bid",Toast.LENGTH_SHORT);
             }
         });

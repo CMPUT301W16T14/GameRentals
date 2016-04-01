@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,12 +31,14 @@ public class BidOnGameActivity extends Activity {
     @Override
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
-        Button okButton = (Button)findViewById(R.id.OKButton);
-        setContentView(R.layout.bid_on_game);
 
+        setContentView(R.layout.bid_on_game);
+        Button okButton = (Button)findViewById(R.id.OKButton);
+        loadFromFile();
+        currentUser = UserController.getCurrentUser();
         int gamePosition = getIntent().getExtras().getInt("gamePosition");
         game = returnedGames.get(gamePosition);
-        final User currentUser = UserController.getCurrentUser();
+        final EditText bidMoney = (EditText) findViewById(R.id.bidMoney);
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,10 +51,14 @@ public class BidOnGameActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //////////TODO:GET RATE VALUE
-                        game.getBidList().AddBid(currentUser,rate);
-                        currentUser.getBiddedItems().addGame(game);
+                        rate = Double.parseDouble(bidMoney.getText().toString());
+                        game.getBidList().AddBid(currentUser, rate);
+                        currentUser.getBiddedItems().addGame(game.getGameID());
                         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                         ese.execute(currentUser);
+                        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                        editGameTask.execute(game);
+                        finish();
                     }
                 });
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {

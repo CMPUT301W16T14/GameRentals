@@ -29,17 +29,31 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     PagerAdapter ft;
     User currentUser;
     User loadedUser;
+    Game test;
+    User borrower;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //User nullUser = new User(null, null, null);
 
+        //editGameTask.execute(game);
+        //addGameTask.execute(game);
+        //currentUser = new User("NEWTEST","piupiupiu@123","123");
+
+        //UserController.setUser(currentUser);
+        //User serverUser = currentUser;
+
+        //ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
+        //esa.execute(serverUser);
+        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        //ese.execute(serverUser);
         /**Load user from server */
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
-        esg.execute("Connor");
+        esg.execute("NEWTEST");
 
         try{
-             loadedUser = (esg.get());
+            loadedUser = (esg.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -49,7 +63,83 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         currentUser = loadedUser;
         UserController.setUser(currentUser);
 
+        //UserController.setUser(test);
+        //Game test = new Game("PunchOut", "Fighting", currentUser.getID());
+        //ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+        //addGameTask.execute(test);
 
+        //ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+        //editGameTask.execute(paper);
+        //String testID = paper.getGameID();
+        //currentUser.getMyGames().addGame(testID);
+
+
+
+
+
+        //ElasticSearchUsersController.EditUserTask ese2 = new ElasticSearchUsersController.EditUserTask();
+        //ese2.execute(currentUser);
+        /*Game zelda = new Game("mlgb8", "Action RPG", currentUser.getID());
+        zelda.setStatus(GameController.STATUS_BIDDED);
+        ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
+        addGameTask.execute(zelda);
+        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+        editGameTask.execute(zelda);
+
+        currentUser.getMyGames().addGame(zelda);
+
+        Game chrono = new Game("mlgb9", "RPG", currentUser.getID());
+        chrono.setStatus(GameController.STATUS_AVAILABLE);
+        ElasticsearchGameController.AddGameTask addGameTask2 = new ElasticsearchGameController.AddGameTask();
+        addGameTask2.execute(chrono);
+        ElasticsearchGameController.EditGameTask editGameTask2 = new ElasticsearchGameController.EditGameTask();
+        editGameTask2.execute(chrono);
+       // currentUser.getMyGames().addGame(chrono);
+        //editGameTask2.execute(chrono);
+
+        Game roller = new Game("mlgb10", "Simulation", currentUser.getID());
+        roller.setStatus(GameController.STATUS_BORROWED);
+        ElasticsearchGameController.AddGameTask addGameTask3 = new ElasticsearchGameController.AddGameTask();
+        addGameTask3.execute(roller);
+        ElasticsearchGameController.EditGameTask editGameTask3 = new ElasticsearchGameController.EditGameTask();
+        editGameTask3.execute(roller);*/
+
+        //currentUser.getMyGames().addGame(roller);
+        //editGameTask3.execute(roller);
+
+
+/**
+ * This is all setting up a test case for borrowed games.
+
+        ElasticSearchUsersController.GetUserTask esg5 = new ElasticSearchUsersController.GetUserTask();
+        //TODO:Set this to load whatever username is given from login screen
+        esg5.execute("BorrowTest");
+
+        try{
+            borrower = (esg5.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        Game roller = new Game("BORROWTESTGAME99999", "Simulation", currentUser.getUserName());
+        roller.setStatus(GameController.STATUS_BORROWED);
+        roller.setBorrower(borrower.getUserName());
+        ElasticsearchGameController.AddGameTask addGameTask3 = new ElasticsearchGameController.AddGameTask();
+        addGameTask3.execute(roller);
+
+        try{
+            test = (addGameTask3.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        borrower.getBorrowedItems().addGame(test.getGameID());
+        ElasticSearchUsersController.EditUserTask ese2 = new ElasticSearchUsersController.EditUserTask();
+        ese2.execute(borrower);*/
 
         setContentView(R.layout.activity_main);
 
