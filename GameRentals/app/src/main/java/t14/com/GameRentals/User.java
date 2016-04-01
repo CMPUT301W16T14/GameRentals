@@ -18,7 +18,6 @@ import io.searchbox.annotations.JestId;
  *             <li>borrowedItems list (the game's that the user is borrowing from others</li>
  *             <li>biddedItems list (game's that that user is currently bidding on</li>
  *         </ul>
- * @param username
  * @see ProfileMain
  *
  * Created by cjresler on 2016-02-28.

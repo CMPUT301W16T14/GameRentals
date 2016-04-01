@@ -29,29 +29,14 @@ import java.util.concurrent.ExecutionException;
 
 
 /**
- * A login screen that offers login via Username.
- *
- *
- *
- *
-
+ * A login screen that offers login via Username or an option to create an account for a new user.
  *
  *
  * @author JL
  * @see ElasticSearchUsersController #GetUserTask()
- * @see UserSingleton
  * @see MainActivity
  */
 public class LoginActivity extends ActionBarActivity  {
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            //"foo@example.com:hello", "bar@example.com:world"
-            "bug", "peter"
-    };
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -69,7 +54,6 @@ public class LoginActivity extends ActionBarActivity  {
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.username);
-//        populateAutoComplete();
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
@@ -88,23 +72,9 @@ public class LoginActivity extends ActionBarActivity  {
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                //startActivity(intent);
             }
         });
     }
-//
-//    //can i delete this?
-//    private void populateAutoComplete() {
-//        if (VERSION.SDK_INT >= 14) {
-//            // Use ContactsContract.Profile (API 14+)
-//            getLoaderManager().initLoader(0, null, this);
-//        } else if (VERSION.SDK_INT >= 8) {
-//            // Use AccountManager (API 8+)
-//            new SetupEmailAutoCompleteTask().execute(null, null);
-//        }
-//    }
-
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -125,48 +95,45 @@ public class LoginActivity extends ActionBarActivity  {
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid Username.
+        // Checks for empty field.
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             cancel = true;
-
-            //need to fix this
         }
+
+        //Checks for valid username.
         User user = isUsernameValid(username);
-        if (user.getUserName() == null) {
+        if (user == null || user.getUserName() == null) {
             mUsernameView.setError(getString(R.string.error_invalid_username));
             focusView = mUsernameView;
             cancel = true;
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
+            // If there was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            //mAuthTask = new UserLoginTask(username);
-            //mAuthTask.execute((Void) null);
-
-            //UserSingleton singleton = UserSingleton.getInstance(); // build singleton for the first time?
-            //singleton.setUser(user);
-
             //set current user to the login user
-
+            showProgress(true);
             UserController.setUser(user);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
     }
 
+    /**
+     * Checks to see if username is valid if the text field is not empty.
+     * @return loadedUser
+     */
     private User isUsernameValid(String email) {
         //if the username matches the username of the user loaded(loadedUser's username) then it is valid.
         User loadedUser = new User(null,null,null);
-
         ElasticSearchUsersController.GetUserTask username = new ElasticSearchUsersController.GetUserTask();
+
         username.execute(email);
 
         try{
@@ -178,13 +145,9 @@ public class LoginActivity extends ActionBarActivity  {
             throw new RuntimeException();
             //e.printStackTrace();
         }
+
         return loadedUser;
-/*
-        if (email.equals(loadedUser.getUserName())){
-            return loadedUser;
-        } else {
-            return null;
-        }*/
+
     }
 
     /**
@@ -223,41 +186,6 @@ public class LoginActivity extends ActionBarActivity  {
         }
     }
 
-//   @Override
-//    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-//        return new CursorLoader(this,
-//                // Retrieve data rows for the device user's 'profile' contact.
-//                Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-//                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
-//
-//                // Select only email addresses.
-//                ContactsContract.Contacts.Data.MIMETYPE +
-//                        " = ?", new String[]{ContactsContract.CommonDataKinds.Email
-//                .CONTENT_ITEM_TYPE},
-//
-//                // Show primary email addresses first. Note that there won't be
-//                // a primary email address if the user hasn't specified one.
-//                ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
-//    }
-//
-//    @Override
-//    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-//        List<String> emails = new ArrayList<String>();
-//        cursor.moveToFirst();
-//        while (!cursor.isAfterLast()) {
-//            emails.add(cursor.getString(ProfileQuery.ADDRESS));
-//            cursor.moveToNext();
-//        }
-//
-//        addEmailsToAutoComplete(emails);
-//    }
-
-//    @Override
-//    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-//
-//    }
-
-    //can i get rid of this too, maybe not?
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
@@ -330,14 +258,6 @@ public class LoginActivity extends ActionBarActivity  {
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mUsername)) {
-                    // Account exists, return true if the password matches.
-                    return true;
-                }
-
-        }
             return true;
     }
 
@@ -348,11 +268,11 @@ public class LoginActivity extends ActionBarActivity  {
 
             if (success) {
                 finish();
-            } else {
+            } /*else {
                 //TODO:
                 // mPasswordView.setError(getString(R.string.error_incorrect_password));
                 //mPasswordView.requestFocus();
-            }
+            }*/
         }
 
         @Override

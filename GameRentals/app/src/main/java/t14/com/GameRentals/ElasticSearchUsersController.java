@@ -120,11 +120,9 @@ public class ElasticSearchUsersController {
      * This method differs from @GetUserTask as it searches for users <br>
      *     from the user ID given. </br>
      *
-     * @param UserID
      * @return user with it's attributes if it exists. <br>
      *     Otherwise, a user with all it's attributes set to null is returned. </br>
      * @see ProfileMain
-     * @see #GetUserTask
      *
      */
     public static class GetUserByIDTask extends AsyncTask<String,Void,User> {
@@ -173,7 +171,6 @@ public class ElasticSearchUsersController {
     /**
      * This class is to add a new User into the database.
      *
-     * @param username
      * @see ProfileMain
      *
      */
@@ -185,7 +182,7 @@ public class ElasticSearchUsersController {
 
             for(User user : params) {
                 String json = gson.toJson(user);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("Users").build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("try").build();
 
                 try {
                     DocumentResult execute = client.execute(index);
@@ -208,7 +205,6 @@ public class ElasticSearchUsersController {
     /**
      * This class is to add a new User into the database.
      *
-     * @param username
      * @see ProfileMain
      *
      */
