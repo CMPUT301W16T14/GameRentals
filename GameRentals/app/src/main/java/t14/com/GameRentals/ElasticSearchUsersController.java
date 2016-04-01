@@ -17,6 +17,13 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
+ * This controller monitors and controls user interaction with the server/database.
+ *
+ *
+ *
+ *
+ * @author JL
+ *
  * Created by margaret on 16/3/7.
  */
 public class ElasticSearchUsersController {
@@ -31,6 +38,10 @@ public class ElasticSearchUsersController {
         return null;
     }
 
+
+    /**
+     * Updates database when user edits their profile.
+     */
     public static class EditUserTask extends AsyncTask<User,Void,Void>{
         Gson gson = new Gson();
         @Override
@@ -38,7 +49,7 @@ public class ElasticSearchUsersController {
             verifyConfig();
             for(User user : params) {
                 String json = gson.toJson(user);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("Users").id(user.getID()).build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("try").id(user.getID()).build();
                 try {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
@@ -55,6 +66,13 @@ public class ElasticSearchUsersController {
         }
     }
 
+    /**
+     *
+     * @return user with it's attributes if it exists. <br>
+     *     Otherwise, a user with all it's attributes set to null is returned.
+     * @see ProfileMain
+     *
+     */
     public static class GetUserTask extends AsyncTask<String,Void,User> {
 
         @Override
@@ -79,7 +97,7 @@ public class ElasticSearchUsersController {
                     "    }\n" +
                     "}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("Users").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("try").build();
             try {
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()) {
@@ -98,6 +116,15 @@ public class ElasticSearchUsersController {
         }
     }
 
+    /**
+     * This method differs from @GetUserTask as it searches for users <br>
+     *     from the user ID given. </br>
+     *
+     * @return user with it's attributes if it exists. <br>
+     *     Otherwise, a user with all it's attributes set to null is returned. </br>
+     * @see ProfileMain
+     *
+     */
     public static class GetUserByIDTask extends AsyncTask<String,Void,User> {
 
         @Override
@@ -122,7 +149,7 @@ public class ElasticSearchUsersController {
                     "    }\n" +
                     "}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("Users").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("try").build();
             try {
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()) {
@@ -141,6 +168,12 @@ public class ElasticSearchUsersController {
         }
     }
 
+    /**
+     * This class is to add a new User into the database.
+     *
+     * @see ProfileMain
+     *
+     */
     public static class AddUserTask extends AsyncTask<User,Void,Void> {
         Gson gson = new Gson();
         @Override
@@ -149,7 +182,7 @@ public class ElasticSearchUsersController {
 
             for(User user : params) {
                 String json = gson.toJson(user);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("Users").build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type("try").build();
 
                 try {
                     DocumentResult execute = client.execute(index);
@@ -168,6 +201,13 @@ public class ElasticSearchUsersController {
         }
     }
 
+
+    /**
+     * This class is to add a new User into the database.
+     *
+     * @see ProfileMain
+     *
+     */
     // If no client, add one
     public static void verifyConfig() {
         if(client == null) {

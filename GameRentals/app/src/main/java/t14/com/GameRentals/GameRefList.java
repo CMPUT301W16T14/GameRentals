@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-/**
+/** Each GameRefList contains gameIDs.
+ * myGames list, borrowed list, and bid list uses their associated GameRefList and gets the actual game object from GameList.
  * Created by cjresler on 2016-03-18.
  */
+
 public class GameRefList implements Serializable {
     private ArrayList<String> gameIDs;
 
