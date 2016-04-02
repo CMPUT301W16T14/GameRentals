@@ -12,14 +12,7 @@ public class CreateAccountActivity extends ActionBarActivity {
     }
 
 
-    //Enter Username the user wishes to have
 
-    //available, go to Profile Main to continue
-
-
-
-
-    //not available
 
 
 

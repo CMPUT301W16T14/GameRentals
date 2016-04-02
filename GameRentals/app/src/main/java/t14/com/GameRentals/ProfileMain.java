@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
 public class ProfileMain extends ActionBarActivity {
     private User currentUser;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -26,13 +28,11 @@ public class ProfileMain extends ActionBarActivity {
         setContentView(R.layout.activity_profile_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //this is for users that already exist
         currentUser = UserController.getCurrentUser();
-        //if it doesn't i need  blank one and then it should add to elasticsearch
 
         ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View arg0){
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
                 Intent i = new Intent(
                         Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -47,9 +47,7 @@ public class ProfileMain extends ActionBarActivity {
         final EditText userPhoneEdit = (EditText) findViewById(R.id.PhoneText);
         final TextView userNameView = (TextView) findViewById(R.id.lblName);
 
-
-
-        final Button saveButton = (Button)findViewById(R.id.SaveButton);
+        final Button saveButton = (Button) findViewById(R.id.SaveButton);
 
         userNameEdit.setText(currentUser.getUserName());
         userEmailEdit.setText(currentUser.getEmail());
@@ -59,25 +57,76 @@ public class ProfileMain extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                currentUser.setUserName(userNameEdit.getText().toString());
-                currentUser.setEmail(userEmailEdit.getText().toString());
-                currentUser.setPhoneNumber(userPhoneEdit.getText().toString());
-                updateServer();
-                finish();
+                boolean cancel = false;
+                View focusView = null;
+
+                //if username is null use checkandupdate (for null users)
+                if (currentUser.getID() == null || currentUser.getUserName() == null) {
+                    //userNameEdit.setError(getString(R.string.error_invalid_username));
+                    //checks username if it's being used
+                    //get string from what they enter
+                    String username = userNameEdit.getText().toString();
+                    //do elastic search and see if the user is null
+                    User user = isUsernameValid(username);
+                    //if returns null, it means the username does not exist so it can use it
+                    if (user.getUserName() == null){
+                        ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
+                        esa.execute(user);
+                        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                        ese.execute(user);
+                    } else {
+                        //if not null show error
+                        userNameEdit.setError(getString(R.string.error_invalid_username));
+                        focusView = userNameEdit;
+                        cancel = true;
+                    }
+
+                    if (cancel) {
+                        // If there was an error; don't attempt login and focus the first
+                        // form field with an error.
+                        focusView.requestFocus();
+
+
+
+
+
+
+                    //checkAndUpdateServer();
+                } else {
+                    currentUser.setUserName(userNameEdit.getText().toString());
+                    currentUser.setEmail(userEmailEdit.getText().toString());
+                    currentUser.setPhoneNumber(userPhoneEdit.getText().toString());
+
+
+                    updateServer(); //already existing users get updated
+                    finish();
+
+
+                }
+
+
+                //currentUser.setUserName(userNameEdit.getText().toString());
+                //currentUser.setEmail(userEmailEdit.getText().toString());
+                //currentUser.setPhoneNumber(userPhoneEdit.getText().toString());
+
+
+                //updateServer(); //already existing users get updated
+                //finish();
             }
         });
 
     }
-    public ImageView getImageProfile(){
+
+    public ImageView getImageProfile() {
         return (ImageView) findViewById(R.id.profile_image);
     }
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data){
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
@@ -97,11 +146,95 @@ public class ProfileMain extends ActionBarActivity {
         }
     }
 
-    public void updateServer(){
+    public void updateServer() {
 
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         ese.execute(currentUser);
     }
 
+    private User isUsernameValid(String email) {
+        //if the username matches the username of the user loaded(loadedUser's username) then it is valid.
+        User loadedUser = new User(null,null,null);
+        ElasticSearchUsersController.GetUserTask username = new ElasticSearchUsersController.GetUserTask();
+
+        username.execute(email);
+
+        try{
+            loadedUser = (username.get());
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+            //e.printStackTrace();
+        } catch (ExecutionException e) {
+            throw new RuntimeException();
+            //e.printStackTrace();
+        }
+
+        return loadedUser;
+
+    }
+
+
+
+
+
+
 
 }
+
+
+
+
+    /*public void checkAndUpdateServer(){
+        //checks username if it's being used
+        //get string from what they enter
+        //String username = userNameEdit.getText().toString();
+
+
+
+
+
+        //do elastic search and see if the user is null
+        //if null show error
+        //if not null add a new user and update it immediately
+
+        //if the username matches the username of the user loaded(loadedUser's username) then it is valid.
+        User testUser = new User(null,null,null);
+        ElasticSearchUsersController.GetUserTask username = new ElasticSearchUsersController.GetUserTask();
+
+        username.execute(email);
+
+        try{
+            testUser = (username.get());
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+            //e.printStackTrace();
+        } catch (ExecutionException e) {
+            throw new RuntimeException();
+            //e.printStackTrace();
+        }
+
+        return testUser;
+
+    }*/
+
+
+
+
+
+
+
+        //if it's not it will add
+        //ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
+        //esa.execute(serverUser);
+        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+        //ese.execute(serverUser);
+
+
+
+        //otherwise it will show error
+
+
+
+    /*}
+
+}*/
