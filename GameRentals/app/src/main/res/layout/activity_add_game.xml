@@ -46,19 +46,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_marginTop="207dp">
 
         <TextView
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:text="Status:"
-            android:id="@+id/textView6"
-            android:textSize="30dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editGameStatus"
-            android:layout_weight="0.03" />
-
-        <TextView
             android:layout_width="226dp"
             android:layout_height="wrap_content"
             android:text="Game Name:"
@@ -70,20 +57,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_height="wrap_content"
             android:id="@+id/addGameNameEditText"
             android:layout_weight="0.03" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Borrower:"
-            android:id="@+id/borrowerNameLabel" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#32CD32"
-            android:id="@+id/borrowerName" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,18 +95,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:layout_gravity="bottom"
                 android:layout_weight="0.46" />
         </LinearLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            android:id="@+id/editGameDeleteButton" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Return"
-            android:id="@+id/editGameReturnButton" />
 
     </LinearLayout>
 
