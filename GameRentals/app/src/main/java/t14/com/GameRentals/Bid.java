@@ -1,11 +1,12 @@
 package t14.com.GameRentals;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class Bid{
+public class Bid implements Serializable{
     private String bidMaker;
     private double rate;
     private int accepted;
