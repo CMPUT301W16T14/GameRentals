@@ -37,6 +37,12 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.my_items, container,false);
         //Initial setup of buttons and list
         Button addButton = (Button)v.findViewById(R.id.AddButton);
+        Button testData = (Button)v.findViewById(R.id.addTestDataButton);
+
+        //Comment this out if want to generate test data
+        testData.setVisibility(View.GONE);
+        testData.setEnabled(false);
+
         myItems = (ListView)v.findViewById(R.id.myItems);
         RadioButton bidCheckBox = (RadioButton)v.findViewById(R.id.withBidCheckBox);
         RadioButton allCheckBox = (RadioButton)v.findViewById(R.id.withAllCheckBox);
@@ -56,6 +62,17 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                 intent.putExtra("test", (Serializable)test);
                 startActivity(intent);
                 adapter.notifyDataSetChanged();
+            }
+        });
+
+        //Generate test data
+        testData.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                CreateTestData test = new CreateTestData();
+                test.createObjects();
+                //test.setGameStatuses();
             }
         });
 

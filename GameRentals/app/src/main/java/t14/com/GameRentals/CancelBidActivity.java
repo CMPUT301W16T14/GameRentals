@@ -41,7 +41,7 @@ public class CancelBidActivity extends Activity {
 
         gameNameText.setText(game.getGameName());
         descriptionText.setText(game.getDescription());
-        ElasticSearchUsersController.GetUserByIDTask getUserTask = new ElasticSearchUsersController.GetUserByIDTask();
+        ElasticSearchUsersController.GetUserTask getUserTask = new ElasticSearchUsersController.GetUserTask();
         getUserTask.execute(game.getOwner());
         try {
             gameOwner.setText(getUserTask.get().getUserName());

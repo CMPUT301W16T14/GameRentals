@@ -1,17 +1,18 @@
 package t14.com.GameRentals;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class Bid{
+public class Bid implements Serializable {
     private String bidMaker;
     private double rate;
     private int accepted;
 
     public Bid(User bidMaker, double rate) {
-        this.bidMaker = bidMaker.getID();
+        this.bidMaker = bidMaker.getUserName();
         this.rate = rate;
         this.accepted = 0;
     }
@@ -58,13 +59,14 @@ public class Bid{
     }
 
     public String toString(){
-        try {
+        /*try {
             return "Bidmaker:" + TransformBidMaker() + "\n rate:" + rate + "\n status: " +  TransformIsAccepted();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        return null;
+        }*/
+        return bidMaker;
+        //return null;
     }
 }

@@ -117,7 +117,7 @@ public class Game implements Serializable{
             case(GameController.STATUS_AVAILABLE):
                 return "Available";
             case(GameController.STATUS_BORROWED):
-                if(UserController.getCurrentUser().getID().equals(ownerID)){
+                if(UserController.getCurrentUser().getUserName().equals(ownerID)){
                     return "Lent out";
                 }
                 else {
@@ -216,13 +216,32 @@ public class Game implements Serializable{
         this.borrowerID = game.getBorrower();
     }
 
+    public String getOwnerUserName() throws ExecutionException, InterruptedException {
+        User owner;
+        ElasticSearchUsersController.GetUserByIDTask getUserByIDTask= new ElasticSearchUsersController.GetUserByIDTask();
+        getUserByIDTask.execute(ownerID);
+        owner = getUserByIDTask.get();
+        return owner.getUserName();
+    }
+
    @Override
    /** Display game in proper format
     *
     */
     public String toString(){
-        return "Status: " + getStatusString() + "\n" +
-                "Game name: " + gameName + "\n" +
-                "Description: " + description;
+       String returnString = "Status: " + getStatusString() + "\n" +
+               "Game name: " + gameName + "\n" +
+               "Description: " + description;
+       //If current user is not the owner of the game, show the owner of the game
+/*       if(!ownerID.equalsIgnoreCase(UserController.getCurrentUser().getID())) {
+           try {
+               returnString += "\nOwner username: " + getOwnerUserName();
+           } catch (ExecutionException e) {
+               e.printStackTrace();
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+       }*/
+        return returnString;
     }
 }

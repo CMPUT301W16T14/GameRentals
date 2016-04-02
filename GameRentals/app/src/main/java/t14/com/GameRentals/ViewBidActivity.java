@@ -52,7 +52,7 @@ public class ViewBidActivity extends Activity {
 
         String bidUserID = bid.getBidMaker();
 
-        ElasticSearchUsersController.GetUserByIDTask getUserByIDTask = new ElasticSearchUsersController.GetUserByIDTask();
+        ElasticSearchUsersController.GetUserTask getUserByIDTask = new ElasticSearchUsersController.GetUserTask();
         getUserByIDTask.execute(bidUserID);
 
 
@@ -103,7 +103,7 @@ public class ViewBidActivity extends Activity {
                 }
                 if (length == i) {
                     game.getBidList().getItem(bidPosition).setAccepted(1);
-                    game.setBorrower(bidMaker.getID());
+                    game.setBorrower(bidMaker.getUserName());
                     game.setStatus(2);
                     bid.setAccepted(1);
                     bidMaker.getBorrowedItems().addGame(game.getGameID());
