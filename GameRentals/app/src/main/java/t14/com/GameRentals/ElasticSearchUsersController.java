@@ -29,6 +29,8 @@ import io.searchbox.core.SearchResult;
 public class ElasticSearchUsersController {
 
     private static JestDroidClient client;
+    private static String serverType = "TestUsers";
+    private static String testType = "TestUsers";
 
     //TODO: A function that gets tweets
     public static ArrayList<User> getUsers() {
@@ -49,7 +51,32 @@ public class ElasticSearchUsersController {
             verifyConfig();
             for(User user : params) {
                 String json = gson.toJson(user);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("Users").id(user.getID()).build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type(serverType).id(user.getID()).build();
+                try {
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()) {
+                        //user.setID(execute.getId());
+                    } else {
+                        Log.e("TODO", "Our edit of user failed, oh no!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public static class EditTestUserTask extends AsyncTask<User,Void,Void>{
+        Gson gson = new Gson();
+        @Override
+        protected Void doInBackground(User... params) {
+            verifyConfig();
+            for(User user : params) {
+                String json = gson.toJson(user);
+                Index index = new Index.Builder(json).index("cmput301w16t14").type(testType).id(user.getID()).build();
+
                 try {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
@@ -97,7 +124,7 @@ public class ElasticSearchUsersController {
                     "    }\n" +
                     "}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("Users").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType(serverType).build();
             try {
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()) {
@@ -149,7 +176,7 @@ public class ElasticSearchUsersController {
                     "    }\n" +
                     "}";
 
-            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType("Users").build();
+            Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType(serverType).build();
             try {
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()) {
@@ -182,7 +209,34 @@ public class ElasticSearchUsersController {
 
             for(User user : params) {
                 String json = gson.toJson(user);
-                Index index = new Index.Builder(json).index("cmput301w16t14").type("Users").build();
+                Index index = new Index.Builder(json).index("cmput301w16t14").type(serverType).build();
+
+                try {
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()) {
+                        user.setID(execute.getId());
+
+                    } else {
+                        Log.e("TODO", "Our insert of game failed, oh no!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public static class AddTestUserTask extends AsyncTask<User,Void,Void> {
+        Gson gson = new Gson();
+        @Override
+        protected Void doInBackground(User... params) {
+            verifyConfig();
+
+            for(User user : params) {
+                String json = gson.toJson(user);
+                Index index = new Index.Builder(json).index("cmput301w16t14").type(testType).build();
 
                 try {
                     DocumentResult execute = client.execute(index);

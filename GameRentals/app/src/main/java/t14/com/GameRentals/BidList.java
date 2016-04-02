@@ -42,7 +42,7 @@ public class BidList implements Serializable{
 
     public void RemoveBid(User user){
         for (int i = 0; i < list.size(); i++){
-            if (list.get(i).getBidMaker().equals(user.getID()))
+            if (list.get(i).getBidMaker().equals(user.getUserName()))
                 list.remove(i);
         }
     }

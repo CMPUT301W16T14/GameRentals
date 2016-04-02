@@ -117,7 +117,7 @@ public class Game implements Serializable{
             case(GameController.STATUS_AVAILABLE):
                 return "Available";
             case(GameController.STATUS_BORROWED):
-                if(UserController.getCurrentUser().getID().equals(ownerID)){
+                if(UserController.getCurrentUser().getUserName().equals(ownerID)){
                     return "Lent out";
                 }
                 else {
@@ -221,8 +221,16 @@ public class Game implements Serializable{
     *
     */
     public String toString(){
-        return "Status: " + getStatusString() + "\n" +
-                "Game name: " + gameName + "\n" +
-                "Description: " + description;
+       String returnString = "Status: " + getStatusString() + "\n" +
+               "Game name: " + gameName + "\n" +
+               "Description: " + description;
+       //If current user is not the owner of the game, show the owner of the game
+       if(!ownerID.equalsIgnoreCase(UserController.getCurrentUser().getUserName())) {
+           returnString += "\nOwner Username: " + ownerID;
+       }
+       if(borrowerID != null && !borrowerID.equals(UserController.getCurrentUser().getUserName())){
+           returnString += "\nBorrower Username: " + borrowerID;
+       }
+        return returnString;
     }
 }

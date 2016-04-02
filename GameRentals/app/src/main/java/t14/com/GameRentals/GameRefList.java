@@ -61,6 +61,23 @@ public class GameRefList implements Serializable {
         return game;
     }
 
+    public Game getTestGame(int index){
+        //return list.get(index);
+        //TODO:Use elastic search to get game
+        Game game = new Game("", "", null);
+        String id = gameIDs.get(index);
+        ElasticsearchGameController.GetTestGameTask getGameTask = new ElasticsearchGameController.GetTestGameTask();
+        getGameTask.execute(id);
+        try{
+            game = (getGameTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return game;
+    }
+
     public Game getGame (String gameID){
         for (int i = 0;i < getSize(); i++) {
             if (getGame(i).getGameID().equals(gameID)) {
