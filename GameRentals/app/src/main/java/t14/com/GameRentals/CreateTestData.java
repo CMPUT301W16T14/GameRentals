@@ -5,7 +5,14 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * Created by cjresler on 2016-04-02.
+ *
+ * Type curl -XDELETE http://cmput301.softwareprocess.es:8080/cmput301w16t14/TestGames
+ *      curl -XDELETE http://cmput301.softwareprocess.es:8080/cmput301w16t14/TestUsers
+ *      in command line to first clear the server
  */
+//Type curl -XDELETE http://cmput301.softwareprocess.es:8080/cmput301w16t14/TestGames
+//      curl -XDELETE http://cmput301.softwareprocess.es:8080/cmput301w16t14/TestUsers
+//      in command line to first clear the server
 public class CreateTestData {
     ArrayList<String> usernames;
     String email;
