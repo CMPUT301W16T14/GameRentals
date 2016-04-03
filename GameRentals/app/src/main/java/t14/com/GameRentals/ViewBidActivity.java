@@ -41,7 +41,7 @@ public class ViewBidActivity extends Activity {
         final int gamePosition = getIntent().getExtras().getInt("gamePosition");
         final int bidPosition = getIntent().getExtras().getInt("bidPosition");
 
-        currentUser = (User) getIntent().getExtras().get("currentUser");
+        currentUser = UserController.getCurrentUser();
 
         gameNameEdit.setText(currentUser.getMyGames().getGame(gamePosition).getGameName());
         gameDescriptionEdit.setText(currentUser.getMyGames().getGame(gamePosition).getDescription());

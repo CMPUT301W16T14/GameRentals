@@ -32,7 +32,7 @@ public class Bid implements Serializable {
 
     public String TransformIsAccepted(){
         if (accepted == 0){
-            return "Not Accepted";
+            return "Pending";
         }
         else if (accepted == 1)return "Accepted";
         else return "Declined";
@@ -66,7 +66,8 @@ public class Bid implements Serializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        return bidMaker;
+
+        return  "Bidmaker:"  + bidMaker + "status:" + TransformIsAccepted();
         //return null;
     }
 }

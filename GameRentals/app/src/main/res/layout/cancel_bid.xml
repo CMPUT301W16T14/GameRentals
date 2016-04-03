@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/gameNameText"
-            android:layout_weight="0.03" />
+            android:layout_weight="0.13" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/descriptionText"
-            android:layout_weight="0.88" />
+            android:layout_weight="0.55" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,7 +52,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/gameOwner"
-            android:layout_weight="0.05" />
+            android:layout_weight="0.13" />
+
+        <TextView
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:id="@+id/textView16"
+            android:layout_weight="0.07"
+            android:textSize="30dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -66,13 +74,19 @@
                 android:id="@+id/textView9"
                 android:layout_weight="0.15" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                android:id="@+id/CancelBidButton"
-                android:layout_weight="0.67" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/gameStatus" />
+
         </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:id="@+id/CancelBidButton"
+            android:layout_weight="0.07" />
 
     </LinearLayout>
 
