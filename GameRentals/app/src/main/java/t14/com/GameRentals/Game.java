@@ -216,14 +216,6 @@ public class Game implements Serializable{
         this.borrowerID = game.getBorrower();
     }
 
-    public String getOwnerUserName() throws ExecutionException, InterruptedException {
-        User owner;
-        ElasticSearchUsersController.GetUserByIDTask getUserByIDTask= new ElasticSearchUsersController.GetUserByIDTask();
-        getUserByIDTask.execute(ownerID);
-        owner = getUserByIDTask.get();
-        return owner.getUserName();
-    }
-
    @Override
    /** Display game in proper format
     *
@@ -233,15 +225,12 @@ public class Game implements Serializable{
                "Game name: " + gameName + "\n" +
                "Description: " + description;
        //If current user is not the owner of the game, show the owner of the game
-/*       if(!ownerID.equalsIgnoreCase(UserController.getCurrentUser().getID())) {
-           try {
-               returnString += "\nOwner username: " + getOwnerUserName();
-           } catch (ExecutionException e) {
-               e.printStackTrace();
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-       }*/
+       if(!ownerID.equalsIgnoreCase(UserController.getCurrentUser().getUserName())) {
+           returnString += "\nOwner Username: " + ownerID;
+       }
+       if(borrowerID != null && !borrowerID.equals(UserController.getCurrentUser().getUserName())){
+           returnString += "\nBorrower Username: " + borrowerID;
+       }
         return returnString;
     }
 }

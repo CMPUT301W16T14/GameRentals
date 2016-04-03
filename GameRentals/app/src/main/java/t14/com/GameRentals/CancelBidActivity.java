@@ -1,10 +1,12 @@
 package t14.com.GameRentals;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
@@ -20,8 +22,12 @@ public class CancelBidActivity extends Activity {
 
     private EditText gameNameText;
     private EditText descriptionText;
+<<<<<<< HEAD
     private EditText gameOwner;
     private EditText gameStatus;
+=======
+    private TextView gameOwner;
+>>>>>>> f0c0a5d8d2c2533ae7aa8dee05f0a5b1db3c076b
 
     private Button cancelBidButton;
 
@@ -32,8 +38,12 @@ public class CancelBidActivity extends Activity {
 
         gameNameText = (EditText)findViewById(R.id.gameNameText);
         descriptionText = (EditText)findViewById(R.id.descriptionText);
+<<<<<<< HEAD
         gameOwner = (EditText)findViewById(R.id.gameOwner);
         gameStatus = (EditText)findViewById(R.id.gameStatus);
+=======
+        gameOwner = (TextView)findViewById(R.id.gameOwner);
+>>>>>>> f0c0a5d8d2c2533ae7aa8dee05f0a5b1db3c076b
 
         biddedItems = new GameList();
         currentUser = UserController.getCurrentUser();
@@ -79,6 +89,17 @@ public class CancelBidActivity extends Activity {
                     finish();
                 }
 
+            }
+        });
+
+        gameOwner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Go to borrower's profile
+                //User gameOwner = UserController.getUser(game.getOwner());
+                Intent intent = new Intent(CancelBidActivity.this, ViewProfileActivity.class);
+                intent.putExtra("Username", game.getOwner());
+                startActivity(intent);
             }
         });
 

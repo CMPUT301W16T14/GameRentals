@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class ViewBidsListActivity extends Activity {
         adapter = new ArrayAdapter<Bid>(this.getApplicationContext(), R.layout.game_list, bidList);
         bidListView.setAdapter(adapter);
 
+        final Button returnButton = (Button) findViewById(R.id.viewBidsListReturnButton);
+
         bidListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -47,6 +50,14 @@ public class ViewBidsListActivity extends Activity {
                 intent.putExtra("gamePosition",gamePosition);
                 intent.putExtra("bidPosition",position);
                 startActivity(intent);
+            }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

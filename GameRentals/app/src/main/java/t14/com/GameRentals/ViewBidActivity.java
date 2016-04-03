@@ -2,10 +2,13 @@ package t14.com.GameRentals;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -36,7 +39,7 @@ public class ViewBidActivity extends Activity {
 
         final EditText gameNameEdit = (EditText) findViewById(R.id.BidGameName);
         final EditText gameDescriptionEdit = (EditText) findViewById(R.id.BidGameDescription);
-        final EditText bidUser = (EditText) findViewById(R.id.bidUser);
+        final TextView bidUser = (TextView) findViewById(R.id.bidUser);
         final EditText bidRate = (EditText) findViewById(R.id.bidRate);
         final int gamePosition = getIntent().getExtras().getInt("gamePosition");
         final int bidPosition = getIntent().getExtras().getInt("bidPosition");
@@ -66,6 +69,8 @@ public class ViewBidActivity extends Activity {
 
         bidUser.setText(bidMaker.getUserName());
         bidRate.setText(Double.toString(bid.getRate()));
+        bidRate.setEnabled(false);
+        bidRate.setTextColor(Color.BLACK);
 
         cancelButton = (Button)findViewById(R.id.CancelBidButton);
         acceptButton = (Button)findViewById(R.id.acceptBidButton);
@@ -115,6 +120,17 @@ public class ViewBidActivity extends Activity {
                     editGameTask.execute(game);
                     finish();
                 }
+            }
+        });
+
+        bidUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Go to borrower's profile
+                //User gameOwner = UserController.getUser(game.getOwner());
+                Intent intent = new Intent(ViewBidActivity.this, ViewProfileActivity.class);
+                intent.putExtra("Username", bidMaker.getUserName());
+                startActivity(intent);
             }
         });
 

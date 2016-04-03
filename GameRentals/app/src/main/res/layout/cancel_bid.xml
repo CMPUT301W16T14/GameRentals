@@ -48,10 +48,11 @@
             android:id="@+id/textView15"
             android:textSize="30dp" />
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/gameOwner"
+<<<<<<< HEAD
             android:layout_weight="0.13" />
 
         <TextView
@@ -61,6 +62,11 @@
             android:id="@+id/textView16"
             android:layout_weight="0.07"
             android:textSize="30dp" />
+=======
+            android:layout_weight="0.05"
+            android:textSize="30dp"
+            android:textColor="#32CD32"/>
+>>>>>>> f0c0a5d8d2c2533ae7aa8dee05f0a5b1db3c076b
 
         <LinearLayout
             android:orientation="horizontal"
