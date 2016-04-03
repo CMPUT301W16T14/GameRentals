@@ -22,12 +22,9 @@ public class CancelBidActivity extends Activity {
 
     private EditText gameNameText;
     private EditText descriptionText;
-<<<<<<< HEAD
-    private EditText gameOwner;
     private EditText gameStatus;
-=======
+
     private TextView gameOwner;
->>>>>>> f0c0a5d8d2c2533ae7aa8dee05f0a5b1db3c076b
 
     private Button cancelBidButton;
 
@@ -38,12 +35,10 @@ public class CancelBidActivity extends Activity {
 
         gameNameText = (EditText)findViewById(R.id.gameNameText);
         descriptionText = (EditText)findViewById(R.id.descriptionText);
-<<<<<<< HEAD
-        gameOwner = (EditText)findViewById(R.id.gameOwner);
+
         gameStatus = (EditText)findViewById(R.id.gameStatus);
-=======
+
         gameOwner = (TextView)findViewById(R.id.gameOwner);
->>>>>>> f0c0a5d8d2c2533ae7aa8dee05f0a5b1db3c076b
 
         biddedItems = new GameList();
         currentUser = UserController.getCurrentUser();

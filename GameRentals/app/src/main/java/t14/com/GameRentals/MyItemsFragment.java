@@ -90,14 +90,10 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                     adb.setPositiveButton("VIEW", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-<<<<<<< HEAD
+
                             //Switch to edit games screen
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
-=======
-                            //Switch to view games screen
-                            Intent intent = new Intent(getActivity(), ViewGameActivity.class);
-                            intent.putExtra("currentUser",currentUser);
->>>>>>> f0c0a5d8d2c2533ae7aa8dee05f0a5b1db3c076b
+
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
@@ -123,12 +119,9 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Switch to edit games screen
-<<<<<<< HEAD
+
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
-=======
-                            Intent intent = new Intent(getActivity(), ViewGameActivity.class);
-                            intent.putExtra("currentUser",currentUser);
->>>>>>> f0c0a5d8d2c2533ae7aa8dee05f0a5b1db3c076b
+
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
@@ -152,14 +145,9 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                     adb.setPositiveButton("VIEW", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-<<<<<<< HEAD
                             //Change to edit game screen
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
-=======
-                            //Change to view game screen
-                            Intent intent = new Intent(getActivity(), ViewGameActivity.class);
-                            intent.putExtra("currentUser",currentUser);
->>>>>>> f0c0a5d8d2c2533ae7aa8dee05f0a5b1db3c076b
+
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
