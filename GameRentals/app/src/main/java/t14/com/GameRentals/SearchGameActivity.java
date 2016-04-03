@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -61,6 +62,10 @@ public class SearchGameActivity extends Activity {
         }
 
         setResult(RESULT_OK);
+
+        if(returnedGames.size() == 0) {
+            Toast.makeText(SearchGameActivity.this, "No results found.", Toast.LENGTH_LONG);
+        }
 
         adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
         returnedGamesList.setAdapter(adapter);
