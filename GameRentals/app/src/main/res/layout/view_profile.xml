@@ -38,13 +38,6 @@
                 android:id="@+id/greyRectMask"
                 android:layout_gravity="left|center_vertical" />
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton"
-                android:src="@drawable/ic_setting"
-                android:layout_gravity="left|top" />
-
 
         </FrameLayout>
 
@@ -73,10 +66,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/nameText"
+            android:layout_above="@+id/viewProfileNameText"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Name:"
-            android:id="@+id/lblName"
+            android:text="Username:"
+            android:id="@+id/viewProfileNameLabel"
             android:layout_gravity="left|center_vertical"
             android:paddingLeft="5dp"
             android:fontFamily="sans-serif"
@@ -87,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:id="@+id/nameText"
+            android:id="@+id/viewProfileNameText"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-light"
             android:textColor="#444444"
@@ -99,20 +92,23 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/btnProfileImage"
-            android:layout_alignEnd="@+id/btnProfileImage" />
+            android:layout_alignEnd="@+id/btnProfileImage"
+            android:clickable="false"
+            android:inputType="none"
+            android:enabled="false"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Email:"
-            android:id="@+id/txtEmail"
+            android:id="@+id/viewProfileEmailLabel"
             android:layout_gravity="left|center_vertical"
             android:paddingLeft="5dp"
             android:fontFamily="sans-serif"
             android:textSize="12dp"
             android:layout_alignParentLeft="true"
-            android:layout_above="@+id/EmailText"
+            android:layout_above="@+id/viewProfileEmailText"
             android:layout_marginTop="17dp"
             android:layout_marginBottom="-25dp"/>
 
@@ -120,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:id="@+id/EmailText"
+            android:id="@+id/viewProfileEmailText"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-light"
             android:textColor="#444444"
@@ -128,23 +124,26 @@
             android:paddingLeft="10dp"
             android:paddingRight="50dp"
             android:layout_marginTop="24dp"
-            android:layout_below="@+id/nameText"
+            android:layout_below="@+id/viewProfileNameText"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/nameText"
-            android:layout_alignEnd="@+id/nameText" />
+            android:layout_alignRight="@+id/viewProfileNameText"
+            android:layout_alignEnd="@+id/viewProfileNameText"
+            android:clickable="false"
+            android:inputType="none"
+            android:enabled="false"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Phone Number:"
-            android:id="@+id/txtPhone"
+            android:id="@+id/viewProfilePhoneLabel"
             android:layout_gravity="left|center_vertical"
             android:paddingLeft="5dp"
             android:fontFamily="sans-serif"
             android:textSize="12dp"
             android:layout_alignParentLeft="true"
-            android:layout_above="@+id/PhoneText"
+            android:layout_above="@+id/viewProfilePhoneText"
             android:layout_marginTop="17dp"
             android:layout_marginBottom="-25dp"/>
 
@@ -152,32 +151,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:id="@+id/PhoneText"
+            android:id="@+id/viewProfilePhoneText"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-light"
             android:textColor="#444444"
             android:maxLines="1"
-            android:inputType="textWebEmailAddress"
             android:paddingLeft="10dp"
             android:paddingRight="50dp"
             android:layout_marginTop="24dp"
-            android:layout_below="@+id/EmailText"
+            android:layout_below="@+id/viewProfileEmailText"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/EmailText"
-            android:layout_alignEnd="@+id/EmailText" />
+            android:layout_alignRight="@+id/viewProfileEmailText"
+            android:layout_alignEnd="@+id/viewProfileEmailText"
+            android:clickable="false"
+            android:inputType="none"
+            android:enabled="false" />
 
         <Button
-            android:layout_width="94dp"
-            android:layout_height="34dp"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="Save"
-            android:id="@+id/SaveButton"
+            android:text="Exit Profile"
+            android:id="@+id/viewProfileExitButton"
             android:layout_gravity="end|bottom"
             android:fontFamily="sans-serif-light"
             android:layout_marginBottom="17dp"
-            android:layout_below="@+id/PhoneText"
+            android:layout_below="@+id/viewProfilePhoneText"
             android:layout_marginRight="0dp" />
 
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="false"
+            android:text="Send Message"
+            android:id="@+id/viewProfileSendMessageButton"
+            android:layout_gravity="end|bottom"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginBottom="17dp"
+            android:layout_below="@+id/viewProfilePhoneText"
+            android:layout_marginRight="0dp" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:text="View Games"
+            android:id="@+id/viewProfileViewGamesButton"
+            android:layout_gravity="end|bottom"
+            android:fontFamily="sans-serif-light"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone" />
     </RelativeLayout>
 </ScrollView>

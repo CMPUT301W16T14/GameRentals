@@ -21,13 +21,13 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * This activity is receives the the search terms and uses them to get a list of games that have all
- * the search terms.
+ * This activity is used when a user wishes to search for a game they have interest in borrowing. <br>
+ * The app searches and returns a list of games that include the search terms given by the user.<br>
+ *
  * <p>
  */
 public class SearchGameActivity extends Activity {
     private final String FILENAME = "searchedResults.sav";
-
     private ArrayList<Game> returnedGames;
     private ListView returnedGamesList;
     private ArrayAdapter<Game> adapter;

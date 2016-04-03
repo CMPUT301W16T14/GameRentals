@@ -32,6 +32,10 @@ public class BidsFragment  extends Fragment {
 
         biddedItemsView = (ListView)v.findViewById(R.id.biddedItemList);
 
+        biddedItems.copyRefListToGames(currentUser.getBiddedItems());
+        adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),R.layout.game_list,biddedItems.getList());
+        biddedItemsView.setAdapter(adapter);
+
         biddedItemsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -44,6 +48,7 @@ public class BidsFragment  extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getActivity(),CancelBidActivity.class);
+                        intent.putExtra("currentUser",currentUser);
                         intent.putExtra("bidPosition",position);
                         startActivity(intent);
                     }

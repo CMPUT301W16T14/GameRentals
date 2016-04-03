@@ -39,7 +39,20 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/searchGameDescription"
-            android:layout_weight="0.89" />
+            android:layout_weight="0.67" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game Owner"
+            android:id="@+id/textView14"
+            android:textSize="30dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/owner"
+            android:layout_weight="0.25" />
 
         <LinearLayout
             android:orientation="horizontal"
