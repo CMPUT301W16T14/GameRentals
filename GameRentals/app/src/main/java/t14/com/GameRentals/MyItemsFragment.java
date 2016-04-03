@@ -37,6 +37,12 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.my_items, container,false);
         //Initial setup of buttons and list
         Button addButton = (Button)v.findViewById(R.id.AddButton);
+        Button testData = (Button)v.findViewById(R.id.addTestDataButton);
+
+        //Comment this out if want to generate test data
+        testData.setVisibility(View.GONE);
+        testData.setEnabled(false);
+
         myItems = (ListView)v.findViewById(R.id.myItems);
         RadioButton bidCheckBox = (RadioButton)v.findViewById(R.id.withBidCheckBox);
         RadioButton allCheckBox = (RadioButton)v.findViewById(R.id.withAllCheckBox);
@@ -50,11 +56,23 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onClick(View v) {
-                Game test = new Game("", "", currentUser.getID());
+                Game test = new Game("", "", currentUser.getUserName());
                 Intent intent = new Intent(getActivity(), AddGameActivity.class);
+                intent.putExtra("currentUser",currentUser);
                 intent.putExtra("test", (Serializable)test);
                 startActivity(intent);
                 adapter.notifyDataSetChanged();
+            }
+        });
+
+        //Generate test data
+        testData.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                CreateTestData test = new CreateTestData();
+                test.createObjects();
+                //test.setGameStatuses();
             }
         });
 
@@ -68,20 +86,26 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                 //Handle if game clicked has available status
                 if(selectedGame.getStatus() == GameController.STATUS_AVAILABLE){
                     //Verify that user wants to edit selected game
-                    adb.setMessage("Do you want to edit it?");
+                    adb.setMessage("Do you want to view the game or edit?");
                     adb.setCancelable(true);
-                    adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    adb.setPositiveButton("VIEW", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //Switch to edit games screen
-                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            //Switch to view games screen
+                            Intent intent = new Intent(getActivity(), ViewGameActivity.class);
+                            intent.putExtra("currentUser",currentUser);
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
                     });
-                    adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    adb.setNegativeButton("EDIT", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            //Switch to edit games screen
+                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            intent.putExtra("currentUser",currentUser);
+                            intent.putExtra("Game", (Serializable)selectedGame);
+                            startActivity(intent);
                         }
                     });
                     adb.show();
@@ -89,13 +113,14 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                 //If game clicked has bidded status
                 else if(selectedGame.getStatus() == GameController.STATUS_BIDDED){
                     //Check if user wants to edit selected game or view the bids on it
-                    adb.setMessage("Do you want to edit or view bids?");
+                    adb.setMessage("Do you want to view the game or view bids?");
                     adb.setCancelable(true);
-                    adb.setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
+                    adb.setPositiveButton("VIEW GAME", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Switch to edit games screen
-                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            Intent intent = new Intent(getActivity(), ViewGameActivity.class);
+                            intent.putExtra("currentUser",currentUser);
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
@@ -105,6 +130,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO:Go to view bids activity
                             Intent intent = new Intent(getActivity(), ViewBidsListActivity.class);
+                            intent.putExtra("currentUser",currentUser);
                             intent.putExtra("gamePosition",pos);
                             startActivity(intent);
                         }
@@ -114,20 +140,26 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                 //If game clicked has borrowed status
                 else if(selectedGame.getStatus() == GameController.STATUS_BORROWED){
                     //Verify that user wants to edit selected item
-                    adb.setMessage("Do you want to edit it?");
+                    adb.setMessage("Do you want to view the game or edit?");
                     adb.setCancelable(true);
-                    adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    adb.setPositiveButton("VIEW", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //Change to edit game screen
-                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            //Change to view game screen
+                            Intent intent = new Intent(getActivity(), ViewGameActivity.class);
+                            intent.putExtra("currentUser",currentUser);
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
                     });
-                    adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    adb.setNegativeButton("EDIT", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            //Change to edit game screen
+                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            intent.putExtra("currentUser",currentUser);
+                            intent.putExtra("Game", (Serializable)selectedGame);
+                            startActivity(intent);
                         }
                     });
                     adb.show();
@@ -147,8 +179,8 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
     public void onResume(){
         super.onResume();
         //TODO:For some reason crashes sometimes so disabled for now
-        //gameList.copyRefListToGames(currentUser.getMyGames());
-        //adapter.notifyDataSetChanged();
+        gameList.copyRefListToGames(currentUser.getMyGames());
+        adapter.notifyDataSetChanged();
     }
 
     @Override

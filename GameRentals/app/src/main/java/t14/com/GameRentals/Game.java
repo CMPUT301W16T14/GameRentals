@@ -2,12 +2,23 @@ package t14.com.GameRentals;
 
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 
 import io.searchbox.annotations.JestId;
 
-/** This class contains information for Game objects.
- * Each game has a game name, game ID, descirption, status, list of bids, owner,
- * and borrower.
+
+/** This class contains information for Game objects. <br>
+ * Each game has the following attributes: <br>
+ *     <ul>
+ *             <li>gameName </li>
+ *             <li>gameID</li>
+ *             <li>description</li>
+ *             <li>status</li>
+ *             <li>Bids list (the bids being offered to the owner)</li>
+ *             <li>owner</li>
+ *             <li>borrower</li>
+ *         </ul>
+ *
  * Game status can be either available, bidded, or borrowed.
  * Borrower will be initialized to null and only set if game status is borrowed.
  * Created by cjresler on 2016-02-28.
@@ -47,6 +58,23 @@ public class Game implements Serializable{
         return borrowerID;
     }
 
+    public String getBorrowerName(){
+        /*User loadedUser = new User(null, null, null);
+        ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+        //TODO:Set this to load whatever username is given from login screen
+        esg.execute(borrowerID);
+
+        try{
+            loadedUser = (esg.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return loadedUser.getUserName();*/
+        return borrowerID;
+    }
+
     /** Set borrower of game
      *
      * @param borrower Set borrower to user that is borrowing the game
@@ -82,14 +110,19 @@ public class Game implements Serializable{
     /** Return a string that represents the status of game
      *
      * @return The string of the status of the game
-     * can be "available", "bidded", or "borrowoed"
+     * can be "available", "bidded", or "borrowed"
      */
     public String getStatusString(){
         switch(this.status){
             case(GameController.STATUS_AVAILABLE):
                 return "Available";
             case(GameController.STATUS_BORROWED):
-                return "Borrowed";
+                if(UserController.getCurrentUser().getUserName().equals(ownerID)){
+                    return "Lent out";
+                }
+                else {
+                    return "Borrowed";
+                }
             case(GameController.STATUS_BIDDED):
                 return "Has bids";
         }
@@ -188,8 +221,16 @@ public class Game implements Serializable{
     *
     */
     public String toString(){
-        return "Status: " + getStatusString() + "\n" +
-                "Game name: " + gameName + "\n" +
-                "Description: " + description;
+       String returnString = "Status: " + getStatusString() + "\n" +
+               "Game name: " + gameName + "\n" +
+               "Description: " + description;
+       //If current user is not the owner of the game, show the owner of the game
+       if(!ownerID.equalsIgnoreCase(UserController.getCurrentUser().getUserName())) {
+           returnString += "\nOwner Username: " + ownerID;
+       }
+       if(borrowerID != null && !borrowerID.equals(UserController.getCurrentUser().getUserName())){
+           returnString += "\nBorrower Username: " + borrowerID;
+       }
+        return returnString;
     }
 }

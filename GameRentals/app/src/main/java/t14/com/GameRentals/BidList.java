@@ -14,7 +14,12 @@ public class BidList implements Serializable{
     }
 
     public ArrayList<Bid> getList() {
-        return list;
+        ArrayList<Bid> bids = new ArrayList<Bid>();
+        for (int i = 0; i < list.size(); i++){
+            if (list.get(i).isAccepted() != 2)
+                bids.add(list.get(i));
+        }
+        return bids;
     }
     public int getSize(){
         return list.size();
@@ -37,8 +42,10 @@ public class BidList implements Serializable{
 
     public void RemoveBid(User user){
         for (int i = 0; i < list.size(); i++){
-            if (list.get(i).getBidMaker().equals(user.getID()))
-                list.remove(user.getID());
+            if (list.get(i).getBidMaker().equals(user.getUserName()))
+                list.remove(i);
         }
     }
+
+
 }

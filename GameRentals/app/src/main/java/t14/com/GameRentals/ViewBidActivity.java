@@ -2,11 +2,21 @@ package t14.com.GameRentals;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -15,9 +25,10 @@ import java.util.concurrent.ExecutionException;
  */
 public class ViewBidActivity extends Activity {
     private Bid bid;
+    private Game game;
     private BidList bidList;
     private User currentUser;
-
+    private User bidMaker = null;
     private Button cancelButton;
     private Button acceptButton;
 
@@ -26,27 +37,28 @@ public class ViewBidActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_bid);
 
-        currentUser = UserController.getCurrentUser();
         final EditText gameNameEdit = (EditText) findViewById(R.id.BidGameName);
         final EditText gameDescriptionEdit = (EditText) findViewById(R.id.BidGameDescription);
-        final EditText bidUser = (EditText) findViewById(R.id.bidUser);
+        final TextView bidUser = (TextView) findViewById(R.id.bidUser);
         final EditText bidRate = (EditText) findViewById(R.id.bidRate);
-        int gamePosition = getIntent().getExtras().getInt("gamePosition");
-        int bidPosition = getIntent().getExtras().getInt("bidPosition");
+        final int gamePosition = getIntent().getExtras().getInt("gamePosition");
+        final int bidPosition = getIntent().getExtras().getInt("bidPosition");
+
+        currentUser = (User) getIntent().getExtras().get("currentUser");
 
         gameNameEdit.setText(currentUser.getMyGames().getGame(gamePosition).getGameName());
         gameDescriptionEdit.setText(currentUser.getMyGames().getGame(gamePosition).getDescription());
 
         bidList = currentUser.getMyGames().getGame(gamePosition).getBidList();
         bid = bidList.getItem(bidPosition);
-        final String gameName = currentUser.getMyGames().getGame(gamePosition).getGameName();
+        game = currentUser.getMyGames().getGame(gamePosition);
 
         String bidUserID = bid.getBidMaker();
 
-        ElasticSearchUsersController.GetUserByIDTask getUserByIDTask = new ElasticSearchUsersController.GetUserByIDTask();
+        ElasticSearchUsersController.GetUserTask getUserByIDTask = new ElasticSearchUsersController.GetUserTask();
         getUserByIDTask.execute(bidUserID);
 
-        User bidMaker = null;
+
         try {
             bidMaker = getUserByIDTask.get();
         } catch (InterruptedException e) {
@@ -56,7 +68,9 @@ public class ViewBidActivity extends Activity {
         }
 
         bidUser.setText(bidMaker.getUserName());
-        bidRate.setText((CharSequence) bidMaker.getBiddedItems().getGame(gameName));
+        bidRate.setText(Double.toString(bid.getRate()));
+        bidRate.setEnabled(false);
+        bidRate.setTextColor(Color.BLACK);
 
         cancelButton = (Button)findViewById(R.id.CancelBidButton);
         acceptButton = (Button)findViewById(R.id.acceptBidButton);
@@ -66,9 +80,17 @@ public class ViewBidActivity extends Activity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bid.setAccepted(false);
-                ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-                ese.execute(currentUser);
+                game.getBidList().getItem(bidPosition).setAccepted(2);//decline
+                if (game.getBidList().getSize() == 0) {
+                    game.setStatus(0);
+                }
+                bidList.getItem(bidPosition).setAccepted(2);//decline
+                ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                editGameTask.execute(game);
+                ElasticSearchUsersController.EditUserTask ese1 = new ElasticSearchUsersController.EditUserTask();
+                ese1.execute(currentUser);
+                finish();
+
             }
         });
 
@@ -77,18 +99,38 @@ public class ViewBidActivity extends Activity {
             public void onClick(View view) {
                 int i;
                 for(i = 0; i < length; i++){
-                    if (bidList.getItem(i).isAccepted()){
+                    if (bidList.getItem(i).isAccepted() == 1){
                         AlertDialog.Builder adb = new AlertDialog.Builder(ViewBidActivity.this);
                         adb.setTitle("Alert");
                         adb.setMessage("You can't accept it cause you have already accepted other bid");
-                        break;
+                        finish();
                     }
                 }
                 if (length == i) {
-                    bid.setAccepted(true);
+                    game.getBidList().getItem(bidPosition).setAccepted(1);
+                    game.setBorrower(bidMaker.getUserName());
+                    game.setStatus(2);
+                    bid.setAccepted(1);
+                    bidMaker.getBorrowedItems().addGame(game.getGameID());
                     ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-                    ese.execute(currentUser);
+                    ese.execute(bidMaker);
+                    ElasticSearchUsersController.EditUserTask ese1 = new ElasticSearchUsersController.EditUserTask();
+                    ese1.execute(currentUser);
+                    ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                    editGameTask.execute(game);
+                    finish();
                 }
+            }
+        });
+
+        bidUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Go to borrower's profile
+                //User gameOwner = UserController.getUser(game.getOwner());
+                Intent intent = new Intent(ViewBidActivity.this, ViewProfileActivity.class);
+                intent.putExtra("Username", bidMaker.getUserName());
+                startActivity(intent);
             }
         });
 

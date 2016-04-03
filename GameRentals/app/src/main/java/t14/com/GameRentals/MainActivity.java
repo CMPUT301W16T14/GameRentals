@@ -28,10 +28,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     ViewPager viewpager;
     PagerAdapter ft;
     User currentUser;
-    User loadedUser;
+    Game test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //User nullUser = new User(null, null, null);
 
         //editGameTask.execute(game);
         //addGameTask.execute(game);
@@ -45,9 +46,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         //ese.execute(serverUser);
         /**Load user from server */
+        /*
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
         //TODO:Set this to load whatever username is given from login screen
-        esg.execute("NEWTEST");
+        esg.execute("debug");
 
         try{
             loadedUser = (esg.get());
@@ -55,9 +57,30 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+
         }
         //Set current user of app to user that logged in
+        UserController.setUser(loadedUser);
         currentUser = loadedUser;
+        UserController.setUser(currentUser);
+        }*/
+
+        //Set current user of app to user that logged in
+        //currentUser = loadedUser;
+
+        //UserSingleton singleton = UserSingleton.getInstance();
+        //currentUser = singleton.getUser();
+
+        /*ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+        esg.execute(currentUser.getUserName());
+        try{
+            currentUser = (esg.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }*/
+
 
         //UserController.setUser(test);
         //Game test = new Game("PunchOut", "Fighting", currentUser.getID());
@@ -102,6 +125,40 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
         //currentUser.getMyGames().addGame(roller);
         //editGameTask3.execute(roller);
+
+
+/**
+ * This is all setting up a test case for borrowed games.
+
+        ElasticSearchUsersController.GetUserTask esg5 = new ElasticSearchUsersController.GetUserTask();
+        //TODO:Set this to load whatever username is given from login screen
+        esg5.execute("BorrowTest");
+
+        try{
+            borrower = (esg5.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        Game roller = new Game("BORROWTESTGAME99999", "Simulation", currentUser.getUserName());
+        roller.setStatus(GameController.STATUS_BORROWED);
+        roller.setBorrower(borrower.getUserName());
+        ElasticsearchGameController.AddGameTask addGameTask3 = new ElasticsearchGameController.AddGameTask();
+        addGameTask3.execute(roller);
+
+        try{
+            test = (addGameTask3.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        borrower.getBorrowedItems().addGame(test.getGameID());
+        ElasticSearchUsersController.EditUserTask ese2 = new ElasticSearchUsersController.EditUserTask();
+        ese2.execute(borrower);*/
 
         setContentView(R.layout.activity_main);
 

@@ -1,11 +1,7 @@
 package t14.com.GameRentals;
 
-import android.app.Activity;
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -20,7 +16,7 @@ public class SearchGameActivityTest extends ActivityInstrumentationTestCase2 {
 
     public void testSearchQuery() {
 
-        Game EUIV = new Game("EUIV", "grand strategy", new User("Austin", "aredmond@gmail.com", "7801234576"));
+        Game EUIV = new Game("EUIV", "grand strategy", "Austin");
         EUIV.setStatus(GameController.STATUS_BIDDED);
 
         ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();

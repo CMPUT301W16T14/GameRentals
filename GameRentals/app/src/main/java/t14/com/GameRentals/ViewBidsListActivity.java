@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * Created by yourui on 3/4/16.
@@ -14,7 +17,7 @@ import android.widget.ListView;
  */
 public class ViewBidsListActivity extends Activity {
 
-    private BidList bidList;
+    private ArrayList<Bid> bidList;
     private ListView bidListView;
     private User currentUser;
     private int gamePosition;
@@ -25,11 +28,18 @@ public class ViewBidsListActivity extends Activity {
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.view_bids_list);
-        currentUser = UserController.getCurrentUser();
+        currentUser = (User)getIntent().getExtras().get("currentUser");
 
         gamePosition = getIntent().getExtras().getInt("gamePosition");
         bidListView = (ListView)findViewById(R.id.bidListView);
-        bidList = currentUser.getMyGames().getGame(gamePosition).getBidList();
+
+        bidList = new ArrayList<Bid>();
+        bidList.addAll(currentUser.getMyGames().getGame(gamePosition).getBidList().getList());
+
+        adapter = new ArrayAdapter<Bid>(this.getApplicationContext(), R.layout.game_list, bidList);
+        bidListView.setAdapter(adapter);
+
+        final Button returnButton = (Button) findViewById(R.id.viewBidsListReturnButton);
 
         bidListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -39,7 +49,16 @@ public class ViewBidsListActivity extends Activity {
                 Intent intent = new Intent(ViewBidsListActivity.this, ViewBidActivity.class);
                 intent.putExtra("gamePosition",gamePosition);
                 intent.putExtra("bidPosition",position);
+                intent.putExtra("currentUser",currentUser);
                 startActivity(intent);
+            }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -48,7 +67,9 @@ public class ViewBidsListActivity extends Activity {
     public void onStart(){
         super.onStart();
         //TODO: SET THE BIDLIST TO THE ONE IN SERVER
-        adapter = new ArrayAdapter<Bid>(ViewBidsListActivity.this,R.layout.view_bids_list,bidList.getList());
+        bidList = new ArrayList<Bid>();
+        bidList.addAll(currentUser.getMyGames().getGame(gamePosition).getBidList().getList());
+        adapter = new ArrayAdapter<Bid>(this.getApplicationContext(),R.layout.game_list,bidList);
         bidListView.setAdapter(adapter);
     }
 

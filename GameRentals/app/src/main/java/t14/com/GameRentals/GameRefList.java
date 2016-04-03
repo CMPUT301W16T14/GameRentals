@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-/**
+/** Each GameRefList contains gameIDs.
+ * myGames list, borrowed list, and bid list uses their associated GameRefList and gets the actual game object from GameList.
  * Created by cjresler on 2016-03-18.
  */
+
 public class GameRefList implements Serializable {
     private ArrayList<String> gameIDs;
 
@@ -59,6 +61,23 @@ public class GameRefList implements Serializable {
         return game;
     }
 
+    public Game getTestGame(int index){
+        //return list.get(index);
+        //TODO:Use elastic search to get game
+        Game game = new Game("", "", null);
+        String id = gameIDs.get(index);
+        ElasticsearchGameController.GetTestGameTask getGameTask = new ElasticsearchGameController.GetTestGameTask();
+        getGameTask.execute(id);
+        try{
+            game = (getGameTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return game;
+    }
+
     public Game getGame (String gameID){
         for (int i = 0;i < getSize(); i++) {
             if (getGame(i).getGameID().equals(gameID)) {
@@ -69,6 +88,7 @@ public class GameRefList implements Serializable {
     }
 
     public void removeGame(String game){
+
         if(gameIDs.contains(game)){
             gameIDs.remove(game);
         }

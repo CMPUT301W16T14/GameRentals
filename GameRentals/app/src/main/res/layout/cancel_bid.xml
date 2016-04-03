@@ -39,7 +39,22 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/descriptionText"
-            android:layout_weight="0.93" />
+            android:layout_weight="0.88" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game Owner"
+            android:id="@+id/textView15"
+            android:textSize="30dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/gameOwner"
+            android:layout_weight="0.05"
+            android:textSize="30dp"
+            android:textColor="#32CD32"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -56,7 +71,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel Bid"
+                android:text="Delete"
                 android:id="@+id/CancelBidButton"
                 android:layout_weight="0.67" />
         </LinearLayout>

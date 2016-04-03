@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by yourui on 3/4/16.
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class BidOnActivity extends Activity {
     private Game game;
     private int gamePosition;
+    private User currentUser;
     private ArrayList<Game> returnedGames;
     private final String FILENAME = "searchedResults.sav";
 
@@ -34,13 +36,24 @@ public class BidOnActivity extends Activity {
         //final EditText searchGameId = (EditText) findViewById(R.id.searchGameId);
         final EditText searchGameName = (EditText) findViewById(R.id.searchGameName);
         final EditText searchGameDescription = (EditText) findViewById(R.id.searchGameDescription);
+        final EditText searchGameOwner = (EditText)findViewById(R.id.owner);
         loadFromFile();
+        currentUser = UserController.getCurrentUser();
         gamePosition = getIntent().getExtras().getInt("gamePosition");
         game = returnedGames.get(gamePosition);
 
         //searchGameId.setText(game.getGameID());
         searchGameName.setText(game.getGameName());
         searchGameDescription.setText(game.getDescription());
+        ElasticSearchUsersController.GetUserByIDTask getUserTask = new ElasticSearchUsersController.GetUserByIDTask();
+        getUserTask.execute(game.getOwner());
+        try {
+            searchGameOwner.setText(getUserTask.get().getUserName());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         Button bidButton = (Button)findViewById(R.id.BidButton);
 
@@ -49,6 +62,7 @@ public class BidOnActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(BidOnActivity.this, BidOnGameActivity.class);
                 intent.putExtra("gamePosition", gamePosition);
+                intent.putExtra("currentUser",currentUser);
                 startActivity(intent);
                 finish();
             }

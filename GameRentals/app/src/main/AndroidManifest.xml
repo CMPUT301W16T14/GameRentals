@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="t14.com.GameRentals">
     target
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -18,44 +19,48 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ViewMyGamesActivity" />
-        <activity android:name=".AddGameActivity" />
-        <activity android:name=".EditGameActivity" />
-        <activity android:name=".ViewBidsListActivity" />
-        <activity android:name=".ViewBidActivity" />
-        <activity android:name=".BidOnActivity" />
-        <activity android:name=".BidOnGameActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ProfileMain"
-            android:label="@string/title_activity_profile_main"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="t14.com.GameRentals.MainActivity" />
+
+        <activity android:name=".MainActivity">
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
         </activity>
-        <activity
-            android:name=".SearchGameActivity"
-            android:label="@string/title_activity_search_game" />
-        <activity android:name=".CreateAccount" />
+
+
+        <activity android:name=".ViewMyGamesActivity" />
+        <activity android:name=".AddGameActivity"/>
+        <activity android:name=".EditGameActivity"/>
+        <activity android:name=".ViewGameActivity"/>
+        <activity android:name=".ViewBidsListActivity"/>
+        <activity android:name=".ViewBidActivity"/>
+        <activity android:name=".BidOnActivity"/>
+        <activity android:name=".BidOnGameActivity"/>
+        <activity android:name=".ViewProfileActivity"/>
+        <activity android:name=".CancelBidActivity"/>
+        <activity android:name=".ProfileMain"
+            android:label="@string/title_activity_profile_main"
+            android:parentActivityName=".MainActivity"><meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="t14.com.GameRentals.MainActivity" /></activity>
+        <activity android:name=".SearchGameActivity" android:label="@string/title_activity_search_game"></activity>
+        <activity android:name=".CreateAccountActivity">
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".LocationActivity"
             android:label="@string/title_activity_location"></activity>
     </application>
 
 </manifest>
+
