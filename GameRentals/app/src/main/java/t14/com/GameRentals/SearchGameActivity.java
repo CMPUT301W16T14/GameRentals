@@ -63,10 +63,6 @@ public class SearchGameActivity extends Activity {
 
         setResult(RESULT_OK);
 
-        if(returnedGames.size() == 0) {
-            Toast.makeText(SearchGameActivity.this, "No results found.", Toast.LENGTH_LONG);
-        }
-
         adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
         returnedGamesList.setAdapter(adapter);
 
@@ -112,6 +108,10 @@ public class SearchGameActivity extends Activity {
         saveInFile();/////////////save the results to local file to do bid.
         adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
         returnedGamesList.setAdapter(adapter);
+
+        if(returnedGames.size() == 0) {
+            Toast.makeText(SearchGameActivity.this, "No results found.", Toast.LENGTH_LONG).show();
+        }
 
     }
 
