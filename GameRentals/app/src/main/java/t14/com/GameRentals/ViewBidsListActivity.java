@@ -12,8 +12,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 /**
- * Created by yourui on 3/4/16.
- * user case 05.05.01
+ * List of all bids offered on games in myGames (1st Fragment).
+ *
+ * @see MyItemsFragment
+ * @see ViewBidActivity
  */
 public class ViewBidsListActivity extends Activity {
 
@@ -23,7 +25,6 @@ public class ViewBidsListActivity extends Activity {
     private int gamePosition;
     private ArrayAdapter<Bid> adapter;
 
-
     @Override
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
@@ -32,7 +33,6 @@ public class ViewBidsListActivity extends Activity {
 
         gamePosition = getIntent().getExtras().getInt("gamePosition");
         bidListView = (ListView)findViewById(R.id.bidListView);
-
         bidList = new ArrayList<Bid>();
         bidList.addAll(currentUser.getMyGames().getGame(gamePosition).getBidList().getList());
 
@@ -60,6 +60,7 @@ public class ViewBidsListActivity extends Activity {
             public void onClick(View v) {
                 finish();
             }
+
         });
     }
 

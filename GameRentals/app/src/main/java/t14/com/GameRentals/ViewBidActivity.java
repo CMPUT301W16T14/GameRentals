@@ -20,8 +20,9 @@ import java.io.OutputStreamWriter;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by yourui on 3/3/16.
- * uc 05.06.01 & 05.07.01
+ *
+ * View the bids other users are offering to borrow your game(s).
+ * @see ViewBidsListActivity
  */
 public class ViewBidActivity extends Activity {
     private Bid bid;
@@ -32,6 +33,10 @@ public class ViewBidActivity extends Activity {
     private Button cancelButton;
     private Button acceptButton;
 
+    /**
+     * @see ElasticSearchUsersController #GetUserTask()
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -58,7 +63,6 @@ public class ViewBidActivity extends Activity {
         ElasticSearchUsersController.GetUserTask getUserByIDTask = new ElasticSearchUsersController.GetUserTask();
         getUserByIDTask.execute(bidUserID);
 
-
         try {
             bidMaker = getUserByIDTask.get();
         } catch (InterruptedException e) {
@@ -81,16 +85,17 @@ public class ViewBidActivity extends Activity {
             @Override
             public void onClick(View view) {
                 game.getBidList().getItem(bidPosition).setAccepted(2);//decline
+
                 if (game.getBidList().getSize() == 0) {
                     game.setStatus(0);
                 }
+
                 bidList.getItem(bidPosition).setAccepted(2);//decline
                 ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
                 editGameTask.execute(game);
                 ElasticSearchUsersController.EditUserTask ese1 = new ElasticSearchUsersController.EditUserTask();
                 ese1.execute(currentUser);
                 finish();
-
             }
         });
 
@@ -98,6 +103,7 @@ public class ViewBidActivity extends Activity {
             @Override
             public void onClick(View view) {
                 int i;
+
                 for(i = 0; i < length; i++){
                     if (bidList.getItem(i).isAccepted() == 1){
                         AlertDialog.Builder adb = new AlertDialog.Builder(ViewBidActivity.this);
@@ -106,6 +112,7 @@ public class ViewBidActivity extends Activity {
                         finish();
                     }
                 }
+
                 if (length == i) {
                     game.getBidList().getItem(bidPosition).setAccepted(1);
                     game.setBorrower(bidMaker.getUserName());
@@ -139,7 +146,6 @@ public class ViewBidActivity extends Activity {
     @Override
     protected void onStart(){
         super.onStart();
-
     }
 
 }

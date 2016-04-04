@@ -18,11 +18,10 @@ import java.io.Serializable;
 
 /**
  * This activity displays the current user's games.
+ * @see GameRefList
+ * @see GameList
+ * @see Game
  *
- *
- *
- * Created by yourui on 3/2/16.
- * user case 01.01.01 ~ 01.05.01 & 05.04.01
  */
 public class MyItemsFragment extends Fragment implements View.OnClickListener {
     private GameList gameList;
@@ -244,4 +243,5 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
 }

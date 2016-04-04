@@ -4,20 +4,31 @@ import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by cjresler on 2016-02-28.
+ * When a user wants to borrow a game, they can make a bid offer to the owner.
+ * This class is specifically about creating the bid.
  */
 public class Bid implements Serializable{
     private String bidMaker;
     private double rate;
     private int accepted;
 
+    /**
+     *
+     * @param bidMaker
+     * @param rate
+     * @see User
+     */
     public Bid(User bidMaker, double rate) {
         this.bidMaker = bidMaker.getUserName();
         this.rate = rate;
         this.accepted = 0;
     }
 
-
+    /**
+     *
+     * @return User
+     * @see User
+     */
     public String getBidMaker() {
         return bidMaker;
     }
@@ -42,6 +53,10 @@ public class Bid implements Serializable{
         this.bidMaker = bidMaker;
     }
 
+    /**
+     *
+     * @return double
+     */
     public double getRate() {
         return rate;
     }
@@ -50,14 +65,27 @@ public class Bid implements Serializable{
         this.rate = rate;
     }
 
+    /**
+     *
+     * @return int
+     */
     public int isAccepted() {
         return accepted;
     }
 
+    /**
+     *
+     * @param accepted
+     */
     public void setAccepted(int accepted) {
         this.accepted = accepted;
     }
 
+    /**
+     *
+     * @return User
+     * @see User
+     */
     public String toString(){
         /*try {
             return "Bidmaker:" + TransformBidMaker() + "\n rate:" + rate + "\n status: " +  TransformIsAccepted();

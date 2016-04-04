@@ -23,8 +23,6 @@ import java.io.Serializable;
  * activity to edit.
  *
  */
-
-
 public class EditGameActivity extends Activity {
     private Game game;
     private User currentUser;
@@ -43,8 +41,6 @@ public class EditGameActivity extends Activity {
                         Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
-
-
             }
         });
 
@@ -106,6 +102,7 @@ public class EditGameActivity extends Activity {
                 finish();
             }
         });
+
         //Return to previous screen if cancel button is clicked
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +110,7 @@ public class EditGameActivity extends Activity {
                 finish();
             }
         });
+
         //Allow user to delete a game from list
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +136,7 @@ public class EditGameActivity extends Activity {
                 adb.show();
             }
         });
+
         //Only shows if item has borrowed status, and is used to indicate that game has been returned
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +158,7 @@ public class EditGameActivity extends Activity {
             }
         });
     }
+
     public ImageView getImageProfile(){
         return (ImageView) findViewById(R.id.profile_image);
     }
@@ -181,12 +181,14 @@ public class EditGameActivity extends Activity {
             ImageView imageView = getImageProfile();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             imageView.setTag("Changed");
-
-
         }
+
     }
 
-    /** Update user on server to reflect any edits made */
+    /**
+     * Update user on server to reflect any edits made.
+     * @see ElasticsearchGameController
+     */
     public void updateServer(){
         //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         //ese.execute(currentUser);

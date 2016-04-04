@@ -12,14 +12,15 @@ import android.widget.Toast;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by yourui on 3/11/16.
+ * This allows users to cancel a bid that they have offered if it has not yet been accepted or rejected.
+ * @see Bid
+ * @see ElasticsearchGameController
  */
 public class CancelBidActivity extends Activity {
 
     private User currentUser;
     private GameList biddedItems;
     private Game game;
-
     private EditText gameNameText;
     private EditText descriptionText;
     private TextView gameOwner;
@@ -40,11 +41,12 @@ public class CancelBidActivity extends Activity {
         biddedItems.copyRefListToGames(currentUser.getBiddedItems());
         int position = getIntent().getExtras().getInt("bidPosition");
         game = biddedItems.getGame(position);
-
         gameNameText.setText(game.getGameName());
         descriptionText.setText(game.getDescription());
+
         ElasticSearchUsersController.GetUserTask getUserTask = new ElasticSearchUsersController.GetUserTask();
         getUserTask.execute(game.getOwner());
+
         try {
             gameOwner.setText(getUserTask.get().getUserName());
         } catch (InterruptedException e) {
@@ -85,6 +87,6 @@ public class CancelBidActivity extends Activity {
                 startActivity(intent);
             }
         });
-
     }
+
 }

@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutionException;
  * This allows existing users to edit their profile and new users to create a profile.
  *
  * @see LoginActivity
+ * @see MainActivity
  * @author JL
  */
 
@@ -64,15 +65,15 @@ public class ProfileMain extends ActionBarActivity {
             public void onClick(View v) {
                 boolean cancel = false;
                 View focusView = null;
-                boolean creatingAccount = false;
+                //boolean creatingAccount = false;
 
-                //If username or userID is null, it means new User (create a new account)
+                //If userID or username is null, it means new User (create a new account/profile).
                 if (currentUser.getID() == null || currentUser.getUserName() == null) {
                     String eUsername = userNameEdit.getText().toString();
                     String newEmail = userEmailEdit.getText().toString();
                     String newPhone = userPhoneEdit.getText().toString();
 
-                    // Checks for empty field.
+                    // Check for empty fields.
                     if (TextUtils.isEmpty(eUsername)) {
                         userNameEdit.setError(getString(R.string.error_field_required));
                         focusView = userNameEdit;
@@ -92,89 +93,55 @@ public class ProfileMain extends ActionBarActivity {
                     }
 
                     if (cancel) {
-                        // If there was an error; don't attempt create and focus the first
-                        // form field with an error.
+                        // If there was an error; don't attempt create/saving profile and focus the first form field with an error.
                         focusView.requestFocus();
                     } else {
-                        //check if the username is taken
+                        //Check if the username is taken.
                         User enteredUsername = isUsernameValid(eUsername);
 
-                        //if enteredUsername is null, that means the username is available and the account is being created.
+                        //If enteredUsername is null, it means the username is available and can be used.
                         if (enteredUsername == null) {
                             User newUser = new User(eUsername, newEmail, newPhone);
                             ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
                             esa.execute(newUser);
                             ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                             ese.execute(newUser);
-
-                            //login
                             UserController.setUser(newUser);
-                            creatingAccount = true;
+                            //creatingAccount = true;
 
                         } else {
-                            //if not null show error
+                            //The enteredUsername is unavailable.
                             userNameEdit.setError(getString(R.string.error_invalid_username));
                             focusView = userNameEdit;
                             cancel = true;
                         }
+
                         if (cancel) {
-                            // If there was an error; don't attempt create and focus the first
-                            // form field with an error.
+                            // If there was an error; don't attempt create and focus the first form field with an error.
                             focusView.requestFocus();
                         } else {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
-
                     }
                 } else {
-                    //users that already exist
+                    //Users that already exist(editing profile).
                     currentUser.setUserName(userNameEdit.getText().toString());
                     currentUser.setEmail(userEmailEdit.getText().toString());
                     currentUser.setPhoneNumber(userPhoneEdit.getText().toString());
 
-                    updateServer(); //already existing users get updated
+                    updateServer();
                     finish();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                    /*if (cancel) {
-                        // If there was an error; don't attempt adding an account/saving focus the first
-                        // form field with an error.
-                        focusView.requestFocus();
-                    } else {*/
-                        /*if (creatingAccount == true) {
-                            //login
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                        }*/ /*else {
-                            currentUser.setUserName(userNameEdit.getText().toString());
-                            currentUser.setEmail(userEmailEdit.getText().toString());
-                            currentUser.setPhoneNumber(userPhoneEdit.getText().toString());
-
-                            updateServer(); //already existing users get updated
-                            finish();
-
-                        }*/
-                    /*currentUser.setUserName(userNameEdit.getText().toString());
-                    currentUser.setEmail(userEmailEdit.getText().toString());
-                    currentUser.setPhoneNumber(userPhoneEdit.getText().toString());
-
-                    updateServer(); //already existing users get updated
-                    finish();*/
                     }
-                //return back to main activity
-                //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                //startActivity(intent);
                 }
-            //}
         });
-
     }
 
     public ImageView getImageProfile(){
         return (ImageView) findViewById(R.id.profile_image);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -195,17 +162,26 @@ public class ProfileMain extends ActionBarActivity {
             ImageView imageView = getImageProfile();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             imageView.setTag("Changed");
-
-
         }
     }
 
+    /**
+     * @see ElasticSearchUsersController #EditUserTask()
+     */
     public void updateServer(){
 
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         ese.execute(currentUser);
     }
 
+    /**
+     * This function checks to see if the inputted username exists. <br>
+     *     It's purpose in ProfileMain is to ensure the username inputted does not already exist when creating a new account. <br>
+     *             In LoginActivity, it is used to verify whether the inputted username exists and uploads the account if it does.
+     * @param eUsername
+     * @return checkingUsername
+     * @see LoginActivity #isUsernameValid(String email)
+     */
     private User isUsernameValid(String eUsername) {
         //if the username matches the username of the user loaded(loadedUser's username) then it is valid.
         User checkingUsername = new User(null,null,null);
@@ -224,7 +200,6 @@ public class ProfileMain extends ActionBarActivity {
         }
 
         return checkingUsername;
-
     }
 
 }

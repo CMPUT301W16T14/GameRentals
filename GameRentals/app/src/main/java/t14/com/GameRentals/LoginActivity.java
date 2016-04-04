@@ -138,8 +138,10 @@ public class LoginActivity extends ActionBarActivity  {
 
     /**
      * Checks to see if username is valid if the text field is not empty.
-     * @see ElasticSearchUsersController #GetUserTask()
+     * @param email
      * @return loadedUser
+     * @see ElasticSearchUsersController #GetUserTask()
+     * @see ProfileMain #isUsernameValid(String eUsername)
      */
     private User isUsernameValid(String email) {
         //If the username matches the username of the user loaded(loadedUser's username) then it is valid.
@@ -238,5 +240,6 @@ public class LoginActivity extends ActionBarActivity  {
             showProgress(false);
         }
     }
+
 }
 
