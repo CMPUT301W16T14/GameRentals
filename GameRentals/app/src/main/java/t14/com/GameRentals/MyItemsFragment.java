@@ -92,7 +92,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
 
                             //Switch to edit games screen
-                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            Intent intent = new Intent(getActivity(), ViewGameActivity.class);
 
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
@@ -120,7 +120,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                             //Switch to edit games screen
 
-                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            Intent intent = new Intent(getActivity(), ViewGameActivity.class);
 
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
@@ -146,7 +146,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Change to edit game screen
-                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+                            Intent intent = new Intent(getActivity(), ViewGameActivity.class);
 
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);

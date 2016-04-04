@@ -68,8 +68,7 @@ public class BorrowFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-                adb.setTitle("Bidding");
-                adb.setMessage("Do you want to view the details of this game?");
+                adb.setMessage("Do you want to view this game?");
                 adb.setCancelable(true);
                 final Game selectedGame = borrowedGames.getGame(position);
                 adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {

@@ -33,7 +33,8 @@ public class bidView implements Serializable{
 
 
     public String toString(){
-        return "game name:" + game.getGameName() + "\ngame description:" + game.getDescription()
-                + "\nbid status:" + bid.TransformIsAccepted() + "\nbid rate:" + bid.getRate();
+        return "Game name: " + game.getGameName() + "\nDescription: " + game.getDescription()
+                + "\nBid status: " + bid.TransformIsAccepted() + "\nBid rate: " + bid.getRate() +
+                "\nOwner Username: " + game.getOwner();
     }
 }
