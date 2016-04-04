@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
+
+/**
+ * This allows existing users to edit their profile and new users to create a profile.
+ *
+ * @see LoginActivity
+ * @author JL
+ */
 
 public class ProfileMain extends ActionBarActivity {
     private User currentUser;
@@ -37,15 +45,12 @@ public class ProfileMain extends ActionBarActivity {
                         Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
-
-
             }
         });
 
         final EditText userNameEdit = (EditText) findViewById(R.id.nameText);
         final EditText userEmailEdit = (EditText) findViewById(R.id.EmailText);
         final EditText userPhoneEdit = (EditText) findViewById(R.id.PhoneText);
-        final TextView userNameView = (TextView) findViewById(R.id.lblName);
 
         final Button saveButton = (Button)findViewById(R.id.SaveButton);
 
@@ -59,43 +64,109 @@ public class ProfileMain extends ActionBarActivity {
             public void onClick(View v) {
                 boolean cancel = false;
                 View focusView = null;
+                boolean creatingAccount = false;
 
-                //if username is null it means new User (wants to create a new account)
+                //If username or userID is null, it means new User (create a new account)
                 if (currentUser.getID() == null || currentUser.getUserName() == null) {
-                    //checks username being entered if it's being used
-                    //get string from what they enter
                     String eUsername = userNameEdit.getText().toString();
-                    //do elastic search and see if the user is null
-                    User enteredUsername = isUsernameValid(eUsername);
-                    //if returns null, it means the username does not exist so it can use it
-                    if (enteredUsername.getUserName() == null) {
-                        ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
-                        esa.execute(enteredUsername);
-                        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-                        ese.execute(enteredUsername);
-                        //update like edit already existing user account
-                    } else {
-                        //if not null show error
-                        userNameEdit.setError(getString(R.string.error_invalid_username));
+                    String newEmail = userEmailEdit.getText().toString();
+                    String newPhone = userPhoneEdit.getText().toString();
+
+                    // Checks for empty field.
+                    if (TextUtils.isEmpty(eUsername)) {
+                        userNameEdit.setError(getString(R.string.error_field_required));
                         focusView = userNameEdit;
                         cancel = true;
                     }
-                }
 
-                if (cancel) {
-                // If there was an error; don't attempt adding an account/saving focus the first
-                // form field with an error.
-                    focusView.requestFocus();
+                    if (TextUtils.isEmpty(newEmail)) {
+                        userEmailEdit.setError(getString(R.string.error_field_required));
+                        focusView = userEmailEdit;
+                        cancel = true;
+                    }
+
+                    if (TextUtils.isEmpty(newPhone)) {
+                        userPhoneEdit.setError(getString(R.string.error_field_required));
+                        focusView = userPhoneEdit;
+                        cancel = true;
+                    }
+
+                    if (cancel) {
+                        // If there was an error; don't attempt create and focus the first
+                        // form field with an error.
+                        focusView.requestFocus();
+                    } else {
+                        //check if the username is taken
+                        User enteredUsername = isUsernameValid(eUsername);
+
+                        //if enteredUsername is null, that means the username is available and the account is being created.
+                        if (enteredUsername == null) {
+                            User newUser = new User(eUsername, newEmail, newPhone);
+                            ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
+                            esa.execute(newUser);
+                            ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                            ese.execute(newUser);
+
+                            //login
+                            UserController.setUser(newUser);
+                            creatingAccount = true;
+
+                        } else {
+                            //if not null show error
+                            userNameEdit.setError(getString(R.string.error_invalid_username));
+                            focusView = userNameEdit;
+                            cancel = true;
+                        }
+                        if (cancel) {
+                            // If there was an error; don't attempt create and focus the first
+                            // form field with an error.
+                            focusView.requestFocus();
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+
+                    }
                 } else {
+                    //users that already exist
                     currentUser.setUserName(userNameEdit.getText().toString());
                     currentUser.setEmail(userEmailEdit.getText().toString());
                     currentUser.setPhoneNumber(userPhoneEdit.getText().toString());
 
                     updateServer(); //already existing users get updated
                     finish();
-                }
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    /*if (cancel) {
+                        // If there was an error; don't attempt adding an account/saving focus the first
+                        // form field with an error.
+                        focusView.requestFocus();
+                    } else {*/
+                        /*if (creatingAccount == true) {
+                            //login
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }*/ /*else {
+                            currentUser.setUserName(userNameEdit.getText().toString());
+                            currentUser.setEmail(userEmailEdit.getText().toString());
+                            currentUser.setPhoneNumber(userPhoneEdit.getText().toString());
 
-            }
+                            updateServer(); //already existing users get updated
+                            finish();
+
+                        }*/
+                    /*currentUser.setUserName(userNameEdit.getText().toString());
+                    currentUser.setEmail(userEmailEdit.getText().toString());
+                    currentUser.setPhoneNumber(userPhoneEdit.getText().toString());
+
+                    updateServer(); //already existing users get updated
+                    finish();*/
+                    }
+                //return back to main activity
+                //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                //startActivity(intent);
+                }
+            //}
         });
 
     }
@@ -156,62 +227,7 @@ public class ProfileMain extends ActionBarActivity {
 
     }
 
-
-
-
-
-
-
 }
 
 
-
-
-    /*public void checkAndUpdateServer(){
-        //checks username if it's being used
-        //get string from what they enter
-        //String username = userNameEdit.getText().toString();
-        //do elastic search and see if the user is null
-        //if null show error
-        //if not null add a new user and update it immediately
-        //if the username matches the username of the user loaded(loadedUser's username) then it is valid.
-        User testUser = new User(null,null,null);
-        ElasticSearchUsersController.GetUserTask username = new ElasticSearchUsersController.GetUserTask();
-        username.execute(email);
-        try{
-            testUser = (username.get());
-        } catch (InterruptedException e) {
-            throw new RuntimeException();
-            //e.printStackTrace();
-        } catch (ExecutionException e) {
-            throw new RuntimeException();
-            //e.printStackTrace();
-        }
-        return testUser;
-    }*/
-
-
-
-
-
-
-
-//if it's not it will add
-//ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
-//esa.execute(serverUser);
-//ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-//ese.execute(serverUser);
-
-
-
-//otherwise it will show error
-
-
-
-    /*}
-}*/
-
-
-
-//}
 

@@ -29,12 +29,9 @@ import java.util.concurrent.ExecutionException;
 
 
 /**
- * A login screen that offers login via Username or an option to create an account for a new user.
- *
+ * A login screen that offers login via Username or an option to create a new account.
  *
  * @author JL
- * @see ElasticSearchUsersController #GetUserTask()
- * @see MainActivity
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class LoginActivity extends ActionBarActivity  {
@@ -58,22 +55,25 @@ public class LoginActivity extends ActionBarActivity  {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        //Buttons
+        /**
+         * Directs to Profile page with attributes blank for the user to fill in.
+         * @see ProfileMain
+         */
         Button createAccount = (Button) findViewById(R.id.createAccount);
         createAccount.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
-                //startActivity(intent);
-                //want to be directed to profile main with null attributes
                 User newUser = new User(null,null,null);
                 UserController.setUser(newUser);
                 Intent intent = new Intent(getApplicationContext(), ProfileMain.class);
-                //Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
                 startActivity(intent);
             }
         });
 
+        /**
+         * Signs in user.
+         * @see attemptLogin
+         */
         Button mUsernameSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mUsernameSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -84,9 +84,10 @@ public class LoginActivity extends ActionBarActivity  {
     }
 
     /**
-     * Attempts to sign in or register the account specified by the login form.
+     * Attempts to sign in user.
      * If there are form errors (invalid username, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
+     * @see MainActivity
      */
     private void attemptLogin() {
         if (mAuthTask != null) {
@@ -109,7 +110,10 @@ public class LoginActivity extends ActionBarActivity  {
             cancel = true;
         }
 
-        //Checks for valid username.
+        /**
+         * Checks for valid username.
+         * @see isUsernameValid
+         */
         User user = isUsernameValid(username);
         if (user == null || user.getUserName() == null) {
             mUsernameView.setError(getString(R.string.error_invalid_username));
@@ -134,10 +138,11 @@ public class LoginActivity extends ActionBarActivity  {
 
     /**
      * Checks to see if username is valid if the text field is not empty.
+     * @see ElasticSearchUsersController #GetUserTask()
      * @return loadedUser
      */
     private User isUsernameValid(String email) {
-        //if the username matches the username of the user loaded(loadedUser's username) then it is valid.
+        //If the username matches the username of the user loaded(loadedUser's username) then it is valid.
         User loadedUser = new User(null,null,null);
         ElasticSearchUsersController.GetUserTask username = new ElasticSearchUsersController.GetUserTask();
 
@@ -147,10 +152,8 @@ public class LoginActivity extends ActionBarActivity  {
             loadedUser = (username.get());
         } catch (InterruptedException e) {
             throw new RuntimeException();
-            //e.printStackTrace();
         } catch (ExecutionException e) {
             throw new RuntimeException();
-            //e.printStackTrace();
         }
 
         return loadedUser;
