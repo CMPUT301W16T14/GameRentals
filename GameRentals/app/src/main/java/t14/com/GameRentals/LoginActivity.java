@@ -63,7 +63,13 @@ public class LoginActivity extends ActionBarActivity  {
         createAccount.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+                //Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+                //startActivity(intent);
+                //want to be directed to profile main with null attributes
+                User newUser = new User(null,null,null);
+                UserController.setUser(newUser);
+                Intent intent = new Intent(getApplicationContext(), ProfileMain.class);
+                //Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
                 startActivity(intent);
             }
         });
