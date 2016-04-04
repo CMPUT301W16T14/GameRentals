@@ -5,12 +5,16 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import org.osmdroid.util.GeoPoint;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -24,13 +28,17 @@ import java.util.concurrent.ExecutionException;
  * uc 05.06.01 & 05.07.01
  */
 public class ViewBidActivity extends Activity {
+
+    private static final int PICK_GEOLOCATION_REQUEST = 1;
     private Bid bid;
     private Game game;
     private BidList bidList;
     private User currentUser;
     private User bidMaker = null;
+    private GeoPoint retrievedPoint;
     private Button cancelButton;
     private Button acceptButton;
+    private Button getLocationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -79,6 +87,7 @@ public class ViewBidActivity extends Activity {
 
         cancelButton = (Button)findViewById(R.id.CancelBidButton);
         acceptButton = (Button)findViewById(R.id.acceptBidButton);
+        getLocationButton = (Button)findViewById(R.id.GetLocationButton);
 
         final int length = bidList.getSize();
 
@@ -121,20 +130,34 @@ public class ViewBidActivity extends Activity {
                         finish();
                     }
                 }
-                if (length == i) {
-                    game.getBidList().getItem(bidPosition).setAccepted(1);
-                    game.setBorrower(bidMaker.getUserName());
-                    game.setStatus(2);
-                    bid.setAccepted(1);
-                    bidMaker.getBorrowedItems().addGame(game.getGameID());
-                    ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-                    ese.execute(bidMaker);
-                    ElasticSearchUsersController.EditUserTask ese1 = new ElasticSearchUsersController.EditUserTask();
-                    ese1.execute(currentUser);
-                    ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
-                    editGameTask.execute(game);
-                    finish();
+                if(retrievedPoint == null) {
+                    Toast.makeText(ViewBidActivity.this, "Set Location First.", Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    if (length == i) {
+                        game.setLocation(retrievedPoint);
+                        game.getBidList().getItem(bidPosition).setAccepted(1);
+                        game.setBorrower(bidMaker.getUserName());
+                        game.setStatus(2);
+                        bid.setAccepted(1);
+                        bidMaker.getBorrowedItems().addGame(game.getGameID());
+                        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                        ese.execute(bidMaker);
+                        ElasticSearchUsersController.EditUserTask ese1 = new ElasticSearchUsersController.EditUserTask();
+                        ese1.execute(currentUser);
+                        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                        editGameTask.execute(game);
+                        finish();
+                    }
+                }
+            }
+        });
+
+        getLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent locationIntent = new Intent(ViewBidActivity.this, LocationActivity.class);
+                startActivityForResult(locationIntent, PICK_GEOLOCATION_REQUEST);
             }
         });
 
@@ -157,4 +180,16 @@ public class ViewBidActivity extends Activity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == PICK_GEOLOCATION_REQUEST ) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
+                retrievedPoint = (GeoPoint) data.getExtras().getSerializable("MAP_POINT");
+            }
+        }
+    }
 }

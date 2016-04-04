@@ -18,6 +18,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -132,7 +133,7 @@ public class LocationActivity extends Activity implements MapEventsReceiver {
 
     public void onClickGeo(View v) {
         Intent intent = new Intent();
-        intent.putExtra("Start_Point", (Serializable) mapPoint);
+        intent.putExtra("MAP_POINT", (Serializable) mapPoint);
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -151,6 +152,7 @@ public class LocationActivity extends Activity implements MapEventsReceiver {
         mapPoint = arg0;
         mapMarker.setPosition(arg0);
         map.invalidate();
+        Toast.makeText(LocationActivity.this, mapPoint.toString(), Toast.LENGTH_SHORT).show();
         return false;
     }
 }

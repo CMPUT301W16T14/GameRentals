@@ -1,6 +1,8 @@
 package t14.com.GameRentals;
 
 
+import org.osmdroid.util.GeoPoint;
+
 import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
@@ -34,6 +36,7 @@ public class Game implements Serializable{
     private BidList bidList;
     private String ownerID;
     private String borrowerID;
+    private GeoPoint location;
 
     /** Constructor for game object.
      *
@@ -48,6 +51,7 @@ public class Game implements Serializable{
         this.bidList = new BidList();
         this.ownerID = owner;
         this.borrowerID = null;
+        this.location = null;
     }
 
     /** Return the borrower of game
@@ -214,6 +218,14 @@ public class Game implements Serializable{
         this.bidList = game.getBidList();
         this.ownerID = game.getOwner();
         this.borrowerID = game.getBorrower();
+    }
+
+    public GeoPoint getLocation() {
+        return location;
+    }
+
+    public void setLocation(GeoPoint location) {
+        this.location = location;
     }
 
     @Override

@@ -90,8 +90,16 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Set Trade Location"
+            android:id="@+id/GetLocationButton" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Accept Bid"
             android:id="@+id/acceptBidButton" />
+
+
 
     </LinearLayout>
 
