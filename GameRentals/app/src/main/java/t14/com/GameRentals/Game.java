@@ -228,7 +228,8 @@ public class Game implements Serializable{
        if(!ownerID.equalsIgnoreCase(UserController.getCurrentUser().getUserName())) {
            returnString += "\nOwner Username: " + ownerID;
        }
-       if(borrowerID != null && !borrowerID.equals(UserController.getCurrentUser().getUserName())){
+       if(borrowerID != null && !borrowerID.equals(UserController.getCurrentUser().getUserName()) &&
+               status == GameController.STATUS_BORROWED){
            returnString += "\nBorrower Username: " + borrowerID;
        }
         return returnString;
