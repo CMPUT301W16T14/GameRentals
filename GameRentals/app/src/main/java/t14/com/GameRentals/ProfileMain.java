@@ -103,5 +103,22 @@ public class ProfileMain extends ActionBarActivity {
         ese.execute(currentUser);
     }
 
+    public void checkAndUpdateServer() {
 
-}
+
+    }
+    }
+    /*
+    if(username == null)
+    {
+        check server
+        if good username{
+            addUserTask
+            editUserTask
+        }
+    }
+    else{
+        updateserver();
+    }
+*/
+

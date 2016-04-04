@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 /**
  * Created by yourui on 3/2/16.
  * uc 05.02.01
@@ -19,8 +21,9 @@ import android.widget.ListView;
 public class BidsFragment  extends Fragment {
     private User currentUser;
     private GameList biddedItems;
+    private ArrayList<bidView> bids;
     private ListView biddedItemsView;
-    private ArrayAdapter<Game> adapter;
+    private ArrayAdapter<bidView> adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -30,10 +33,16 @@ public class BidsFragment  extends Fragment {
         biddedItems = new GameList();
         currentUser = UserController.getCurrentUser();
 
+        bids = new ArrayList<bidView>();
+
         biddedItemsView = (ListView)v.findViewById(R.id.biddedItemList);
 
         biddedItems.copyRefListToGames(currentUser.getBiddedItems());
-        adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),R.layout.game_list,biddedItems.getList());
+        for (int i = 0; i < biddedItems.getSize(); i++){
+            bidView bidview = new bidView(biddedItems.getGame(i).getBidList().getBid(currentUser),biddedItems.getGame(i));
+            bids.add(bidview);
+        }
+        adapter = new ArrayAdapter<bidView>(getActivity().getApplicationContext(),R.layout.game_list,bids);
         biddedItemsView.setAdapter(adapter);
 
         biddedItemsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -48,7 +57,6 @@ public class BidsFragment  extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getActivity(),CancelBidActivity.class);
-                        intent.putExtra("currentUser",currentUser);
                         intent.putExtra("bidPosition",position);
                         startActivity(intent);
                     }
@@ -69,8 +77,18 @@ public class BidsFragment  extends Fragment {
     public void onStart(){
         super.onStart();
         //TODO: SET THE BIDLIST TO THE ONE IN SERVER
+        biddedItems = new GameList();
+        currentUser = UserController.getCurrentUser();
+
+        bids = new ArrayList<bidView>();
+
         biddedItems.copyRefListToGames(currentUser.getBiddedItems());
-        adapter = new ArrayAdapter<Game>(getActivity().getApplicationContext(),R.layout.game_list,biddedItems.getList());
+        for (int i = 0; i < biddedItems.getSize(); i++){
+            bidView bidview = new bidView(biddedItems.getGame(i).getBidList().getBid(currentUser),biddedItems.getGame(i));
+            bids.add(bidview);
+        }
+        adapter = new ArrayAdapter<bidView>(getActivity().getApplicationContext(),R.layout.game_list,bids);
         biddedItemsView.setAdapter(adapter);
+
     }
 }

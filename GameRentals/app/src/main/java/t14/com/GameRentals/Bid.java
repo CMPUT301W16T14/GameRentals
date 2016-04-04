@@ -6,13 +6,13 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by cjresler on 2016-02-28.
  */
-public class Bid implements Serializable{
+public class Bid implements Serializable {
     private String bidMaker;
     private double rate;
     private int accepted;
 
     public Bid(User bidMaker, double rate) {
-        this.bidMaker = bidMaker.getID();
+        this.bidMaker = bidMaker.getUserName();
         this.rate = rate;
         this.accepted = 0;
     }
@@ -32,7 +32,7 @@ public class Bid implements Serializable{
 
     public String TransformIsAccepted(){
         if (accepted == 0){
-            return "Not Accepted";
+            return "Pending";
         }
         else if (accepted == 1)return "Accepted";
         else return "Declined";
@@ -59,13 +59,16 @@ public class Bid implements Serializable{
     }
 
     public String toString(){
-        try {
+        /*try {
             return "Bidmaker:" + TransformBidMaker() + "\n rate:" + rate + "\n status: " +  TransformIsAccepted();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        return null;
+        }*/
+
+        return  "Bidmaker: "  + bidMaker + "\nBid status: " + TransformIsAccepted() +
+                "\nBid rate: " + rate;
+        //return null;
     }
 }

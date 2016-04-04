@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 
 /** This activity allows the user to edit games on their list of games. <br>
  * User will select a game from their list, and that game will be passed to this <br>
@@ -78,7 +79,14 @@ public class EditGameActivity extends Activity {
             borrowerNameLabel.setVisibility(View.VISIBLE);
             borrowerName.setText(game.getBorrowerName());
             borrowerName.setClickable(true);
-            //borrowerName.setText("Borrow name will go here when not NULL");
+        }
+        else if(game.getStatus() == GameController.STATUS_BORROWED &&
+                game.getBorrower().equals(currentUser.getUserName())){
+            borrowerName.setVisibility(View.VISIBLE);
+            borrowerNameLabel.setVisibility(View.VISIBLE);
+            borrowerNameLabel.setText("Owner Username: ");
+            borrowerName.setText(game.getOwner());
+            borrowerName.setClickable(true);
         }
 
         gameNameEdit.setText(game.getGameName());
@@ -135,9 +143,46 @@ public class EditGameActivity extends Activity {
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.setStatus(GameController.STATUS_AVAILABLE);
-                statusLabel.setText(game.getStatusString());
-                updateServer();
+                adb.setMessage("This will set the game's status to available, do you want to continue?");
+                adb.setCancelable(true);
+                adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        User loadedUser = new User(null, null, null);
+                        //Change status to available
+                        game.setStatus(GameController.STATUS_AVAILABLE);
+                        //Get the user who was borrowing the game
+                        ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
+                        esg.execute(game.getBorrower());
+
+                        try{
+                            loadedUser = (esg.get());
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                        //Remove the game from the borrower's Borrowed Games list
+                        loadedUser.getBorrowedItems().removeGame(game.getGameID());
+
+                        //Update user on server
+                        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
+                        ese.execute(loadedUser);
+                        //Set game's borrower name to null
+                        game.setBorrower(null);
+                        statusLabel.setText(game.getStatusString());
+
+                        //Update game on server
+                        updateServer();
+                    }
+                });
+                adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                adb.show();
+
             }
         });
 

@@ -20,11 +20,11 @@
             android:id="@+id/textView7"
             android:textSize="30dp" />
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/gameNameText"
-            android:layout_weight="0.03" />
+            android:layout_weight="0.13" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,13 +33,12 @@
             android:id="@+id/textView8"
             android:textSize="30dp" />
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/descriptionText"
-            android:layout_weight="0.88" />
+            android:id="@+id/descriptionText" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,11 +47,22 @@
             android:id="@+id/textView15"
             android:textSize="30dp" />
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/gameOwner"
-            android:layout_weight="0.05" />
+            android:layout_weight="0.05"
+            android:textSize="30dp"
+            android:textColor="#32CD32"/>
+
+        <TextView
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:id="@+id/textView16"
+            android:layout_weight="0.07"
+            android:textSize="30dp" />
+
 
         <LinearLayout
             android:orientation="horizontal"
@@ -60,19 +70,26 @@
             android:layout_height="wrap_content"
             android:weightSum="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView9"
-                android:layout_weight="0.15" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/gameStatus" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                android:id="@+id/CancelBidButton"
-                android:layout_weight="0.67" />
         </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel Bid"
+            android:id="@+id/CancelBidButton"
+            android:layout_weight="0.07" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Return to main"
+            android:id="@+id/cancelBidReturnButton"
+            android:layout_weight="0.07" />
 
     </LinearLayout>
 
