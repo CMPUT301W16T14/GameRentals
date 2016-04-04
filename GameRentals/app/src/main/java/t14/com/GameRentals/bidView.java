@@ -3,12 +3,13 @@ package t14.com.GameRentals;
 import java.io.Serializable;
 
 /**
- * Created by margaret on 16/4/3.
+ * Used primarily for formatting, allowing a user to view a single bid.
+ *
+ * @see BidsFragment
  */
 public class bidView implements Serializable{
     private Bid bid;
     private Game game;
-
 
     public bidView(Bid bid, Game game) {
         this.bid = bid;
@@ -31,10 +32,10 @@ public class bidView implements Serializable{
         this.game = game;
     }
 
-
     public String toString(){
         return "Game name: " + game.getGameName() + "\nDescription: " + game.getDescription()
                 + "\nBid status: " + bid.TransformIsAccepted() + "\nBid rate: " + bid.getRate() +
                 "\nOwner Username: " + game.getOwner();
     }
+
 }

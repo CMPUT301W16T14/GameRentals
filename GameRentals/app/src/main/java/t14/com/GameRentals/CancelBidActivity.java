@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
  * This allows users to cancel a bid that they have offered if it has not yet been accepted or rejected.
  * @see Bid
  * @see ElasticsearchGameController
+ * @see ElasticSearchUsersController
  */
 public class CancelBidActivity extends Activity {
 
@@ -33,11 +34,6 @@ public class CancelBidActivity extends Activity {
         return cancelBidButton;
     }
 
-    public TextView getGameStatus() {
-        return gameStatus;
-    }
-    ///////for UI test
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -45,7 +41,6 @@ public class CancelBidActivity extends Activity {
 
         gameNameText = (TextView)findViewById(R.id.gameNameText);
         descriptionText = (TextView)findViewById(R.id.descriptionText);
-
         gameStatus = (TextView)findViewById(R.id.gameStatus);
 
         gameNameText.setEnabled(false);
@@ -75,6 +70,7 @@ public class CancelBidActivity extends Activity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
         Bid bid = game.getBidList().getBid(currentUser);
 
         gameStatus.setText(bid.TransformIsAccepted());
@@ -87,13 +83,14 @@ public class CancelBidActivity extends Activity {
             public void onClick(View view) {
                 if(game.getStatus() == 2 && currentUser.getUserName().equals(game.getBorrower())){
                     Toast.makeText(CancelBidActivity.this,"it is borrowed, can't be deleted",Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     game.getBidList().RemoveBid(currentUser);
                     currentUser.getBiddedItems().removeGame(game.getGameID());
+
                     if(game.getBidList().getSize() == 0){
                         game.setStatus(0);
                     }
+
                     ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                     ese.execute(currentUser);
                     ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
@@ -117,7 +114,6 @@ public class CancelBidActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //TODO: Go to borrower's profile
-                //User gameOwner = UserController.getUser(game.getOwner());
                 Intent intent = new Intent(CancelBidActivity.this, ViewProfileActivity.class);
                 intent.putExtra("Username", game.getOwner());
                 startActivity(intent);

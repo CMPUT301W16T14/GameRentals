@@ -5,6 +5,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
 import android.widget.ListView;
 
+
 /**
  * Created by aredmond on 3/10/16.
  */
@@ -21,11 +22,11 @@ public class SearchGameActivityTest extends ActivityInstrumentationTestCase2 {
 
         SearchGameActivity activity = (SearchGameActivity) getActivity();
         assertNotNull(activity);
-
-
-        Game EUIV = new Game("EUIV", "grand strategy", "Austin");
-        EUIV.setStatus(GameController.STATUS_BIDDED);
+    Game EUIV = new Game("EUIV", "grand strategy", "Austin");
+    //EUIV.setStatus(GameController.STATUS_BIDDED);
     }
+
+
 
     public void testViewOnScreen(){
         Intent intent = new Intent();
@@ -41,7 +42,8 @@ public class SearchGameActivityTest extends ActivityInstrumentationTestCase2 {
 
     public void testSearch() {
         User Austin = new User("Austin", "aredmond@ualberta.ca", "780");
-        Game EUIV = new Game("EUIV", "grand strategy", "Austin");
+
+        Game EUIV = new Game("EUIV", "grand strategy", Austin.getUserName());
 
         Intent intent = new Intent();
         intent.putExtra("SEARCH_TERM", "grand");

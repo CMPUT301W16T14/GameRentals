@@ -30,7 +30,6 @@ public class EditGameActivity extends Activity {
     private static int RESULT_LOAD_IMAGE = 1;
 
     @Override
-    /**Called when activity is created */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_my_item);
@@ -75,8 +74,7 @@ public class EditGameActivity extends Activity {
             borrowerNameLabel.setVisibility(View.VISIBLE);
             borrowerName.setText(game.getBorrowerName());
             borrowerName.setClickable(true);
-        }
-        else if(game.getStatus() == GameController.STATUS_BORROWED &&
+        } else if (game.getStatus() == GameController.STATUS_BORROWED &&
                 game.getBorrower().equals(currentUser.getUserName())){
             borrowerName.setVisibility(View.VISIBLE);
             borrowerNameLabel.setVisibility(View.VISIBLE);
@@ -116,24 +114,27 @@ public class EditGameActivity extends Activity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //Verify that user really wants to delete game
                 adb.setMessage("Are you sure you want to delete this game?");
                 adb.setCancelable(true);
                 adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         //TODO: Make this remove from server
-                        //UserController.getCurrentUser().getMyGames().removeGame(game);
                         ElasticsearchGameController.RemoveGameTask removeGameTask = new ElasticsearchGameController.RemoveGameTask();
                         removeGameTask.execute(game);
                         finish();
                     }
                 });
+
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
+
                 adb.show();
             }
         });
@@ -148,8 +149,10 @@ public class EditGameActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         User loadedUser = new User(null, null, null);
+
                         //Change status to available
                         game.setStatus(GameController.STATUS_AVAILABLE);
+
                         //Get the user who was borrowing the game
                         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
                         esg.execute(game.getBorrower());
@@ -161,12 +164,14 @@ public class EditGameActivity extends Activity {
                         } catch (ExecutionException e) {
                             e.printStackTrace();
                         }
+
                         //Remove the game from the borrower's Borrowed Games list
                         loadedUser.getBorrowedItems().removeGame(game.getGameID());
 
                         //Update user on server
                         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                         ese.execute(loadedUser);
+
                         //Set game's borrower name to null
                         game.setBorrower(null);
                         statusLabel.setText(game.getStatusString());
@@ -175,11 +180,13 @@ public class EditGameActivity extends Activity {
                         updateServer();
                     }
                 });
+
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
+
                 adb.show();
 
             }
@@ -195,6 +202,7 @@ public class EditGameActivity extends Activity {
                 startActivity(intent);
             }
         });
+
     }
 
     public ImageView getImageProfile(){
@@ -228,8 +236,6 @@ public class EditGameActivity extends Activity {
      * @see ElasticsearchGameController
      */
     public void updateServer(){
-        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        //ese.execute(currentUser);
         ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
         editGameTask.execute(game);
     }

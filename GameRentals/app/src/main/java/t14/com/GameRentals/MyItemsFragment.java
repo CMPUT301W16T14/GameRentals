@@ -17,7 +17,9 @@ import android.widget.RadioButton;
 import java.io.Serializable;
 
 /**
- * This activity displays the current user's games.
+ * This activity displays the current user's games. User can sort between statuses of games they
+ * want to see. Clicking on an item in the list will allow the user to edit or view the details
+ * of the selected game, as well as view any bids that may be on the game if they exist.
  * @see GameRefList
  * @see GameList
  * @see Game
@@ -49,8 +51,6 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         RadioButton availableCheckBox = (RadioButton)v.findViewById(R.id.withAvailableCheckBox);
 
 
-        //allCheckBox.setChecked(true);
-
         addButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -70,7 +70,6 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 CreateTestData test = new CreateTestData();
                 test.createObjects();
-                //test.setGameStatuses();
             }
         });
 
@@ -92,9 +91,8 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            //Switch to edit games screen
+                            //Switch to view games screen
                             Intent intent = new Intent(getActivity(), ViewGameActivity.class);
-
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }
@@ -119,7 +117,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                     adb.setPositiveButton("VIEW GAME", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //Switch to edit games screen
+                            //Switch to view games screen
 
                             Intent intent = new Intent(getActivity(), ViewGameActivity.class);
 
@@ -132,7 +130,6 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO:Go to view bids activity
                             Intent intent = new Intent(getActivity(), EditGameActivity.class);
-
                             intent.putExtra("Game", (Serializable) selectedGame);
                             startActivity(intent);
                         }
@@ -156,9 +153,8 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                     adb.setPositiveButton("VIEW", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //Change to edit game screen
+                            //Change to view game screen
                             Intent intent = new Intent(getActivity(), ViewGameActivity.class);
-
                             intent.putExtra("Game", (Serializable)selectedGame);
                             startActivity(intent);
                         }

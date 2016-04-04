@@ -34,7 +34,6 @@
         </activity>
 
 
-        <activity android:name=".ViewMyGamesActivity" />
         <activity android:name=".AddGameActivity"/>
         <activity android:name=".EditGameActivity"/>
         <activity android:name=".ViewGameActivity"/>

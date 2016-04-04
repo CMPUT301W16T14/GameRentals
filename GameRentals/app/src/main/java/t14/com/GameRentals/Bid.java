@@ -33,14 +33,10 @@ public class Bid implements Serializable{
         return bidMaker;
     }
 
-    public String TransformBidMaker() throws ExecutionException, InterruptedException {
-        User Maker;
-        ElasticSearchUsersController.GetUserByIDTask getUserByIDTask= new ElasticSearchUsersController.GetUserByIDTask();
-        getUserByIDTask.execute(bidMaker);
-        Maker = getUserByIDTask.get();
-        return Maker.getUserName();
-    }
-
+    /**
+     * Status of bids
+     * @return A String describing the status of the bids
+     */
     public String TransformIsAccepted(){
         if (accepted == 0){
             return "Pending";
@@ -49,20 +45,12 @@ public class Bid implements Serializable{
         else return "Declined";
     }
 
-    public void setBidMaker(String bidMaker) {
-        this.bidMaker = bidMaker;
-    }
-
     /**
      *
      * @return double
      */
     public double getRate() {
         return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
     }
 
     /**
@@ -87,16 +75,8 @@ public class Bid implements Serializable{
      * @see User
      */
     public String toString(){
-        /*try {
-            return "Bidmaker:" + TransformBidMaker() + "\n rate:" + rate + "\n status: " +  TransformIsAccepted();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
         return  "Bidmaker: "  + bidMaker + "\nBid status: " + TransformIsAccepted() +
                 "\nBid rate: " + rate;
-        //return null;
     }
+
 }
