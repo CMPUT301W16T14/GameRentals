@@ -1,6 +1,7 @@
 package t14.com.GameRentals;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -19,10 +20,12 @@ import java.io.Serializable;
 public class EditGameActivityTest extends ActivityInstrumentationTestCase2 {
 
     Instrumentation instrumentation;
-    Activity activity;
+    EditGameActivity activity;
     EditText nameInput;
     EditText descriptionInput;
     Game game;
+    User testUser;
+    AlertDialog.Builder adb;
     public EditGameActivityTest(){
         super(EditGameActivity.class);
     }
@@ -30,13 +33,14 @@ public class EditGameActivityTest extends ActivityInstrumentationTestCase2 {
     protected void setUp() throws Exception {
         super.setUp();
         instrumentation = getInstrumentation();
-        User testUser = new User("test", "test", "123");
+        testUser = new User("test", "test", "123");
         UserController.setUser(testUser);
         game = new Game("test", "test", testUser.getUserName());
+        game.setStatus(GameController.STATUS_BORROWED);
         Intent intent = new Intent();
         intent.putExtra("Game", (Serializable) game);
         setActivityIntent(intent);
-        activity = getActivity();
+        activity = (EditGameActivity)getActivity();
         nameInput = ((EditText) activity.findViewById(R.id.editGameNameEditText));
         descriptionInput = ((EditText) activity.findViewById(R.id.editGameDescriptionText));
     }
@@ -47,18 +51,17 @@ public class EditGameActivityTest extends ActivityInstrumentationTestCase2 {
         descriptionInput.setText(description);
         ((Button) activity.findViewById(R.id.editGameSaveButton)).performClick();
     }
-/*
-    private void deleteGame() {
-        assertNotNull(activity.findViewById(R.id.editGameSaveButton));
-        ((Button) activity.findViewById(R.id.editGameDeleteButton)).performClick();
-    } */
+
+    private void returnGame() {
+        assertNotNull(activity.findViewById(R.id.editGameReturnButton));
+        ((Button) activity.findViewById(R.id.editGameReturnButton)).performClick();
+    }
 
     //Test editing a game
     @UiThreadTest
     public void testEditGame(){
         EditText gameName = (EditText) activity.findViewById(R.id.editGameNameEditText);
         EditText gameDescription = (EditText) activity.findViewById(R.id.editGameDescriptionText);
-        TextView statusLabel = (TextView) activity.findViewById(R.id.editGameStatus);
         assertEquals("Initial game name", gameName.getText().toString(), "test");
         assertEquals("Initial description", gameDescription.getText().toString(), "test");
         saveEdit("name", "description");
@@ -68,22 +71,17 @@ public class EditGameActivityTest extends ActivityInstrumentationTestCase2 {
         assertEquals("After description", testGame.getDescription(), "description");
 
     }
-/*
-    //Test editing a game
+
+    //Test returning a game
     @UiThreadTest
-    public void testDeleteGame(){
-        EditText gameName = (EditText) activity.findViewById(R.id.editGameNameEditText);
-        EditText gameDescription = (EditText) activity.findViewById(R.id.editGameDescriptionText);
-        TextView statusLabel = (TextView) activity.findViewById(R.id.editGameStatus);
-        assertEquals("Initial game name", gameName.getText().toString(), "test");
-        assertEquals("Initial description", gameDescription.getText().toString(), "test");
-        saveEdit("name", "description");
-
+    public void testReturnGame(){
         Game testGame = (Game) getActivity().getIntent().getSerializableExtra("Game");
-        assertEquals("After game name", testGame.getGameName(), "name");
-        assertEquals("After description", testGame.getDescription(), "description");
+        assertEquals("Status should be borrowed", testGame.getStatus(), 2);
+        returnGame();
+        Game testGame2 = (Game) getActivity().getIntent().getSerializableExtra("Game");
 
-    }*/
+        assertEquals("Status should be available", testGame2.getStatus(), 0);
+    }
 
     public void testViewOnScreen() {
         Intent intent = new Intent();
