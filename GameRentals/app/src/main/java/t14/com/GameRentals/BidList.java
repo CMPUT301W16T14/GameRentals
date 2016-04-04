@@ -30,6 +30,14 @@ public class BidList implements Serializable{
         bid = list.get(position);
         return bid;
     }
+    public Bid getBid(User user){
+        for(int i = 0; i < list.size(); i++){
+            if(user.getUserName().equals(list.get(i).getBidMaker())){
+                return list.get(i);
+            }
+        }
+        return null;
+    }
 
     public void AddBid(User user, double rate){
         Bid bid = new Bid(user,rate);

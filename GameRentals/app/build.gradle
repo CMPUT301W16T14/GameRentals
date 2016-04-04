@@ -24,6 +24,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:18.0.0'
     compile files('src/include/jest-droid-2.0.1-SNAPSHOT.jar')
+<<<<<<< HEAD
     compile files('src/include/osmbonuspack_v5.1.jar')
     compile 'org.osmdroid:osmdroid-android:5.1'
+=======
+    //from http://developer.android.com/training/testing/ui-testing/espresso-testing.html
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+>>>>>>> 0NewMaster
 }

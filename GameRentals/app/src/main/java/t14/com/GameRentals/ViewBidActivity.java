@@ -39,12 +39,17 @@ public class ViewBidActivity extends Activity {
 
         final EditText gameNameEdit = (EditText) findViewById(R.id.BidGameName);
         final EditText gameDescriptionEdit = (EditText) findViewById(R.id.BidGameDescription);
+
+        gameNameEdit.setEnabled(false);
+        gameNameEdit.setTextColor(Color.BLACK);
+        gameDescriptionEdit.setEnabled(false);
+        gameDescriptionEdit.setTextColor(Color.BLACK);
         final TextView bidUser = (TextView) findViewById(R.id.bidUser);
         final EditText bidRate = (EditText) findViewById(R.id.bidRate);
         final int gamePosition = getIntent().getExtras().getInt("gamePosition");
         final int bidPosition = getIntent().getExtras().getInt("bidPosition");
 
-        currentUser = (User) getIntent().getExtras().get("currentUser");
+        currentUser = UserController.getCurrentUser();
 
         gameNameEdit.setText(currentUser.getMyGames().getGame(gamePosition).getGameName());
         gameDescriptionEdit.setText(currentUser.getMyGames().getGame(gamePosition).getDescription());
@@ -81,8 +86,18 @@ public class ViewBidActivity extends Activity {
             @Override
             public void onClick(View view) {
                 game.getBidList().getItem(bidPosition).setAccepted(2);//decline
+                int count = 0;
                 if (game.getBidList().getSize() == 0) {
                     game.setStatus(0);
+                }
+                else {
+                    for (int i = 0; i < game.getBidList().getSize(); i++) {
+                        if (game.getBidList().getItem(i).isAccepted() == 2)
+                            count++;
+                    }
+                    if (count == game.getBidList().getSize()) {
+                        game.setStatus(0);
+                    }
                 }
                 bidList.getItem(bidPosition).setAccepted(2);//decline
                 ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
