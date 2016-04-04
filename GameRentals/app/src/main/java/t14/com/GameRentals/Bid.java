@@ -67,7 +67,8 @@ public class Bid implements Serializable {
             e.printStackTrace();
         }*/
 
-        return  "Bidmaker:"  + bidMaker + "status:" + TransformIsAccepted();
+        return  "Bidmaker: "  + bidMaker + "\nBid status: " + TransformIsAccepted() +
+                "\nBid rate: " + rate;
         //return null;
     }
 }

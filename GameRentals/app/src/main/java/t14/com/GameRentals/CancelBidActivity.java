@@ -62,6 +62,7 @@ public class CancelBidActivity extends Activity {
         gameStatus.setText(bid.TransformIsAccepted());
 
         cancelBidButton = (Button)findViewById(R.id.CancelBidButton);
+        final Button returnButton = (Button) findViewById(R.id.cancelBidReturnButton);
 
         cancelBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +85,13 @@ public class CancelBidActivity extends Activity {
                     finish();
                 }
 
+            }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

@@ -87,8 +87,15 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete"
+            android:text="Cancel Bid"
             android:id="@+id/CancelBidButton"
+            android:layout_weight="0.07" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Return to previous screen"
+            android:id="@+id/cancelBidReturnButton"
             android:layout_weight="0.07" />
 
     </LinearLayout>

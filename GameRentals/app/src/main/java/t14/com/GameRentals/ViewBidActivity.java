@@ -39,6 +39,11 @@ public class ViewBidActivity extends Activity {
 
         final EditText gameNameEdit = (EditText) findViewById(R.id.BidGameName);
         final EditText gameDescriptionEdit = (EditText) findViewById(R.id.BidGameDescription);
+
+        gameNameEdit.setEnabled(false);
+        gameNameEdit.setTextColor(Color.BLACK);
+        gameDescriptionEdit.setEnabled(false);
+        gameDescriptionEdit.setTextColor(Color.BLACK);
         final TextView bidUser = (TextView) findViewById(R.id.bidUser);
         final EditText bidRate = (EditText) findViewById(R.id.bidRate);
         final int gamePosition = getIntent().getExtras().getInt("gamePosition");
