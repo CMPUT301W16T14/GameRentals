@@ -38,7 +38,7 @@ public class Game implements Serializable{
     private String ownerID;
     private String borrowerID;
     //private ArrayList<Image> images;
-    private Image image;
+    private Image gameimage;
     /** Constructor for game object.
      *
      * @param gameName The name of game to create.
@@ -52,7 +52,7 @@ public class Game implements Serializable{
         this.bidList = new BidList();
         this.ownerID = owner;
         this.borrowerID = null;
-        this.image = null;
+        this.gameimage = null;
 
     }
 
@@ -221,7 +221,7 @@ public class Game implements Serializable{
         this.bidList = game.getBidList();
         this.ownerID = game.getOwner();
         this.borrowerID = game.getBorrower();
-        this.image = game.getImage();
+        this.gameimage = game.getGameimage();
     }
 /*
     public Image getImagebyIndex(int index){
@@ -268,12 +268,21 @@ public class Game implements Serializable{
        }
         return returnString;
     }
-
-    public void setImage(Image image) {
-        this.image = image;
+/*
+    public void setGameImage(Image gameimage) {
+        this.gameimage = gameimage;
     }
 
     public Image getImage() {
-        return image;
+        return gameimage;
+    }
+    */
+
+    public Image getGameimage() {
+        return gameimage;
+    }
+
+    public void setGameimage(Image gameimage) {
+        this.gameimage = gameimage;
     }
 }

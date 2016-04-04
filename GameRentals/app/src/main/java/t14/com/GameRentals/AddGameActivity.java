@@ -28,7 +28,8 @@ public class AddGameActivity extends Activity {
     private Game game;
     private static int RESULT_LOAD_IMAGE = 1;
     //private gameImage gameimage;
-    private ImageView gameimage;
+    private ImageView gameImage;
+    private Image gameimage;
     private Boolean filledMainImage;
     private  Bitmap thumbnail;
     private ArrayList<Bitmap> gameimages;
@@ -43,11 +44,12 @@ public class AddGameActivity extends Activity {
         setContentView(R.layout.activity_add_game);
         currentUser = (User)getIntent().getExtras().get("currentUser");
         game = (Game) getIntent().getSerializableExtra("test");
+        //gameimage = (Image) getIntent().getStringExtra();
         gameName = (EditText)findViewById(R.id.addGameNameEditText);
         gameDescription = (EditText)findViewById(R.id.addGameDescriptionEditText);
         Button okButton = (Button)findViewById(R.id.addGameOkButton);
         Button cancelButton = (Button)findViewById(R.id.addGameCancelButton);
-        gameimage = (ImageView)findViewById(R.id.gameImage);
+        gameImage = (ImageView)findViewById(R.id.gameImage);
 
         filledMainImage = Boolean.FALSE;
         ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
@@ -69,10 +71,11 @@ public class AddGameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //ArrayList<Image> gameImages = new ArrayList<Image>();
-                Image gameImage = new Image(null);
-                Bitmap gameimage = null;
+                Image gameimage = new Image(null);
+                //Bitmap gameimage = null;
                 String name = gameName.getText().toString();
                 String description = gameDescription.getText().toString();
+
 
                 //Verify that game name is not left empty
                 if(name.equalsIgnoreCase("")){
@@ -89,7 +92,7 @@ public class AddGameActivity extends Activity {
                     game.setGameName(name);
                     game.setDescription(description);
 
-                    gameImage.setImage(gameImage);
+                    gameimage.setImage(gameimage);
                     //gameImages.add(new Image(gameimage));
                     thumbnail = null;
                     //currentUser.getMyGames().addGame(game);
@@ -138,10 +141,11 @@ public class AddGameActivity extends Activity {
             }
         });
     }
+    /*
     public ImageView getImageProfile(){
         return (ImageView) findViewById(R.id.gameImage);
     }
-
+*/
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
 
@@ -164,14 +168,14 @@ public class AddGameActivity extends Activity {
             imageView.setTag("Changed");
             filledMainImage = Boolean.TRUE;
 */
-
+/*
             if(!filledMainImage) {
                 ImageView imageView = getImageViewCard();
                 imageView.setImageBitmap(bitmap);
                 imageView.setTag("Changed");
                 filledMainImage = Boolean.TRUE;
             }
-
+*/
             //getCardImages().add(bitmap);
             //this.Update(null);
 
@@ -254,8 +258,9 @@ public class AddGameActivity extends Activity {
     public void setFilledMainImage(Boolean filledMainImage) {
         this.filledMainImage = filledMainImage;
     }
-
-    public ImageView getImageViewCard() {
-        return imageViewCard;
+/*
+    public ImageView getImageViewGame() {
+        return imageViewGame;
     }
+    */
 }
