@@ -17,8 +17,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import java.io.Serializable;
@@ -27,9 +25,9 @@ import java.io.Serializable;
 public class LocationActivity extends Activity implements MapEventsReceiver {
 
     public static final String MOCK_PROVIDER = "mockLocationProvider";
-    public GeoPoint startPoint = new GeoPoint(53.5444, 113.4909);
+    public GeoPoint mapPoint = new GeoPoint(53.5444, -113.4909);
     private MyLocationOverlay myLocationOverlay;
-    private Marker startMarker;
+    private Marker mapMarker;
     private MapView map;
     private IMapController mapController;
 
@@ -44,7 +42,7 @@ public class LocationActivity extends Activity implements MapEventsReceiver {
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location != null) {
             // Default location is edmonton
-            startPoint = new GeoPoint(location);
+            mapPoint = new GeoPoint(location);
 
         }
         // Listener for updating location
@@ -62,7 +60,7 @@ public class LocationActivity extends Activity implements MapEventsReceiver {
         map.setClickable(true);
         mapController = map.getController();
         mapController.setZoom(9);
-        mapController.setCenter(startPoint);
+        mapController.setCenter(mapPoint);
 
         // Allows for map animations
         myLocationOverlay = new MyLocationOverlay(getApplicationContext(), map);
@@ -80,10 +78,10 @@ public class LocationActivity extends Activity implements MapEventsReceiver {
         });
 
         // A marker on the current location
-        startMarker = new Marker(map);
-        startMarker.setPosition(startPoint);
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        map.getOverlays().add(startMarker);
+        mapMarker = new Marker(map);
+        mapMarker.setPosition(mapPoint);
+        mapMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        map.getOverlays().add(mapMarker);
 
         // Event listener for user touches
         MapEventsOverlay evOverlay = new MapEventsOverlay(this, this);
@@ -134,7 +132,7 @@ public class LocationActivity extends Activity implements MapEventsReceiver {
 
     public void onClickGeo(View v) {
         Intent intent = new Intent();
-        intent.putExtra("Start_Point", (Serializable) startPoint);
+        intent.putExtra("Start_Point", (Serializable) mapPoint);
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -150,8 +148,8 @@ public class LocationActivity extends Activity implements MapEventsReceiver {
      */
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint arg0) {
-        startPoint = arg0;
-        startMarker.setPosition(arg0);
+        mapPoint = arg0;
+        mapMarker.setPosition(arg0);
         map.invalidate();
         return false;
     }
