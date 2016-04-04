@@ -1,6 +1,8 @@
 package t14.com.GameRentals;
 
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -35,7 +37,8 @@ public class Game implements Serializable{
     private BidList bidList;
     private String ownerID;
     private String borrowerID;
-   // private ArrayList<Image> images;
+    //private ArrayList<Image> images;
+    private Image image;
     /** Constructor for game object.
      *
      * @param gameName The name of game to create.
@@ -49,7 +52,7 @@ public class Game implements Serializable{
         this.bidList = new BidList();
         this.ownerID = owner;
         this.borrowerID = null;
-       // this.images = images;
+        this.image = null;
 
     }
 
@@ -205,11 +208,12 @@ public class Game implements Serializable{
         this.gameName = gameName;
     }
 
-    /** Copies game to have identical attributes to a given one
+    /**
+     * Copies game to have identical attributes to a given one
      *
      * @param game Game that should be copied into this game
      */
-    public void copyGame(Game game){
+    public void copyGame(Game game) {
         this.gameName = game.getGameName();
         this.description = game.getDescription();
         this.gameID = game.getGameID();
@@ -217,7 +221,7 @@ public class Game implements Serializable{
         this.bidList = game.getBidList();
         this.ownerID = game.getOwner();
         this.borrowerID = game.getBorrower();
-        //this.images = game.getImages();
+        this.image = game.getImage();
     }
 /*
     public Image getImagebyIndex(int index){
@@ -231,8 +235,23 @@ public class Game implements Serializable{
 
         getImages().add(image);
     }
+
+    public Bitmap constructImage(int index){
+        return getImages().get(index).constructImage();
+    }
 */
-   @Override
+/*
+    public ArrayList<Image> getImages() {
+        return images;
+    }
+*/
+    /*
+    public void setImages(ArrayList<Image> images) {
+        this.images = images;
+    }
+    */
+
+    @Override
    /** Display game in proper format
     *
     */
@@ -248,5 +267,13 @@ public class Game implements Serializable{
            returnString += "\nBorrower Username: " + borrowerID;
        }
         return returnString;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }

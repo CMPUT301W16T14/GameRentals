@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
  */
 public class Image extends AddGameActivity {
     private String imageserial;
+    private Image image;
 
     /**
      *
@@ -114,5 +115,9 @@ public class Image extends AddGameActivity {
         b = null;
 
         return string;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

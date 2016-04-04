@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,8 +28,13 @@ public class AddGameActivity extends Activity {
     private Game game;
     private static int RESULT_LOAD_IMAGE = 1;
     //private gameImage gameimage;
+    private ImageView gameimage;
     private Boolean filledMainImage;
+    private  Bitmap thumbnail;
     private ArrayList<Bitmap> gameimages;
+    private ImageView imageViewCard;
+    //static final int REQUEST_CAPTURING_IMAGE = 1234;
+
 
     @Override
     /** Called when activity is created */
@@ -41,6 +47,7 @@ public class AddGameActivity extends Activity {
         gameDescription = (EditText)findViewById(R.id.addGameDescriptionEditText);
         Button okButton = (Button)findViewById(R.id.addGameOkButton);
         Button cancelButton = (Button)findViewById(R.id.addGameCancelButton);
+        gameimage = (ImageView)findViewById(R.id.gameImage);
 
         filledMainImage = Boolean.FALSE;
         ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
@@ -55,14 +62,18 @@ public class AddGameActivity extends Activity {
             }
         });
 
+
         /** Handle OK button being clicked */
         okButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                //ArrayList<Image> gameImages = new ArrayList<Image>();
+                Image gameImage = new Image(null);
+                Bitmap gameimage = null;
                 String name = gameName.getText().toString();
                 String description = gameDescription.getText().toString();
-                ArrayList<Image> gameImages = new ArrayList<Image>();
+
                 //Verify that game name is not left empty
                 if(name.equalsIgnoreCase("")){
                     gameName.setError("Game name cannot be empty");
@@ -77,7 +88,10 @@ public class AddGameActivity extends Activity {
                 else{
                     game.setGameName(name);
                     game.setDescription(description);
+
+                    gameImage.setImage(gameImage);
                     //gameImages.add(new Image(gameimage));
+                    thumbnail = null;
                     //currentUser.getMyGames().addGame(game);
                     //Update user and add game to server
                     //addTestData();
@@ -86,6 +100,32 @@ public class AddGameActivity extends Activity {
                     //currentUser.getMyGames().addGame(gameID);
                     finish();
                 }
+                /*
+                User owner = model.getUser();
+                Bitmap cardimage = null;
+                ArrayList<Image> cardImages = new ArrayList<Image>();
+                if(view.getImageViewCard().getTag().equals("Changed")) {
+                    for(Bitmap bmp: view.getCardImages()) {
+                        //cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
+                        cardImages.add(new Image(bmp));
+                    }
+                }
+
+                else {
+                    cardimage = BitmapFactory.decodeResource(view.getResources(), R.drawable.img_no_img);
+                    cardImages.add(new Image(cardimage));
+                }
+                Toast.makeText(view, "Submitted a card...",
+                        Toast.LENGTH_SHORT).show();
+                Card card = new Card(name, quantity, quality, catagory, series, tradable, comments, cardImages, owner);
+                model.getUser().addInventoryItem(card);
+                //model.getUser().addInventoryItem(new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner));
+                //cardimage.recycle();
+                cardimage = null;
+
+                profileSerializer.Serialize(model, view);
+                view.navigateToInventory();
+                */
             }
         });
 
@@ -117,10 +157,23 @@ public class AddGameActivity extends Activity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+            /*
             ImageView imageView = getImageProfile();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             imageView.setTag("Changed");
             filledMainImage = Boolean.TRUE;
+*/
+
+            if(!filledMainImage) {
+                ImageView imageView = getImageViewCard();
+                imageView.setImageBitmap(bitmap);
+                imageView.setTag("Changed");
+                filledMainImage = Boolean.TRUE;
+            }
+
+            //getCardImages().add(bitmap);
+            //this.Update(null);
 
 
         }
@@ -143,6 +196,10 @@ public class AddGameActivity extends Activity {
 
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
+    public ArrayList<Bitmap> getCardImages(){
+        return this.gameimages;
+    }
+
 /*
     public void addTestData(){
         User test = new User("Dude", "dude", "123");
@@ -163,4 +220,42 @@ public class AddGameActivity extends Activity {
 
     }*/
 
+    /*
+    @Override
+
+    public void Update(Model model) {
+        mAdapter.notifyDataSetChanged();
+
+    }
+
+    public void navigateToInventory(){
+        finish();
+
+    }
+    */
+
+/*
+    public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
+
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+    }
+*/
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public Boolean getFilledMainImage() {
+        return filledMainImage;
+    }
+
+    public void setFilledMainImage(Boolean filledMainImage) {
+        this.filledMainImage = filledMainImage;
+    }
+
+    public ImageView getImageViewCard() {
+        return imageViewCard;
+    }
 }

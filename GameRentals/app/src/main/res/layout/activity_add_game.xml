@@ -22,7 +22,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_height="wrap_content"
             android:id="@+id/imageButton"
             android:src="@drawable/ic_setting"
-            android:layout_gravity="left|top" />
+            android:layout_gravity="left|top"
+            android:layout_below="@+id/greyRectMask"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <ImageView
             android:layout_width="207dp"
@@ -35,6 +38,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     </FrameLayout>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -44,6 +48,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="207dp">
+
 
         <TextView
             android:layout_width="226dp"

@@ -29,6 +29,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
     private ListView myItems;
     private ArrayAdapter<Game> adapter;
     private User currentUser;
+    static View view;
 
     @Override
     /** Called when the activity view is created */
