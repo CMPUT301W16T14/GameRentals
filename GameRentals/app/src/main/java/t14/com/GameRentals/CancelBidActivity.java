@@ -13,7 +13,10 @@ import android.widget.Toast;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by yourui on 3/11/16.
+ * This allows users to cancel a bid that they have offered if it has not yet been accepted or rejected.
+ * @see Bid
+ * @see ElasticsearchGameController
+ * @see ElasticSearchUsersController
  */
 public class CancelBidActivity extends Activity {
 
@@ -24,30 +27,13 @@ public class CancelBidActivity extends Activity {
     private TextView gameNameText;
     private TextView descriptionText;
     private TextView gameStatus;
-
     private TextView gameOwner;
 
     private Button cancelBidButton;
-    ////////for UI test
-    public TextView getGameNameText(){
-        return gameNameText;
-    }
-    public TextView getDescriptionText(){
-        return descriptionText;
-    }
-
-    public TextView getGameOwner() {
-        return gameOwner;
-    }
 
     public Button getCancelBidButton() {
         return cancelBidButton;
     }
-
-    public TextView getGameStatus() {
-        return gameStatus;
-    }
-    ///////for UI test
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -56,7 +42,6 @@ public class CancelBidActivity extends Activity {
 
         gameNameText = (TextView)findViewById(R.id.gameNameText);
         descriptionText = (TextView)findViewById(R.id.descriptionText);
-
         gameStatus = (TextView)findViewById(R.id.gameStatus);
 
         gameNameText.setEnabled(false);
@@ -73,11 +58,12 @@ public class CancelBidActivity extends Activity {
         biddedItems.copyRefListToGames(currentUser.getBiddedItems());
         int position = getIntent().getExtras().getInt("bidPosition");
         game = biddedItems.getGame(position);
-
         gameNameText.setText(game.getGameName());
         descriptionText.setText(game.getDescription());
+
         ElasticSearchUsersController.GetUserTask getUserTask = new ElasticSearchUsersController.GetUserTask();
         getUserTask.execute(game.getOwner());
+
         try {
             gameOwner.setText(getUserTask.get().getUserName());
         } catch (InterruptedException e) {
@@ -85,6 +71,7 @@ public class CancelBidActivity extends Activity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
         Bid bid = game.getBidList().getBid(currentUser);
 
         gameStatus.setText(bid.TransformIsAccepted());
@@ -97,13 +84,14 @@ public class CancelBidActivity extends Activity {
             public void onClick(View view) {
                 if(game.getStatus() == 2 && currentUser.getUserName().equals(game.getBorrower())){
                     Toast.makeText(CancelBidActivity.this,"it is borrowed, can't be deleted",Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     game.getBidList().RemoveBid(currentUser);
                     currentUser.getBiddedItems().removeGame(game.getGameID());
+
                     if(game.getBidList().getSize() == 0){
                         game.setStatus(0);
                     }
+
                     ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
                     ese.execute(currentUser);
                     ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
@@ -127,12 +115,11 @@ public class CancelBidActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //TODO: Go to borrower's profile
-                //User gameOwner = UserController.getUser(game.getOwner());
                 Intent intent = new Intent(CancelBidActivity.this, ViewProfileActivity.class);
                 intent.putExtra("Username", game.getOwner());
                 startActivity(intent);
             }
         });
-
     }
+
 }

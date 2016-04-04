@@ -19,7 +19,7 @@ import io.searchbox.core.SearchResult;
 
 /**
  * This class is modeled after the ElasticsearchTweetController introduced in the lab. Its purpose
- * is to interact with the server.
+ * is to interact with the server to update database information.
  *<p>
  * @author aredmond
  */
@@ -62,6 +62,10 @@ public class ElasticsearchGameController {
         }
     }
 
+    /**
+     * Adding a game to the server.
+     * @see Game
+     */
     public static class AddGameTask extends AsyncTask<Game,Void,Game> {
         Gson gson = new Gson();
         Game addedGame;
@@ -93,20 +97,28 @@ public class ElasticsearchGameController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
+
             return addedGame;
         }
 
         protected void onPostExecute(Game addedGame){
             ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
             editGameTask.execute(addedGame);
+
             String testID = addedGame.getGameID();
             UserController.getCurrentUser().getMyGames().addGame(testID);
+
             ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
             ese.execute(UserController.getCurrentUser());
         }
+
     }
 
+    /**
+     * @see Game
+     */
     public static class AddTestGameTask extends AsyncTask<Game,Void,Game> {
         Gson gson = new Gson();
         Game addedGame;
@@ -145,8 +157,13 @@ public class ElasticsearchGameController {
             ElasticsearchGameController.EditTestGameTask editGameTask = new ElasticsearchGameController.EditTestGameTask();
             editGameTask.execute(addedGame);
         }
+
     }
 
+    /**
+     * Removing a game from the server.
+     * @see Game
+     */
     public static class RemoveGameTask extends AsyncTask<Game,Void,Game> {
         Game removedGame;
 
@@ -186,8 +203,13 @@ public class ElasticsearchGameController {
             ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
             ese.execute(UserController.getCurrentUser());
         }
+
     }
 
+    /**
+     * Get a game from the server.
+     * @see Game
+     */
     public static class GetGameTask extends AsyncTask<String,Void,Game>{
         @Override
         protected Game doInBackground(String... params) {
@@ -261,6 +283,9 @@ public class ElasticsearchGameController {
         }
     }
 
+    /**
+     * Allows users to look for games based on search terms given.
+     */
     public static class SearchGamesTask extends AsyncTask<String,Void,GameList> {
         /**
          *
@@ -274,21 +299,6 @@ public class ElasticsearchGameController {
             // Hold (eventually) the games that we get back from Elasticsearch
             GameList games = new GameList();
 
-            /*
-            {
-                "query": {
-                    "bool": {
-                        "must": [
-                            { "match": { "description": "first" } },
-                            { "match": { "description": "shooter" } }
-                        ],
-                        "must_not": { "match": {"status"; 2} }
-                    }
-                }
-            }
-
-             */
-
             String insertTerms = "";
 
             for (String searchTerm: params) {
@@ -301,6 +311,7 @@ public class ElasticsearchGameController {
             String search_string = "{\"from\":0,\"size\":10000,\"query\":{\"bool\":{\"must\":[ " + insertTerms + " ], \"must_not\": {\"match\": {\"status\": 2}}}}}";
 
             Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType(serverType).build();
+
             try {
                 SearchResult execute = client.execute(search);
                 if(execute.isSucceeded()) {
@@ -317,21 +328,30 @@ public class ElasticsearchGameController {
         }
     }
 
+    /**
+     * Updates the server when users edit their games or when there is a change in game attributes.
+     * @see Game
+     */
     public static class EditGameTask extends AsyncTask<Game,Void,Void>{
         Gson gson = new Gson();
+
         @Override
         protected Void doInBackground(Game... params) {
             verifyConfig();
+
             for(Game game : params) {
                 String json = gson.toJson(game);
                 Index index = new Index.Builder(json).index("cmput301w16t14").type(serverType).id(game.getGameID()).build();
+
                 try {
                     DocumentResult execute = client.execute(index);
+
                     if(execute.isSucceeded()) {
                         //user.setID(execute.getId());
                     } else {
                         Log.e("TODO", "Our edit of user failed, oh no!");
                     }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -378,4 +398,5 @@ public class ElasticsearchGameController {
             client = (JestDroidClient) factory.getObject();
         }
     }
+
 }

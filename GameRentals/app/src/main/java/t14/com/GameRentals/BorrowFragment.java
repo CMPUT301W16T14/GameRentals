@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 
 /**
- * The fragment shows all games that are borrowed by the user in a list.
+ * Shows all games that the user is borrowing (2nd Fragment).
  * <p>
  * @author aredmond
  */
@@ -95,11 +95,6 @@ public class BorrowFragment extends Fragment {
         return v;
     }
 
-    /**
-     * On start, the fragment sets the adapter so that the view shows the most up-to-date list of
-     * borrowed games.
-     * <p>
-     */
     @Override
     public void onStart() {
         super.onStart();
@@ -110,7 +105,6 @@ public class BorrowFragment extends Fragment {
     }
 
     @Override
-    /**Called when activity is first created */
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         currentUser = UserController.getCurrentUser();

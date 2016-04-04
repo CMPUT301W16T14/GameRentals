@@ -34,7 +34,6 @@
         </activity>
 
 
-        <activity android:name=".ViewMyGamesActivity" />
         <activity android:name=".AddGameActivity"/>
         <activity android:name=".EditGameActivity"/>
         <activity android:name=".ViewGameActivity"/>
@@ -50,12 +49,6 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="t14.com.GameRentals.MainActivity" /></activity>
         <activity android:name=".SearchGameActivity" android:label="@string/title_activity_search_game"></activity>
-        <activity android:name=".CreateAccountActivity">
-            <intent-filter >
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".LocationActivity"
             android:label="@string/title_activity_location"></activity>

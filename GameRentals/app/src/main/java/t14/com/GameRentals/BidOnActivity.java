@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by yourui on 3/4/16.
+ * The bidButton directs the user to the BidOnGameActivity which allows users to bid on games
+ * @see BidOnGameActivity
  */
 public class BidOnActivity extends Activity {
     private Game game;
@@ -33,20 +34,21 @@ public class BidOnActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result_for_bid);
 
-        //final EditText searchGameId = (EditText) findViewById(R.id.searchGameId);
         final EditText searchGameName = (EditText) findViewById(R.id.searchGameName);
         final EditText searchGameDescription = (EditText) findViewById(R.id.searchGameDescription);
         final EditText searchGameOwner = (EditText)findViewById(R.id.owner);
         loadFromFile();
+
         currentUser = UserController.getCurrentUser();
         gamePosition = getIntent().getExtras().getInt("gamePosition");
         game = returnedGames.get(gamePosition);
 
-        //searchGameId.setText(game.getGameID());
         searchGameName.setText(game.getGameName());
         searchGameDescription.setText(game.getDescription());
+
         ElasticSearchUsersController.GetUserTask getUserTask = new ElasticSearchUsersController.GetUserTask();
         getUserTask.execute(game.getOwner());
+
         try {
             searchGameOwner.setText(getUserTask.get().getUserName());
         } catch (InterruptedException e) {

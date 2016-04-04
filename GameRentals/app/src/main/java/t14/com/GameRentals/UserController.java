@@ -2,7 +2,9 @@ package t14.com.GameRentals;
 
 import java.util.concurrent.ExecutionException;
 
-/**
+/** This class keeps track of the current user of the app through a static variable.
+ *  Methods include getting a user from the server other than the current user, and sorting
+ *  through a user's list of games to allow them to filter statuses of games they want to see.
  * Created by cjresler on 2016-02-28.
  */
 public class UserController {
@@ -20,7 +22,12 @@ public class UserController {
         currentUser = user;
     }
 
-    //Given a GameList, return all games with available status
+    /** Takes in a gameRefList and returns a gameList that contains only the Available games
+     *  that were in it.
+     *
+     * @param games
+     * @return GameList
+     */
     public static GameRefList getAvailable(GameRefList games){
         GameRefList gameList = new GameRefList();
         for(int i = 0; i < games.getSize(); i++){
@@ -31,7 +38,12 @@ public class UserController {
         return gameList;
     }
 
-    //Given a GameList, return all games with borrowed status
+    /** Takes in a gameRefList and returns a gameList that contains only the Borrowed games
+     *  that were in it.
+     *
+     * @param games
+     * @return GameList
+     */
     public static GameRefList getBorrowed(GameRefList games){
         GameRefList gameList = new GameRefList();
         for(int i = 0; i < games.getSize(); i++){
@@ -42,7 +54,12 @@ public class UserController {
         return gameList;
     }
 
-    //Given a GameList, return all games with bidded status
+    /** Takes in a gameRefList and returns a gameList that contains only the Bidded games
+     *  that were in it.
+     *
+     * @param games
+     * @return GameList
+     */
     public static GameRefList getBidded(GameRefList games){
         GameRefList gameList = new GameRefList();
         for(int i = 0; i < games.getSize(); i++){
@@ -52,14 +69,8 @@ public class UserController {
         }
         return gameList;
     }
-
-    public GameRefList getGameList() {
-        return currentUser.getMyGames();
-    }
-
+    
     public static void addMyGame(Game game){
-        //currentUser.getMyGames().addGame(game);
-        //User tempUser = currentUser;
 
         ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
         addGameTask.execute(game);
@@ -67,30 +78,6 @@ public class UserController {
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         ese.execute(currentUser);
     }
-
-    public void deleteGame(){
-        //TODO
-    }
-
-    public void addBorrowedGame(){
-        //TODO
-    }
-
-    /*public static void addBiddedGame(Game game){
-        currentUser.getBiddedItems().addGame(game);
-        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.execute(currentUser);
-    }
-
-    public Game getGame(GameList list, int index){
-        return list.getGame(index);
-    }
-
-    public static void deleteBiddedGame(Game game){
-        currentUser.getBiddedItems().removeGame(game);
-        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.execute(currentUser);
-    }*/
 
     public static User getUser(String username){
         User loadedUser = new User(null, null, null);

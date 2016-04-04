@@ -25,8 +25,6 @@ import java.io.Serializable;
  * activity to edit.
  *
  */
-
-
 public class ViewGameActivity extends Activity {
 
     private static final int GET_GEOLOCATION_REQUEST = 0;
@@ -42,7 +40,6 @@ public class ViewGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_game);
         currentUser = UserController.getCurrentUser();
-
 
         //Set up buttons and text boxes
         final EditText gameNameEdit = (EditText) findViewById(R.id.editGameNameEditText);
@@ -150,8 +147,6 @@ public class ViewGameActivity extends Activity {
             ImageView imageView = getImageProfile();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             imageView.setTag("Changed");
-
-
         }
     }
 

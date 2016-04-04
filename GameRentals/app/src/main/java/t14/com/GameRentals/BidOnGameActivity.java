@@ -24,8 +24,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
- * Created by yourui on 3/4/16.
- * user case 05.01.01
+ * Allows users to bid on a game.
  */
 public class BidOnGameActivity extends Activity {
     private Game game;
@@ -33,10 +32,10 @@ public class BidOnGameActivity extends Activity {
     private double rate;
     private User currentUser;
     private final String FILENAME = "searchedResults.sav";
+
     @Override
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
-
         setContentView(R.layout.bid_on_game);
         Button okButton = (Button)findViewById(R.id.OKButton);
         loadFromFile();
@@ -59,8 +58,7 @@ public class BidOnGameActivity extends Activity {
                         if (currentUser.getUserName().equals(game.getOwner())){
                             Toast.makeText(BidOnGameActivity.this,"can't bid your own game",Toast.LENGTH_SHORT).show();
                             finish();
-                        }
-                        else{
+                        } else {
                             rate = Double.parseDouble(bidMoney.getText().toString());
                             game.getBidList().AddBid(currentUser, rate);
                             game.setStatus(1);
@@ -73,11 +71,14 @@ public class BidOnGameActivity extends Activity {
                         }
                     }
                 });
+
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
+
                 adb.show();
             }
         });
@@ -102,6 +103,5 @@ public class BidOnGameActivity extends Activity {
             throw new RuntimeException();
         }
     }
-
 
 }

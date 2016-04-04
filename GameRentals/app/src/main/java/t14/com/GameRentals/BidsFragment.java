@@ -15,8 +15,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 /**
- * Created by yourui on 3/2/16.
- * uc 05.02.01
+ * This allows users to view a list of bids they have offered on games.
+ *
  */
 public class BidsFragment  extends Fragment {
     private User currentUser;
@@ -30,18 +30,19 @@ public class BidsFragment  extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.bids, container,false);
+
         biddedItems = new GameList();
         currentUser = UserController.getCurrentUser();
-
         bids = new ArrayList<bidView>();
-
         biddedItemsView = (ListView)v.findViewById(R.id.biddedItemList);
 
         biddedItems.copyRefListToGames(currentUser.getBiddedItems());
+
         for (int i = 0; i < biddedItems.getSize(); i++){
             bidView bidview = new bidView(biddedItems.getGame(i).getBidList().getBid(currentUser),biddedItems.getGame(i));
             bids.add(bidview);
         }
+
         adapter = new ArrayAdapter<bidView>(getActivity().getApplicationContext(),R.layout.game_list,bids);
         biddedItemsView.setAdapter(adapter);
 
@@ -52,7 +53,9 @@ public class BidsFragment  extends Fragment {
                 adb.setTitle("Bidding");
                 adb.setMessage("Do you want to view the details?");
                 adb.setCancelable(true);
+
                 final int position = i;
+
                 adb.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -61,11 +64,13 @@ public class BidsFragment  extends Fragment {
                         startActivity(intent);
                     }
                 });
+
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
+
                 adb.show();
             }
         });
@@ -79,16 +84,17 @@ public class BidsFragment  extends Fragment {
         //TODO: SET THE BIDLIST TO THE ONE IN SERVER
         biddedItems = new GameList();
         currentUser = UserController.getCurrentUser();
-
         bids = new ArrayList<bidView>();
 
         biddedItems.copyRefListToGames(currentUser.getBiddedItems());
+
         for (int i = 0; i < biddedItems.getSize(); i++){
             bidView bidview = new bidView(biddedItems.getGame(i).getBidList().getBid(currentUser),biddedItems.getGame(i));
             bids.add(bidview);
         }
+
         adapter = new ArrayAdapter<bidView>(getActivity().getApplicationContext(),R.layout.game_list,bids);
         biddedItemsView.setAdapter(adapter);
-
     }
+
 }
