@@ -20,23 +20,43 @@ public class CancelBidActivity extends Activity {
     private GameList biddedItems;
     private Game game;
 
-    private EditText gameNameText;
-    private EditText descriptionText;
-    private EditText gameStatus;
+    private TextView gameNameText;
+    private TextView descriptionText;
+    private TextView gameStatus;
 
     private TextView gameOwner;
 
     private Button cancelBidButton;
+    ////////for UI test
+    public TextView getGameNameText(){
+        return gameNameText;
+    }
+    public TextView getDescriptionText(){
+        return descriptionText;
+    }
+
+    public TextView getGameOwner() {
+        return gameOwner;
+    }
+
+    public Button getCancelBidButton() {
+        return cancelBidButton;
+    }
+
+    public TextView getGameStatus() {
+        return gameStatus;
+    }
+    ///////for UI test
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cancel_bid);
 
-        gameNameText = (EditText)findViewById(R.id.gameNameText);
-        descriptionText = (EditText)findViewById(R.id.descriptionText);
+        gameNameText = (TextView)findViewById(R.id.gameNameText);
+        descriptionText = (TextView)findViewById(R.id.descriptionText);
 
-        gameStatus = (EditText)findViewById(R.id.gameStatus);
+        gameStatus = (TextView)findViewById(R.id.gameStatus);
 
         gameOwner = (TextView)findViewById(R.id.gameOwner);
 

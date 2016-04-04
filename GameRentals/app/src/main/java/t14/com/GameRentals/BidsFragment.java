@@ -57,7 +57,6 @@ public class BidsFragment  extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getActivity(),CancelBidActivity.class);
-                        intent.putExtra("currentUser",currentUser);
                         intent.putExtra("bidPosition",position);
                         startActivity(intent);
                     }
