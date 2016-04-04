@@ -19,7 +19,7 @@ import io.searchbox.core.SearchResult;
 
 /**
  * This class is modeled after the ElasticsearchTweetController introduced in the lab. Its purpose
- * is to interact with the server.
+ * is to interact with the server to update database information.
  *<p>
  * @author aredmond
  */
@@ -62,6 +62,10 @@ public class ElasticsearchGameController {
         }
     }
 
+    /**
+     * Adding a game to the server.
+     * @see Game
+     */
     public static class AddGameTask extends AsyncTask<Game,Void,Game> {
         Gson gson = new Gson();
         Game addedGame;
@@ -93,7 +97,9 @@ public class ElasticsearchGameController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
+
             return addedGame;
         }
 
@@ -105,8 +111,12 @@ public class ElasticsearchGameController {
             ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
             ese.execute(UserController.getCurrentUser());
         }
+
     }
 
+    /**
+     * @see Game
+     */
     public static class AddTestGameTask extends AsyncTask<Game,Void,Game> {
         Gson gson = new Gson();
         Game addedGame;
@@ -145,8 +155,13 @@ public class ElasticsearchGameController {
             ElasticsearchGameController.EditTestGameTask editGameTask = new ElasticsearchGameController.EditTestGameTask();
             editGameTask.execute(addedGame);
         }
+
     }
 
+    /**
+     * Removing a game from the server.
+     * @see Game
+     */
     public static class RemoveGameTask extends AsyncTask<Game,Void,Game> {
         Game removedGame;
 
@@ -188,6 +203,10 @@ public class ElasticsearchGameController {
         }
     }
 
+    /**
+     * Get a game from the server.
+     * @see Game
+     */
     public static class GetGameTask extends AsyncTask<String,Void,Game>{
         @Override
         protected Game doInBackground(String... params) {
@@ -247,8 +266,9 @@ public class ElasticsearchGameController {
             try {
                 SearchResult execute = client.execute(search);
                 if(execute.isSucceeded()) {
-                    game = execute.getSourceAsObject(Game.class);
+                    Game foundGame = execute.getSourceAsObject(Game.class);
                     //games.getList().addAll(foundGames);
+                    game = foundGame;
                 } else {
                     Log.i("TODO", "Search was unsuccessful, do something!");
                 }
@@ -260,6 +280,9 @@ public class ElasticsearchGameController {
         }
     }
 
+    /**
+     * Allows users to look for games based on search terms given.
+     */
     public static class SearchGamesTask extends AsyncTask<String,Void,GameList> {
         /**
          *
@@ -316,21 +339,30 @@ public class ElasticsearchGameController {
         }
     }
 
+    /**
+     * Updates the server when users edit their games or when there is a change in game attributes.
+     * @see Game
+     */
     public static class EditGameTask extends AsyncTask<Game,Void,Void>{
         Gson gson = new Gson();
+
         @Override
         protected Void doInBackground(Game... params) {
             verifyConfig();
+
             for(Game game : params) {
                 String json = gson.toJson(game);
                 Index index = new Index.Builder(json).index("cmput301w16t14").type(serverType).id(game.getGameID()).build();
+
                 try {
                     DocumentResult execute = client.execute(index);
+
                     if(execute.isSucceeded()) {
                         //user.setID(execute.getId());
                     } else {
                         Log.e("TODO", "Our edit of user failed, oh no!");
                     }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -377,4 +409,5 @@ public class ElasticsearchGameController {
             client = (JestDroidClient) factory.getObject();
         }
     }
+
 }

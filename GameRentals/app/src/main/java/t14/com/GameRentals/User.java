@@ -1,10 +1,8 @@
 package t14.com.GameRentals;
 
 import java.io.Serializable;
-
 import io.searchbox.annotations.JestId;
-
-
+import java.util.ArrayList;
 
 /**
  * This class is in regards to a User object. <br>
@@ -19,8 +17,11 @@ import io.searchbox.annotations.JestId;
  *             <li>biddedItems list (game's that that user is currently bidding on</li>
  *         </ul>
  * @see ProfileMain
+ * @see GameRefList
+ * @see GameList
+ * @see Game
  *
- * Created by cjresler on 2016-02-28.
+ *@author JL
  */
 public class User implements Serializable {
     @JestId
@@ -32,8 +33,6 @@ public class User implements Serializable {
     private GameRefList myGames;
     private GameRefList borrowedItems;
     private GameRefList biddedItems;
-
-    // private ArrayList<User> users;
 
     public User(String userName, String email, String phoneNumber) {
         this.id = "";
@@ -56,23 +55,10 @@ public class User implements Serializable {
     /**
      *
      * @param ID
-     * @return void
      */
     public void setID(String ID) {
         this.id = ID;
     }
-
-
-
-
-    /*public ArrayList<User> getUsers(String s) {
-        return this.users;
-    }
-
-    public void viewUser(User user){
-        this.users.add(user);
-    }*/
-
 
     /**
      *
@@ -85,7 +71,6 @@ public class User implements Serializable {
     /**
      *
      * @param userName
-     * @return void
      */
     public void setUserName(String userName) {
         this.userName = userName;
@@ -102,7 +87,6 @@ public class User implements Serializable {
     /**
      *
      * @param email
-     * @return void
      */
     public void setEmail(String email) {
         this.email = email;
@@ -119,7 +103,6 @@ public class User implements Serializable {
     /**
      *
      * @param phoneNumber
-     * @return void
      */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -136,7 +119,6 @@ public class User implements Serializable {
     /**
      *
      * @param myGames
-     * @return void
      */
     public void setMyGames(GameRefList myGames) {
         this.myGames = myGames;
@@ -153,7 +135,6 @@ public class User implements Serializable {
     /**
      *
      * @param biddedItems
-     * @return void
      */
     public void setBiddedItems(GameRefList biddedItems) {
         this.biddedItems = biddedItems;
@@ -170,7 +151,6 @@ public class User implements Serializable {
     /**
      *
      * @param borrowedItems
-     * @return void
      */
     public void setBorrowedItems(GameRefList borrowedItems) {
         this.borrowedItems = borrowedItems;
@@ -185,6 +165,7 @@ public class User implements Serializable {
         Game game = myGames.getGame(gameID);
         UserController.addMyGame(game);
     }
+
 
     public int getBid(Game game){
         for (int i = 0; i < getBiddedItems().getSize(); i++){

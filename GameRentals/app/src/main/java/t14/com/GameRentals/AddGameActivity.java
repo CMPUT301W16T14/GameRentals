@@ -13,8 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-/** This activity handles adding games to a user's list of games.
- *
+/**
+ * Users can add games to myGames that they wish to lend out.
  */
 
 public class AddGameActivity extends Activity {
@@ -24,9 +24,7 @@ public class AddGameActivity extends Activity {
     private Game game;
     private static int RESULT_LOAD_IMAGE = 1;
 
-
     @Override
-    /** Called when activity is created */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
@@ -44,42 +42,36 @@ public class AddGameActivity extends Activity {
                         Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
-
-
             }
         });
 
-        /** Handle OK button being clicked */
         okButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 String name = gameName.getText().toString();
                 String description = gameDescription.getText().toString();
+
                 //Verify that game name is not left empty
                 if(name.equalsIgnoreCase("")){
                     gameName.setError("Game name cannot be empty");
                 }
+
                 //Verify that description is not left empty
                 else if(description.equalsIgnoreCase("")){
                     gameDescription.setError("Game description cannot be empty");
                 }
+
                 //else, proper input
                 else{
                     game.setGameName(name);
                     game.setDescription(description);
-                    //currentUser.getMyGames().addGame(game);
-                    //Update user and add game to server
-                    //addTestData();
                     updateServer();
-                    //String gameID = game.getGameID();
-                    //currentUser.getMyGames().addGame(gameID);
                     finish();
                 }
             }
         });
 
-        /** Return to previous screen when cancel button is clicked */
         cancelButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -110,39 +102,15 @@ public class AddGameActivity extends Activity {
             ImageView imageView = getImageProfile();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             imageView.setTag("Changed");
-
-
         }
     }
 
-    /** Add game to server, and update current user on server to reflect added game */
+    /**
+     * Uploads the game added to the server.
+     * @see ElasticsearchGameController #AddGameTask()
+     */
     public void updateServer(){
         ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
         addGameTask.execute(game);
-        //ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
-        //editGameTask.execute(game);
-
-        //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        //ese.execute(currentUser);
     }
-/*
-    public void addTestData(){
-        User test = new User("Dude", "dude", "123");
-        Game mario = new Game("Mario", "Platform", test);
-        mario.setStatus(GameController.STATUS_BORROWED);
-        test.getMyGames().addGame(mario);
-        currentUser.getBorrowedItems().addGame(mario);
-        mario.setBorrower(currentUser);
-        ElasticsearchGameController.AddGameTask addGameTask = new ElasticsearchGameController.AddGameTask();
-        addGameTask.execute(mario);
-        ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
-        ese.execute(currentUser);
-
-        ElasticSearchUsersController.AddUserTask esa = new ElasticSearchUsersController.AddUserTask();
-        esa.execute(test);
-        ElasticSearchUsersController.EditUserTask ese2 = new ElasticSearchUsersController.EditUserTask();
-        ese2.execute(test);
-
-    }*/
-
 }

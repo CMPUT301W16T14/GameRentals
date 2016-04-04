@@ -21,7 +21,7 @@ import io.searchbox.annotations.JestId;
  *
  * Game status can be either available, bidded, or borrowed.
  * Borrower will be initialized to null and only set if game status is borrowed.
- * Created by cjresler on 2016-02-28.
+ * @author JL
  */
 public class Game implements Serializable{
     private String gameName;
@@ -58,6 +58,11 @@ public class Game implements Serializable{
         return borrowerID;
     }
 
+    /**
+     *
+     * @return int
+     * @see User
+     */
     public String getBorrowerName(){
         /*User loadedUser = new User(null, null, null);
         ElasticSearchUsersController.GetUserTask esg = new ElasticSearchUsersController.GetUserTask();
@@ -216,10 +221,10 @@ public class Game implements Serializable{
         this.borrowerID = game.getBorrower();
     }
 
-   @Override
-   /** Display game in proper format
-    *
-    */
+    @Override
+    /** Display game in proper format
+     *
+     */
     public String toString(){
        String returnString = "Status: " + getStatusString() + "\n" +
                "Game name: " + gameName + "\n" +
@@ -234,4 +239,5 @@ public class Game implements Serializable{
        }
         return returnString;
     }
+
 }

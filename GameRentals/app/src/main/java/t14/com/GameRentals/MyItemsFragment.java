@@ -18,11 +18,10 @@ import java.io.Serializable;
 
 /**
  * This activity displays the current user's games.
+ * @see GameRefList
+ * @see GameList
+ * @see Game
  *
- *
- *
- * Created by yourui on 3/2/16.
- * user case 01.01.01 ~ 01.05.01 & 05.04.01
  */
 public class MyItemsFragment extends Fragment implements View.OnClickListener {
     private GameList gameList;
@@ -80,8 +79,10 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+
                 final Game selectedGame = gameList.getGame(position);
                 final int pos = position;
+
                 //Handle if game clicked has available status
                 if(selectedGame.getStatus() == GameController.STATUS_AVAILABLE){
                     //Verify that user wants to edit selected game
@@ -257,4 +258,5 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
 }
