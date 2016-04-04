@@ -27,18 +27,6 @@ public class ViewProfileActivity extends Activity {
         String givenUsername = (String) getIntent().getSerializableExtra("Username");
         user = UserController.getUser(givenUsername);
 
-        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View arg0){
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
-
-
-            }
-        });
-
         final EditText userNameText = (EditText) findViewById(R.id.viewProfileNameText);
         final EditText emailText = (EditText) findViewById(R.id.viewProfileEmailText);
         final EditText phoneText = (EditText) findViewById(R.id.viewProfilePhoneText);

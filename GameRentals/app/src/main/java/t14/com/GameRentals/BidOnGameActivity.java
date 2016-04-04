@@ -40,7 +40,7 @@ public class BidOnGameActivity extends Activity {
         setContentView(R.layout.bid_on_game);
         Button okButton = (Button)findViewById(R.id.OKButton);
         loadFromFile();
-        currentUser = (User) getIntent().getExtras().get("currentUser");
+        currentUser = UserController.getCurrentUser();
         int gamePosition = getIntent().getExtras().getInt("gamePosition");
         game = returnedGames.get(gamePosition);
         final EditText bidMoney = (EditText) findViewById(R.id.bidMoney);
@@ -56,7 +56,7 @@ public class BidOnGameActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //////////TODO:GET RATE VALUE
-                        if (currentUser.getID().equals(game.getOwner())){
+                        if (currentUser.getUserName().equals(game.getOwner())){
                             Toast.makeText(BidOnGameActivity.this,"can't bid your own game",Toast.LENGTH_SHORT).show();
                             finish();
                         }

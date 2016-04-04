@@ -64,7 +64,7 @@ public class ViewBidActivityTest extends ActivityInstrumentationTestCase2 {
     @UiThreadTest
     public void testAcceptBid(){
         acceptBid();
-        assertTrue(bids.getItem(0).isAccepted());
+        assertTrue(bids.getItem(0).isAccepted()==1);
     }
 
 
