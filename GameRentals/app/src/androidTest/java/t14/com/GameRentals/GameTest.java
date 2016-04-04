@@ -20,4 +20,16 @@ public class GameTest extends ActivityInstrumentationTestCase2{
 
     }
 
+    /** Test that game can have 3 different statuses, for Use Case 02.01.01
+     *
+     */
+    public void testStatus(){
+        Game game = new Game("test", "test", null);
+        assertTrue(game.getStatus() == GameController.STATUS_AVAILABLE);
+        game.setStatus(GameController.STATUS_BORROWED);
+        assertTrue(game.getStatus() == GameController.STATUS_BORROWED);
+        game.setStatus(GameController.STATUS_BIDDED);
+        assertTrue(game.getStatus() == GameController.STATUS_BIDDED);
+    }
+
 }
