@@ -2,6 +2,7 @@ package t14.com.GameRentals;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +58,13 @@ public class CancelBidActivity extends Activity {
         descriptionText = (TextView)findViewById(R.id.descriptionText);
 
         gameStatus = (TextView)findViewById(R.id.gameStatus);
+
+        gameNameText.setEnabled(false);
+        gameNameText.setTextColor(Color.BLACK);
+        descriptionText.setEnabled(false);
+        descriptionText.setTextColor(Color.BLACK);
+        gameStatus.setEnabled(false);
+        gameStatus.setTextColor(Color.BLACK);
 
         gameOwner = (TextView)findViewById(R.id.gameOwner);
 

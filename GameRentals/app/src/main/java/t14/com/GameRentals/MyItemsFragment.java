@@ -113,7 +113,7 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
                 //If game clicked has bidded status
                 else if(selectedGame.getStatus() == GameController.STATUS_BIDDED){
                     //Check if user wants to edit selected game or view the bids on it
-                    adb.setMessage("Do you want to view the game or view bids?");
+                    adb.setMessage("Do you want to view the game, edit it, or view bids?");
                     adb.setCancelable(true);
                     adb.setPositiveButton("VIEW GAME", new DialogInterface.OnClickListener() {
                         @Override
@@ -122,16 +122,26 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
 
                             Intent intent = new Intent(getActivity(), ViewGameActivity.class);
 
-                            intent.putExtra("Game", (Serializable)selectedGame);
+                            intent.putExtra("Game", (Serializable) selectedGame);
                             startActivity(intent);
                         }
                     });
-                    adb.setNegativeButton("VIEW BIDS", new DialogInterface.OnClickListener() {
+                    adb.setNegativeButton("EDIT GAME", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //TODO:Go to view bids activity
+                            Intent intent = new Intent(getActivity(), EditGameActivity.class);
+
+                            intent.putExtra("Game", (Serializable) selectedGame);
+                            startActivity(intent);
+                        }
+                    });
+                    adb.setNeutralButton("VIEW BIDS", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO:Go to view bids activity
                             Intent intent = new Intent(getActivity(), ViewBidsListActivity.class);
-                            intent.putExtra("gamePosition",pos);
+                            intent.putExtra("gamePosition", pos);
                             startActivity(intent);
                         }
                     });
