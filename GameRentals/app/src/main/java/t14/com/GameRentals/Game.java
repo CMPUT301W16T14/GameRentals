@@ -221,10 +221,10 @@ public class Game implements Serializable{
         this.borrowerID = game.getBorrower();
     }
 
-   @Override
-   /** Display game in proper format
-    *
-    */
+    @Override
+    /** Display game in proper format
+     *
+     */
     public String toString(){
        String returnString = "Status: " + getStatusString() + "\n" +
                "Game name: " + gameName + "\n" +

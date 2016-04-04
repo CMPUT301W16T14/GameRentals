@@ -1,10 +1,8 @@
 package t14.com.GameRentals;
 
 import java.io.Serializable;
-
 import io.searchbox.annotations.JestId;
-
-
+import java.util.ArrayList;
 
 /**
  * This class is in regards to a User object. <br>
@@ -167,6 +165,7 @@ public class User implements Serializable {
         Game game = myGames.getGame(gameID);
         UserController.addMyGame(game);
     }
+
 
     public int getBid(Game game){
         for (int i = 0; i < getBiddedItems().getSize(); i++){

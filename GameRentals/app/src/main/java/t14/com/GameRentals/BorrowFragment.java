@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -58,9 +59,11 @@ public class BorrowFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String sSearchText = searchText.getText().toString();
-                Intent intent = new Intent(getActivity(), SearchGameActivity.class);
-                intent.putExtra("SEARCH_TERM", sSearchText);
-                startActivity(intent);
+                if(checkValid(sSearchText)){
+                    Intent intent = new Intent(getActivity(), SearchGameActivity.class);
+                    intent.putExtra("SEARCH_TERM", sSearchText);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -113,6 +116,15 @@ public class BorrowFragment extends Fragment {
         currentUser = UserController.getCurrentUser();
         borrowedGames = new GameList();
         borrowedGames.copyRefListToGames(currentUser.getBorrowedItems());
+    }
+
+    private boolean checkValid(String sSearchString) {
+        boolean valid = true;
+        if(sSearchString.trim().length() == 0) {
+            valid = false;
+            Toast.makeText(getActivity(), "Fields are empty. Please fill them in.", Toast.LENGTH_SHORT).show();
+        }
+        return valid;
     }
 
 }

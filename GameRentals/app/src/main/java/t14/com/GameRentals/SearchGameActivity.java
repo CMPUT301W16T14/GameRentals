@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -31,6 +33,7 @@ public class SearchGameActivity extends Activity {
     private ArrayList<Game> returnedGames;
     private ListView returnedGamesList;
     private ArrayAdapter<Game> adapter;
+    private Button returnButton;
 
     /**
      * On create, the activity gets the search terms and uses the searchGames task to get a list of
@@ -46,6 +49,8 @@ public class SearchGameActivity extends Activity {
 
         returnedGames = new ArrayList<Game>();
         returnedGamesList = (ListView)findViewById(R.id.ReturnedGamesView);
+        returnButton = (Button) findViewById(R.id.ReturnButton);
+
 
         String[] searchTerms = ((String)getIntent().getExtras().getSerializable("SEARCH_TERM")).split(" ");
 
@@ -64,6 +69,14 @@ public class SearchGameActivity extends Activity {
 
         adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
         returnedGamesList.setAdapter(adapter);
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         returnedGamesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -108,6 +121,14 @@ public class SearchGameActivity extends Activity {
         adapter = new ArrayAdapter<Game>(this, R.layout.game_list, returnedGames);
         returnedGamesList.setAdapter(adapter);
 
+        if(returnedGames.size() == 0) {
+            Toast.makeText(SearchGameActivity.this, "No results found.", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    public ArrayList<Game> getReturnedGames(){
+        return  returnedGames;
     }
 
     /**

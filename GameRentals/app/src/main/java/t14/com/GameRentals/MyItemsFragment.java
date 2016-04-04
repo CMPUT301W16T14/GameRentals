@@ -79,8 +79,10 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+
                 final Game selectedGame = gameList.getGame(position);
                 final int pos = position;
+
                 //Handle if game clicked has available status
                 if(selectedGame.getStatus() == GameController.STATUS_AVAILABLE){
                     //Verify that user wants to edit selected game
