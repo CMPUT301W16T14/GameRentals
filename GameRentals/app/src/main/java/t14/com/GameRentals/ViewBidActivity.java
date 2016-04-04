@@ -5,22 +5,14 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import org.osmdroid.util.GeoPoint;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -29,7 +21,8 @@ import java.util.concurrent.ExecutionException;
  */
 public class ViewBidActivity extends Activity {
 
-    private static final int PICK_GEOLOCATION_REQUEST = 1;
+    private static final int GET_GEOLOCATION_REQUEST = 0;
+    private static final int SET_GEOLOCATION_REQUEST = 1;
     private Bid bid;
     private Game game;
     private BidList bidList;
@@ -38,7 +31,7 @@ public class ViewBidActivity extends Activity {
     private GeoPoint retrievedPoint;
     private Button cancelButton;
     private Button acceptButton;
-    private Button getLocationButton;
+    private Button setLocationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -87,7 +80,7 @@ public class ViewBidActivity extends Activity {
 
         cancelButton = (Button)findViewById(R.id.CancelBidButton);
         acceptButton = (Button)findViewById(R.id.acceptBidButton);
-        getLocationButton = (Button)findViewById(R.id.GetLocationButton);
+        setLocationButton = (Button)findViewById(R.id.SetLocationButton);
 
         final int length = bidList.getSize();
 
@@ -153,11 +146,12 @@ public class ViewBidActivity extends Activity {
             }
         });
 
-        getLocationButton.setOnClickListener(new View.OnClickListener() {
+        setLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent locationIntent = new Intent(ViewBidActivity.this, LocationActivity.class);
-                startActivityForResult(locationIntent, PICK_GEOLOCATION_REQUEST);
+                locationIntent.putExtra("ENTER_CODE", "SET_GEOLOCATION_REQUEST");
+                startActivityForResult(locationIntent, SET_GEOLOCATION_REQUEST);
             }
         });
 
@@ -183,7 +177,7 @@ public class ViewBidActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
-        if (requestCode == PICK_GEOLOCATION_REQUEST ) {
+        if (requestCode == SET_GEOLOCATION_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 // The user picked a contact.

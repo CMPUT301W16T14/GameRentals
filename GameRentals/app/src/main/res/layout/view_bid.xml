@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Set Trade Location"
-            android:id="@+id/GetLocationButton" />
+            android:id="@+id/SetLocationButton" />
 
         <Button
             android:layout_width="match_parent"

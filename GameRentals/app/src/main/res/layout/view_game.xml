@@ -99,6 +99,13 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Check Game Location"
+                android:id="@+id/GetLocationButton"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Return to main"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/viewGameReturnButton" />

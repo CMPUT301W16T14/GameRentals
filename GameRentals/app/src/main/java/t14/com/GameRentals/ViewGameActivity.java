@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.Serializable;
 
 /** This activity allows the user to edit games on their list of games. <br>
  * User will select a game from their list, and that game will be passed to this <br>
@@ -25,6 +28,9 @@ import android.widget.TextView;
 
 
 public class ViewGameActivity extends Activity {
+
+    private static final int GET_GEOLOCATION_REQUEST = 0;
+    private static final int SET_GEOLOCATION_REQUEST = 1;
     private Game game;
     private User currentUser;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -46,6 +52,7 @@ public class ViewGameActivity extends Activity {
         gameNameEdit.setTextColor(Color.BLACK);
         gameDescriptionEdit.setTextColor(Color.BLACK);
         final Button returnButton = (Button) findViewById(R.id.viewGameReturnButton);
+        final Button getLocationButton = (Button) findViewById(R.id.GetLocationButton);
         final TextView statusLabel = (TextView) findViewById(R.id.editGameStatus);
         final TextView borrowerName = (TextView) findViewById(R.id.borrowerName);
         final TextView borrowerNameLabel = (TextView) findViewById(R.id.borrowerNameLabel);
@@ -85,6 +92,21 @@ public class ViewGameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        getLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(game.getLocation() != null) {
+                    Intent locationIntent = new Intent(ViewGameActivity.this, LocationActivity.class);
+                    locationIntent.putExtra("GEO_POINT", (Serializable) game.getLocation());
+                    locationIntent.putExtra("ENTER_CODE", "GET_GEOLOCATION_REQUEST");
+                    startActivityForResult(locationIntent, GET_GEOLOCATION_REQUEST);
+                }
+                else {
+                    Toast.makeText(ViewGameActivity.this, "No Location Set.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

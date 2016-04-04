@@ -25,6 +25,8 @@ import java.io.Serializable;
 @SuppressWarnings("deprecation")
 public class LocationActivity extends Activity implements MapEventsReceiver {
 
+    private static final int GET_GEOLOCATION_REQUEST = 0;
+    private static final int SET_GEOLOCATION_REQUEST = 1;
     public static final String MOCK_PROVIDER = "mockLocationProvider";
     public GeoPoint mapPoint = new GeoPoint(53.5444, -113.4909);
     private MyLocationOverlay myLocationOverlay;
@@ -49,6 +51,11 @@ public class LocationActivity extends Activity implements MapEventsReceiver {
         // Listener for updating location
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1,
                 listener);
+
+        String enter = (String)getIntent().getExtras().getSerializable("ENTER_CODE");
+        if(enter.equals("GET_GEOLOCATION_REQUEST")) {
+            mapPoint = (GeoPoint)getIntent().getExtras().getSerializable("GEO_POINT");
+        }
 
         // Retrieved from
         // http://stackoverflow.com/questions/22804650/how-to-handle-long-press-on-a-map-using-osmdroid-osmbonuspack-in-android
@@ -149,10 +156,16 @@ public class LocationActivity extends Activity implements MapEventsReceiver {
      */
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint arg0) {
-        mapPoint = arg0;
-        mapMarker.setPosition(arg0);
-        map.invalidate();
-        Toast.makeText(LocationActivity.this, mapPoint.toString(), Toast.LENGTH_SHORT).show();
+        String enter = (String)getIntent().getExtras().getSerializable("ENTER_CODE");
+        if(enter.equals("GET_GEOLOCATION_REQUEST")) {
+            Toast.makeText(LocationActivity.this, "Cannot Move Location", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mapPoint = arg0;
+            mapMarker.setPosition(arg0);
+            map.invalidate();
+            Toast.makeText(LocationActivity.this, mapPoint.toString(), Toast.LENGTH_SHORT).show();
+        }
         return false;
     }
 }
