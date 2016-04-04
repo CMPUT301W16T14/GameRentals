@@ -95,11 +95,6 @@ public class BorrowFragment extends Fragment {
         return v;
     }
 
-    /**
-     * On start, the fragment sets the adapter so that the view shows the most up-to-date list of
-     * borrowed games.
-     * <p>
-     */
     @Override
     public void onStart() {
         super.onStart();
@@ -110,7 +105,6 @@ public class BorrowFragment extends Fragment {
     }
 
     @Override
-    /**Called when activity is first created */
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         currentUser = UserController.getCurrentUser();
