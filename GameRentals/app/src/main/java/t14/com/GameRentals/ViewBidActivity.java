@@ -90,7 +90,6 @@ public class ViewBidActivity extends Activity {
                 if (game.getBidList().getSize() == 0) {
                     game.setStatus(0);
                 }
-
                 else {
                     for (int i = 0; i < game.getBidList().getSize(); i++) {
                         if (game.getBidList().getItem(i).isAccepted() == 2)
