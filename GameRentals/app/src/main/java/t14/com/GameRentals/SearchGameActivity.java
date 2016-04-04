@@ -26,7 +26,7 @@ import java.util.concurrent.ExecutionException;
  * This activity is used when a user wishes to search for a game they have interest in borrowing. <br>
  * The app searches and returns a list of games that include the search terms given by the user.<br>
  *
- * <p>
+ *
  */
 public class SearchGameActivity extends Activity {
     private final String FILENAME = "searchedResults.sav";
@@ -38,7 +38,7 @@ public class SearchGameActivity extends Activity {
     /**
      * On create, the activity gets the search terms and uses the searchGames task to get a list of
      * games from the server.
-     * <p>
+     *
      *
      * @param savedInstanceState The saved data that the system uses to restore the previous state.
      */
@@ -109,7 +109,7 @@ public class SearchGameActivity extends Activity {
     /**
      * On start, a list of returned games is saved locally so that it may be used by the bidding
      * activities.
-     * <p>
+     *
      */
     @Override
     protected void onStart() {

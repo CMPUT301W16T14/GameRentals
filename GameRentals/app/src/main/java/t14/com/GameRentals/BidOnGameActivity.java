@@ -58,8 +58,7 @@ public class BidOnGameActivity extends Activity {
                         if (currentUser.getUserName().equals(game.getOwner())){
                             Toast.makeText(BidOnGameActivity.this,"can't bid your own game",Toast.LENGTH_SHORT).show();
                             finish();
-                        }
-                        else{
+                        } else {
                             rate = Double.parseDouble(bidMoney.getText().toString());
                             game.getBidList().AddBid(currentUser, rate);
                             game.setStatus(1);
@@ -72,11 +71,14 @@ public class BidOnGameActivity extends Activity {
                         }
                     }
                 });
+
                 adb.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
+
                 adb.show();
             }
         });

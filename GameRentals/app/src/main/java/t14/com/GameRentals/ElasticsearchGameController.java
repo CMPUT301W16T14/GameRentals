@@ -106,8 +106,10 @@ public class ElasticsearchGameController {
         protected void onPostExecute(Game addedGame){
             ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
             editGameTask.execute(addedGame);
+
             String testID = addedGame.getGameID();
             UserController.getCurrentUser().getMyGames().addGame(testID);
+
             ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
             ese.execute(UserController.getCurrentUser());
         }
@@ -201,6 +203,7 @@ public class ElasticsearchGameController {
             ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
             ese.execute(UserController.getCurrentUser());
         }
+
     }
 
     /**
@@ -296,21 +299,6 @@ public class ElasticsearchGameController {
             // Hold (eventually) the games that we get back from Elasticsearch
             GameList games = new GameList();
 
-            /*
-            {
-                "query": {
-                    "bool": {
-                        "must": [
-                            { "match": { "description": "first" } },
-                            { "match": { "description": "shooter" } }
-                        ],
-                        "must_not": { "match": {"status"; 2} }
-                    }
-                }
-            }
-
-             */
-
             String insertTerms = "";
 
             for (String searchTerm: params) {
@@ -323,6 +311,7 @@ public class ElasticsearchGameController {
             String search_string = "{\"from\":0,\"size\":10000,\"query\":{\"bool\":{\"must\":[ " + insertTerms + " ], \"must_not\": {\"match\": {\"status\": 2}}}}}";
 
             Search search = new Search.Builder(search_string).addIndex("cmput301w16t14").addType(serverType).build();
+
             try {
                 SearchResult execute = client.execute(search);
                 if(execute.isSucceeded()) {
