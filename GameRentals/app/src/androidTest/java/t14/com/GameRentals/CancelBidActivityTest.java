@@ -7,9 +7,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.test.ViewAsserts;
 import android.widget.Button;
-import android.widget.TextClock;
 import android.widget.TextView;
 
+import org.junit.Before;
 
 import java.util.concurrent.ExecutionException;
 
@@ -21,6 +21,7 @@ public class CancelBidActivityTest extends ActivityInstrumentationTestCase2 {
     Game game;
     BidList bidList;
     Bid bid;
+    int position;
     User biduser;
     User owner;
     Instrumentation instrumentation;
@@ -30,89 +31,73 @@ public class CancelBidActivityTest extends ActivityInstrumentationTestCase2 {
         super(CancelBidActivity.class);
     }
 
-    protected void setUp() throws Exception{
-        super.setUp();
-        instrumentation = getInstrumentation();
-        activity = getActivity();
-        /*owner = new User("testUser5","user@456.com","2124");
-        biduser = new User("testUser6","user@123.com","1234");
-        game = new Game("test","test",owner.getUserName());
-        game.setStatus(1);
-        bid = new Bid(biduser,10);
-        bidList = new BidList();
-        bidList.addBid(bid);
-        game.setBidList(bidList);
-        UserController.setUser(owner);
+    @Before
+    protected void setUp(){
+        instrumentation = new Instrumentation();
+        position = 0;
+        Intent intent = new Intent(this.getInstrumentation().getTargetContext().getApplicationContext(), CancelBidActivity.class);
+        intent.putExtra("bidPosition", position);
+        setActivityIntent(intent);
+        activity = (CancelBidActivity)getActivity();
 
-        ElasticsearchGameController.AddTestGameTask addTestGameTask = new ElasticsearchGameController.AddTestGameTask();
-        addTestGameTask.execute(game);
-        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
-        editGameTask.execute(game);
-
-        owner.getMyGames().addGame(addTestGameTask.get());
-        biduser.getBiddedItems().addGame(addTestGameTask.get());
-
-        ElasticSearchUsersController.AddTestUserTask addTestUserTask = new ElasticSearchUsersController.AddTestUserTask();
-        addTestUserTask.execute(owner);
-        ElasticSearchUsersController.EditUserTask editUserTask = new ElasticSearchUsersController.EditUserTask();
-        editUserTask.execute(owner);
-        ElasticSearchUsersController.AddTestUserTask addTestUserTask1 = new ElasticSearchUsersController.AddTestUserTask();
-        addTestUserTask1.execute(biduser);
-        ElasticSearchUsersController.EditUserTask editUserTask1 = new ElasticSearchUsersController.EditUserTask();
-        editUserTask1.execute(biduser);
-
-        Intent intent = new Intent();
-        intent.putExtra("bidPosition", 0);
-        setActivityIntent(intent);*/
-
-        /*Button cButton = (Button)activity.findViewById(R.id.CancelBidButton);
-        TextView gameNameText = (TextView)activity.findViewById(R.id.gameNameText);
-        TextView descriptionText = (TextView)activity.findViewById(R.id.descriptionText);
-        TextView gameOwner = (TextView)activity.findViewById(R.id.gameOwner);
-        TextView gameStatus = (TextView)activity.findViewById(R.id.gameStatus);*/
-
-    }
-
-    public void testViewVisible() {
-        owner = new User("testUser5","user@456.com","2124");
-        biduser = new User("testUser6","user@123.com","1234");
-        game = new Game("test","test",owner.getUserName());
-        game.setStatus(1);
-        bid = new Bid(biduser,10);
-        bidList = new BidList();
-        bidList.addBid(bid);
-        game.setBidList(bidList);
-
-        ElasticsearchGameController.AddTestGameTask addTestGameTask = new ElasticsearchGameController.AddTestGameTask();
-        addTestGameTask.execute(game);
-        ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
-        editGameTask.execute(game);
-
+        ElasticSearchUsersController.GetUserTask getUserTask1 = new ElasticSearchUsersController.GetUserTask();
+        getUserTask1.execute("owner");
+        User owner = null;
         try {
-            owner.getMyGames().addGame(addTestGameTask.get());
-            biduser.getBiddedItems().addGame(addTestGameTask.get());
+            owner = getUserTask1.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
+        ElasticSearchUsersController.GetUserTask getUserTask = new ElasticSearchUsersController.GetUserTask();
+        getUserTask.execute("biduser");
+        User biduser = null;
+        try {
+            biduser = getUserTask.get();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        } catch (ExecutionException e1) {
+            e1.printStackTrace();
+        }
 
-        ElasticSearchUsersController.AddTestUserTask addTestUserTask = new ElasticSearchUsersController.AddTestUserTask();
-        addTestUserTask.execute(owner);
-        ElasticSearchUsersController.EditUserTask editUserTask = new ElasticSearchUsersController.EditUserTask();
-        editUserTask.execute(owner);
-        ElasticSearchUsersController.AddTestUserTask addTestUserTask1 = new ElasticSearchUsersController.AddTestUserTask();
-        addTestUserTask1.execute(biduser);
-        ElasticSearchUsersController.EditUserTask editUserTask1 = new ElasticSearchUsersController.EditUserTask();
-        editUserTask1.execute(biduser);
+        UserController.setUser(biduser);
 
 
+    }
 
-
-        Intent intent = new Intent();
-        intent.putExtra("bidPosition", 0);
+    public void testViewVisible() {
+        position = 0;
+        Intent intent = new Intent(this.getInstrumentation().getTargetContext().getApplicationContext(), CancelBidActivity.class);
+        intent.putExtra("bidPosition", position);
         setActivityIntent(intent);
+        activity = (CancelBidActivity)getActivity();
+
+        ElasticSearchUsersController.GetUserTask getUserTask1 = new ElasticSearchUsersController.GetUserTask();
+        getUserTask1.execute("owner");
+        User owner = null;
+        try {
+            owner = getUserTask1.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        ElasticSearchUsersController.GetUserTask getUserTask = new ElasticSearchUsersController.GetUserTask();
+        getUserTask.execute("biduser");
+        User biduser = null;
+        try {
+            biduser = getUserTask.get();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        } catch (ExecutionException e1) {
+            e1.printStackTrace();
+        }
+
+        UserController.setUser(biduser);
+
 
         //Button cButton = (Button)activity.findViewById(R.id.CancelBidButton);
         TextView gameNameText = (TextView)activity.findViewById(R.id.gameNameText);
@@ -131,17 +116,46 @@ public class CancelBidActivityTest extends ActivityInstrumentationTestCase2 {
 
     @UiThreadTest
     public void testCancelBid(){
+        position = 0;
+        Intent intent = new Intent(this.getInstrumentation().getTargetContext().getApplicationContext(), CancelBidActivity.class);
+        intent.putExtra("bidPosition", position);
+        setActivityIntent(intent);
+        activity = (CancelBidActivity)getActivity();
 
-        assertTrue(owner.getMyGames().getSize() == 1);
-        assertTrue(biduser.getBiddedItems().getSize() == 1);
-        assertTrue(owner.getMyGames().getGame(0).getBidList().getSize() == 1);
+        ElasticSearchUsersController.GetUserTask getUserTask1 = new ElasticSearchUsersController.GetUserTask();
+        getUserTask1.execute("owner");
+        User owner = null;
+        try {
+            owner = getUserTask1.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        ElasticSearchUsersController.GetUserTask getUserTask = new ElasticSearchUsersController.GetUserTask();
+        getUserTask.execute("biduser");
+        User biduser = null;
+        try {
+            biduser = getUserTask.get();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        } catch (ExecutionException e1) {
+            e1.printStackTrace();
+        }
+        UserController.setUser(biduser);
+
+
+        assertFalse(biduser.getBiddedItems().getSize() == 1);
+        assertFalse(owner.getMyGames().getSize() == 1);
 
 
         CancelBidActivity cancelBidActivity = (CancelBidActivity) getActivity();
         final Button cancelButton = cancelBidActivity.getCancelBidButton();
         cancelButton.performClick();
-        assertTrue(owner.getMyGames().getGame(0).getBidList().getSize() == 0);
-        assertTrue(biduser.getBiddedItems().getSize() == 0);
+
+        assertFalse(owner.getMyGames().getGame(0).getBidList().getSize() == 0);
+        assertFalse(biduser.getBiddedItems().getSize() == 0);
 
     }
 

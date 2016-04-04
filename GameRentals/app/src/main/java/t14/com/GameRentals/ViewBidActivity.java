@@ -9,14 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -103,12 +97,17 @@ public class ViewBidActivity extends Activity {
                         game.setStatus(0);
                     }
                 }
-                bidList.getItem(bidPosition).setAccepted(2);//decline
-                ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
-                editGameTask.execute(game);
-                ElasticSearchUsersController.EditUserTask ese1 = new ElasticSearchUsersController.EditUserTask();
-                ese1.execute(currentUser);
-                finish();
+                if(game.getBidList().getItem(bidPosition).isAccepted() == 1){
+                    Toast.makeText(ViewBidActivity.this,"you can't cancel it",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    bidList.getItem(bidPosition).setAccepted(2);//decline
+                    ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
+                    editGameTask.execute(game);
+                    ElasticSearchUsersController.EditUserTask ese1 = new ElasticSearchUsersController.EditUserTask();
+                    ese1.execute(currentUser);
+                    finish();
+                }
             }
         });
 

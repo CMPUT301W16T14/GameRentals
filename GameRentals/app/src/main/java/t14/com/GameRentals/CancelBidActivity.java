@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,17 +28,6 @@ public class CancelBidActivity extends Activity {
     private TextView gameOwner;
 
     private Button cancelBidButton;
-    ////////for UI test
-    public TextView getGameNameText(){
-        return gameNameText;
-    }
-    public TextView getDescriptionText(){
-        return descriptionText;
-    }
-
-    public TextView getGameOwner() {
-        return gameOwner;
-    }
 
     public Button getCancelBidButton() {
         return cancelBidButton;

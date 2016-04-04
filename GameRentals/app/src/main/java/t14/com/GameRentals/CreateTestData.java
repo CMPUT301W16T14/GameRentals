@@ -94,6 +94,24 @@ public class CreateTestData {
             ElasticSearchUsersController.EditTestUserTask ese = new ElasticSearchUsersController.EditTestUserTask();
             ese.execute(userList.get(i));
         }
+        ///ui test
+        /*
+        User biduser = new User("biduser","bid@gmail.com","1234");
+        User owner = new User("owner","owner@gmail.com","1234");
+        ElasticSearchUsersController.AddTestUserTask addTestUserTask = new ElasticSearchUsersController.AddTestUserTask();
+        addTestUserTask.execute(biduser);
+        ElasticSearchUsersController.EditTestUserTask editTestUserTask = new ElasticSearchUsersController.EditTestUserTask();
+        editTestUserTask.execute(biduser);
+        ElasticSearchUsersController.AddTestUserTask addTestUserTask1 = new ElasticSearchUsersController.AddTestUserTask();
+        addTestUserTask1.execute(owner);
+        ElasticSearchUsersController.EditTestUserTask editTestUserTask1 = new ElasticSearchUsersController.EditTestUserTask();
+        editTestUserTask1.execute(owner);
+        Game testGame =  new Game("test","test",owner.getUserName());
+        Bid testBid = new Bid(biduser,10);
+        testGame.getBidList().addBid(testBid);
+        */
+
+
         for(int i = 0; i < gameNames.size(); i++){
             gameList.add(new Game(gameNames.get(i), gameDescriptions.get(i), usernames.get(i % 5)));
             ElasticsearchGameController.AddTestGameTask addGameTask = new ElasticsearchGameController.AddTestGameTask();
