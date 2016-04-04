@@ -86,8 +86,18 @@ public class ViewBidActivity extends Activity {
             @Override
             public void onClick(View view) {
                 game.getBidList().getItem(bidPosition).setAccepted(2);//decline
+                int count = 0;
                 if (game.getBidList().getSize() == 0) {
                     game.setStatus(0);
+                }
+                else {
+                    for (int i = 0; i < game.getBidList().getSize(); i++) {
+                        if (game.getBidList().getItem(i).isAccepted() == 2)
+                            count++;
+                    }
+                    if (count == game.getBidList().getSize()) {
+                        game.setStatus(0);
+                    }
                 }
                 bidList.getItem(bidPosition).setAccepted(2);//decline
                 ElasticsearchGameController.EditGameTask editGameTask = new ElasticsearchGameController.EditGameTask();
