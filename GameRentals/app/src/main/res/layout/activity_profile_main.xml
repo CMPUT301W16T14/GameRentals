@@ -89,6 +89,7 @@
             android:singleLine="true"
             android:id="@+id/nameText"
             android:layout_gravity="center_horizontal"
+            android:focusable="true"
             android:fontFamily="sans-serif-light"
             android:textColor="#444444"
             android:maxLines="1"

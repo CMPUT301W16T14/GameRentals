@@ -14,6 +14,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * @see User
+ */
 public class ViewProfileActivity extends Activity {
     private User user;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -31,8 +34,6 @@ public class ViewProfileActivity extends Activity {
         final EditText emailText = (EditText) findViewById(R.id.viewProfileEmailText);
         final EditText phoneText = (EditText) findViewById(R.id.viewProfilePhoneText);
         //final TextView userNameView = (TextView) findViewById(R.id.lblName);
-
-
 
         final Button exitButton = (Button)findViewById(R.id.viewProfileExitButton);
         final Button messageButton = (Button)findViewById(R.id.viewProfileSendMessageButton);
@@ -61,10 +62,10 @@ public class ViewProfileActivity extends Activity {
         });
 
     }
+
     public ImageView getImageProfile(){
         return (ImageView) findViewById(R.id.profile_image);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -85,16 +86,12 @@ public class ViewProfileActivity extends Activity {
             ImageView imageView = getImageProfile();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             imageView.setTag("Changed");
-
-
         }
     }
 
     public void updateServer(){
-
         ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         ese.execute(user);
     }
-
 
 }

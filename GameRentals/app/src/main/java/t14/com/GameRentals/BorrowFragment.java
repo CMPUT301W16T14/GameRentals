@@ -17,7 +17,7 @@ import android.widget.ListView;
 import java.io.Serializable;
 
 /**
- * The fragment shows all games that are borrowed by the user in a list.
+ * Shows all games that the user is borrowing (2nd Fragment).
  * <p>
  * @author aredmond
  */

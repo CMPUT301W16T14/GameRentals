@@ -8,6 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+/**
+ * Used to help set up the myGames view.
+ * @see MyItemsFragment
+ * @see GameList
+ * @see Game
+ */
 public class ViewMyGamesActivity extends Activity {
     private ListView myGamesList;
     private GameList games = new GameList();
