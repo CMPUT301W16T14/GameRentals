@@ -27,7 +27,7 @@
             <ImageView
                 android:layout_width="207dp"
                 android:layout_height="207dp"
-                android:id="@+id/profile_image"
+                android:id="@+id/gameImage"
                 android:src="@drawable/ic_camera"
                 android:layout_gravity="center_horizontal|top"
                 android:scaleType="centerCrop"

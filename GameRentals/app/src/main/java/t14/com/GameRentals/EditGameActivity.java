@@ -160,7 +160,7 @@ public class EditGameActivity extends Activity {
         });
     }
     public ImageView getImageProfile(){
-        return (ImageView) findViewById(R.id.profile_image);
+        return (ImageView) findViewById(R.id.gameImage);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){

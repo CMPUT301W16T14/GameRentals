@@ -3,6 +3,7 @@ package t14.com.GameRentals;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 /** This activity handles adding games to a user's list of games.
  *
@@ -23,7 +26,9 @@ public class AddGameActivity extends Activity {
     private User currentUser;
     private Game game;
     private static int RESULT_LOAD_IMAGE = 1;
-
+    //private gameImage gameimage;
+    private Boolean filledMainImage;
+    private ArrayList<Bitmap> gameimages;
 
     @Override
     /** Called when activity is created */
@@ -37,6 +42,7 @@ public class AddGameActivity extends Activity {
         Button okButton = (Button)findViewById(R.id.addGameOkButton);
         Button cancelButton = (Button)findViewById(R.id.addGameCancelButton);
 
+        filledMainImage = Boolean.FALSE;
         ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
@@ -56,6 +62,7 @@ public class AddGameActivity extends Activity {
             public void onClick(View v) {
                 String name = gameName.getText().toString();
                 String description = gameDescription.getText().toString();
+                ArrayList<Image> gameImages = new ArrayList<Image>();
                 //Verify that game name is not left empty
                 if(name.equalsIgnoreCase("")){
                     gameName.setError("Game name cannot be empty");
@@ -63,11 +70,14 @@ public class AddGameActivity extends Activity {
                 //Verify that description is not left empty
                 else if(description.equalsIgnoreCase("")){
                     gameDescription.setError("Game description cannot be empty");
+
                 }
+
                 //else, proper input
                 else{
                     game.setGameName(name);
                     game.setDescription(description);
+                    //gameImages.add(new Image(gameimage));
                     //currentUser.getMyGames().addGame(game);
                     //Update user and add game to server
                     //addTestData();
@@ -89,7 +99,7 @@ public class AddGameActivity extends Activity {
         });
     }
     public ImageView getImageProfile(){
-        return (ImageView) findViewById(R.id.profile_image);
+        return (ImageView) findViewById(R.id.gameImage);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -110,6 +120,7 @@ public class AddGameActivity extends Activity {
             ImageView imageView = getImageProfile();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             imageView.setTag("Changed");
+            filledMainImage = Boolean.TRUE;
 
 
         }
@@ -124,6 +135,13 @@ public class AddGameActivity extends Activity {
 
         //ElasticSearchUsersController.EditUserTask ese = new ElasticSearchUsersController.EditUserTask();
         //ese.execute(currentUser);
+    }
+    public void loadImage(){
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 /*
     public void addTestData(){

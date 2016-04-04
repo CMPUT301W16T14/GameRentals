@@ -2,6 +2,7 @@ package t14.com.GameRentals;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import io.searchbox.annotations.JestId;
@@ -34,7 +35,7 @@ public class Game implements Serializable{
     private BidList bidList;
     private String ownerID;
     private String borrowerID;
-
+   // private ArrayList<Image> images;
     /** Constructor for game object.
      *
      * @param gameName The name of game to create.
@@ -48,6 +49,8 @@ public class Game implements Serializable{
         this.bidList = new BidList();
         this.ownerID = owner;
         this.borrowerID = null;
+       // this.images = images;
+
     }
 
     /** Return the borrower of game
@@ -214,8 +217,21 @@ public class Game implements Serializable{
         this.bidList = game.getBidList();
         this.ownerID = game.getOwner();
         this.borrowerID = game.getBorrower();
+        //this.images = game.getImages();
+    }
+/*
+    public Image getImagebyIndex(int index){
+        if (index < getImages().size()) {
+            return getImages().get(index);
+        }
+        return null;
     }
 
+    public void addImage(Image image){
+
+        getImages().add(image);
+    }
+*/
    @Override
    /** Display game in proper format
     *
