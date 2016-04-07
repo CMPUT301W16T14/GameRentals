@@ -150,7 +150,7 @@ public class CreateTestData {
         //Create a borrowed game for each user
         for(int i = 10; i < 15; i++){
             gameList.get(i).setStatus(GameController.STATUS_BORROWED);
-            gameList.get(i).setLocation((new GeoPoint(0,0)));
+            gameList.get(i).setLocation((new GeoPoint(53,-113)));
             userList.get((i + 2)%5).getBorrowedItems().addGame(gameList.get(i));
             gameList.get(i).setBorrower(userList.get((i + 2)%5).getUserName());
             ElasticSearchUsersController.EditTestUserTask ese = new ElasticSearchUsersController.EditTestUserTask();
