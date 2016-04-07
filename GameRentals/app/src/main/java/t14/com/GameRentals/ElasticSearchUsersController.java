@@ -29,7 +29,7 @@ import io.searchbox.core.SearchResult;
 public class ElasticSearchUsersController {
 
     private static JestDroidClient client;
-    private static String serverType = "TestUsers";
+    private static String serverType = "try";
     private static String testType = "TestUsers";
 
     //TODO: A function that gets tweets

@@ -26,7 +26,7 @@ import io.searchbox.core.SearchResult;
 public class ElasticsearchGameController {
     private static JestDroidClient client;
     private static User currentUser;
-    private static String serverType = "TestGames";
+    private static String serverType = "game";
     private static String testType = "TestGames";
 
     public static class GetGamesTask extends AsyncTask<String,Void,GameList> {

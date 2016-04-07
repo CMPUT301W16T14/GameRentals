@@ -41,8 +41,8 @@ public class MyItemsFragment extends Fragment implements View.OnClickListener {
         Button testData = (Button)v.findViewById(R.id.addTestDataButton);
 
         //Comment this out if want to generate test data
-        testData.setVisibility(View.GONE);
-        testData.setEnabled(false);
+        //testData.setVisibility(View.GONE);
+        //testData.setEnabled(false);
 
         myItems = (ListView)v.findViewById(R.id.myItems);
         RadioButton bidCheckBox = (RadioButton)v.findViewById(R.id.withBidCheckBox);
